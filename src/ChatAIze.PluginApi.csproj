@@ -1,7 +1,40 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <Title>Plugin API</Title>
+    <Product>Plugin API</Product>
+    <Version>0.1.0</Version>
+    <Company>ChatAIze</Company>
+    <Authors>Marcel Kwiatkowski</Authors>
+    <Copyright>© ChatAIze 2024</Copyright>
+    <AssemblyName>ChatAIze.PluginApi</AssemblyName>
+    <RootNamespace>ChatAIze.PluginApi</RootNamespace>
+    <PackageId>ChatAIze.PluginApi</PackageId>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://www.chataize.com</PackageProjectUrl>
+    <PackageReleaseNotes>https://github.com/chataize/plugin-api/releases</PackageReleaseNotes>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/chataize/plugin-api</RepositoryUrl>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Description>
+      Official library for building ChatAIze chatbot add-ons.
+    </Description>
+    <PackageTags>
+      add-on, add-ons, api, bot, chat, chataize, chatbot, extension, extensions, framework, kit,
+      library, mod, mods, plugin, plugins, sdk
+    </PackageTags>
   </PropertyGroup>
+  <ItemGroup>
+    <None
+        Include="icon.png"
+        Pack="true"
+        PackagePath="\" />
+    <None
+        Include="../README.md"
+        Pack="true"
+        PackagePath="" />
+  </ItemGroup>
 </Project>
