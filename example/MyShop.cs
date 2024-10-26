@@ -13,12 +13,7 @@ public class MyShop : IPluginLoader
             Description = "Gets the status of an order with the given order id.",
             Parameters =
             [
-                new FunctionParameter
-                {
-                    Name = "id",
-                    Type = ParameterType.Text,
-                    Description = "The category of the products",
-                }
+                new FunctionParameter("order_id", "The order id to get the status for.", ParameterType.Text)
             ],
             Callback = () => ValueTask.FromResult<object?>("Order status: shipped")
         };
