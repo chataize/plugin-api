@@ -4,8 +4,6 @@ namespace ChatAIze.PluginApi;
 
 public class ChatbotFunction : IChatbotFunction
 {
-    public virtual required Guid Id { get; set; }
-
     public virtual required string Name { get; set; }
 
     public virtual string? Description { get; set; }

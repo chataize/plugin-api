@@ -9,7 +9,6 @@ public class MyShop : IPluginLoader
     {
         var getProducts = new ChatbotFunction
         {
-            Id = new("a546aca6-5280-4c18-a339-b216588a5d12"),
             Name = "get_order_status",
             Description = "Gets the status of an order with the given order id.",
             Parameters =
