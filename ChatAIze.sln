@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatAIze.PluginApi", "src\ChatAIze.PluginApi.csproj", "{5AAA51FD-4CAE-466B-91C7-D2468A5AFCC2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatAIze.PluginApi.ExamplePlugin", "example\ChatAIze.PluginApi.ExamplePlugin.csproj", "{CF5A4374-EC25-4A81-A2B1-5503A16A3E8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{5AAA51FD-4CAE-466B-91C7-D2468A5AFCC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AAA51FD-4CAE-466B-91C7-D2468A5AFCC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AAA51FD-4CAE-466B-91C7-D2468A5AFCC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF5A4374-EC25-4A81-A2B1-5503A16A3E8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF5A4374-EC25-4A81-A2B1-5503A16A3E8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF5A4374-EC25-4A81-A2B1-5503A16A3E8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF5A4374-EC25-4A81-A2B1-5503A16A3E8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
