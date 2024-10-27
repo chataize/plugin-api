@@ -8,5 +8,5 @@ public interface IChatbotFunction
 
     public ICollection<IFunctionParameter> Parameters => [];
 
-    public ValueTask<object?> ExecuteAsync();
+    public ValueTask<object?> ExecuteAsync(IDictionary<string, object> parameters);
 }

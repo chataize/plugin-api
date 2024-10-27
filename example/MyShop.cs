@@ -15,7 +15,7 @@ public class MyShop : IPluginLoader
             [
                 new FunctionParameter("order_id", "The order id to get the status for.", ParameterType.Text)
             ],
-            Callback = () => ValueTask.FromResult<object?>("Order status: shipped")
+            Callback = (_) => ValueTask.FromResult<object?>("Order status: shipped")
         };
 
         var plugin = new ChatbotPlugin
