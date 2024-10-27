@@ -5,7 +5,7 @@ namespace ChatAIze.PluginApi.ExamplePlugin;
 
 public class MyShop : IPluginLoader
 {
-    public ValueTask<IChatbotPlugin> LoadAsync()
+    public ValueTask<IChatbotPlugin> LoadAsync(CancellationToken cancellationToken = default)
     {
         var getProducts = new ChatbotFunction
         {
@@ -15,7 +15,7 @@ public class MyShop : IPluginLoader
             [
                 new FunctionParameter("order_id", "The order id to get the status for.", ParameterType.Text)
             ],
-            Callback = (_) => ValueTask.FromResult<object?>("Order status: shipped")
+            Callback = (_, _) => ValueTask.FromResult<object?>("Order status: shipped")
         };
 
         var plugin = new ChatbotPlugin

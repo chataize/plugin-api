@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using ChatAIze.PluginApi.Interfaces;
 
-using CallbackT = System.Func<System.Collections.Generic.IDictionary<string, object>, System.Threading.Tasks.ValueTask<object?>>;
+using CallbackT = System.Func<System.Collections.Generic.IDictionary<string, object>, System.Threading.CancellationToken, System.Threading.Tasks.ValueTask<object?>>;
 
 namespace ChatAIze.PluginApi;
 
@@ -35,13 +35,13 @@ public class ChatbotFunction : IChatbotFunction
 
     public virtual CallbackT? Callback { get; set; }
 
-    public virtual ValueTask<object?> ExecuteAsync(IDictionary<string, object> parameters)
+    public virtual ValueTask<object?> ExecuteAsync(IDictionary<string, object> parameters, CancellationToken cancellationToken = default)
     {
         if (Callback is null)
         {
             throw new InvalidOperationException("Callback is not set.");
         }
 
-        return Callback(parameters);
+        return Callback(parameters, cancellationToken);
     }
 }
