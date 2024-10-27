@@ -9,4 +9,6 @@ public enum ParameterType
     Number,
 
     Boolean,
+
+    Enum
 }

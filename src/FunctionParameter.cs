@@ -27,4 +27,6 @@ public class FunctionParameter : IFunctionParameter
     public virtual string? Description { get; set; }
 
     public virtual ParameterType Type { get; set; }
+
+    public virtual ICollection<string> EnumValues { get; set; } = [];
 }

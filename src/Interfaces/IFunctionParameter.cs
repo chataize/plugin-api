@@ -9,4 +9,6 @@ public interface IFunctionParameter
     public string? Description => null;
 
     public ParameterType Type => ParameterType.Text;
+
+    public ICollection<string> EnumValues => [];
 }
