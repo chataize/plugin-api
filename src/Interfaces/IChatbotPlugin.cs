@@ -10,5 +10,5 @@ public interface IChatbotPlugin
 
     public string Version => "1.0.0";
 
-    public ICollection<IChatbotFunction> Functions { get; }
+    public ICollection<IChatbotFunction> Functions => [];
 }

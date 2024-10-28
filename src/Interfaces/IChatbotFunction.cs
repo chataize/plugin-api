@@ -4,7 +4,7 @@ public interface IChatbotFunction
 {
     public string Name { get; }
 
-    public string? Description { get; }
+    public string? Description => null;
 
     public ICollection<IFunctionParameter> Parameters => [];
 
