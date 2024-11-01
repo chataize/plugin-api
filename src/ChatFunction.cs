@@ -5,12 +5,12 @@ using CallbackT = System.Func<System.Collections.Generic.IDictionary<string, obj
 
 namespace ChatAIze.PluginApi;
 
-public class ChatbotFunction : IChatbotFunction
+public class ChatFunction : IChatFunction
 {
-    public ChatbotFunction() { }
+    public ChatFunction() { }
 
     [SetsRequiredMembers]
-    public ChatbotFunction(string name, string? description = null, ICollection<IFunctionParameter>? parameters = null, CallbackT? callback = null)
+    public ChatFunction(string name, string? description = null, ICollection<IFunctionParameter>? parameters = null, CallbackT? callback = null)
     {
         Name = name;
         Description = description;
@@ -19,13 +19,13 @@ public class ChatbotFunction : IChatbotFunction
     }
 
     [SetsRequiredMembers]
-    public ChatbotFunction(string name, CallbackT? callback = null) : this(name, null, null, callback) { }
+    public ChatFunction(string name, CallbackT? callback = null) : this(name, null, null, callback) { }
 
     [SetsRequiredMembers]
-    public ChatbotFunction(string name, string? description = null, CallbackT? callback = null) : this(name, description, null, callback) { }
+    public ChatFunction(string name, string? description = null, CallbackT? callback = null) : this(name, description, null, callback) { }
 
     [SetsRequiredMembers]
-    public ChatbotFunction(string name, ICollection<IFunctionParameter>? parameters = null, CallbackT? callback = null) : this(name, null, parameters, callback) { }
+    public ChatFunction(string name, ICollection<IFunctionParameter>? parameters = null, CallbackT? callback = null) : this(name, null, parameters, callback) { }
 
     public virtual required string Name { get; set; }
 

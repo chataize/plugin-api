@@ -7,7 +7,7 @@ public class MyShop : IPluginLoader
 {
     public ValueTask<IChatbotPlugin> LoadAsync(CancellationToken cancellationToken = default)
     {
-        var getProducts = new ChatbotFunction
+        var getProducts = new ChatFunction
         {
             Name = "get_order_status",
             Description = "Gets the status of an order with the given order id.",

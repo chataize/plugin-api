@@ -1,6 +1,6 @@
 namespace ChatAIze.PluginApi.Interfaces;
 
-public interface IChatbotFunction
+public interface IChatFunction
 {
     public string Name { get; }
 
