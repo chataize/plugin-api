@@ -1,3 +1,5 @@
+using ChatAIze.Abstractions.Chat;
+
 namespace ChatAIze.PluginApi.Interfaces;
 
 public interface IChatbotPlugin

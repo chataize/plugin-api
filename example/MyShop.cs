@@ -1,5 +1,4 @@
-﻿using ChatAIze.PluginApi.Enums;
-using ChatAIze.PluginApi.Interfaces;
+﻿using ChatAIze.PluginApi.Interfaces;
 
 namespace ChatAIze.PluginApi.ExamplePlugin;
 
@@ -13,9 +12,9 @@ public class MyShop : IPluginLoader
             Description = "Gets the status of an order with the given order id.",
             Parameters =
             [
-                new FunctionParameter("order_id", "The order id to get the status for.", ParameterType.Text)
+                new FunctionParameter("order_id", "The order id to get the status for.", typeof(string))
             ],
-            Callback = (_, _) => ValueTask.FromResult<object?>("Order status: shipped")
+            Callback = GetOrderStatus
         };
 
         var plugin = new ChatbotPlugin
@@ -28,5 +27,10 @@ public class MyShop : IPluginLoader
         };
 
         return ValueTask.FromResult<IChatbotPlugin>(plugin);
+    }
+
+    private static string GetOrderStatus()
+    {
+        return "Order status: shipped";
     }
 }

@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using ChatAIze.PluginApi.Enums;
-using ChatAIze.PluginApi.Interfaces;
+using ChatAIze.Abstractions.Chat;
 
 namespace ChatAIze.PluginApi;
 
@@ -9,7 +8,7 @@ public class FunctionParameter : IFunctionParameter
     public FunctionParameter() { }
 
     [SetsRequiredMembers]
-    public FunctionParameter(string name, string? description = null, ParameterType type = ParameterType.Text)
+    public FunctionParameter(string name, string? description, Type type)
     {
         Name = name;
         Description = description;
@@ -17,16 +16,18 @@ public class FunctionParameter : IFunctionParameter
     }
 
     [SetsRequiredMembers]
-    public FunctionParameter(string name, ParameterType type = ParameterType.Text, string? description = null) : this(name, description, type) { }
+    public FunctionParameter(string name, Type type, string? description = null) : this(name, description, type) { }
 
     [SetsRequiredMembers]
-    public FunctionParameter(ParameterType type, string name, string? description = null) : this(name, description, type) { }
+    public FunctionParameter(Type type, string name, string? description = null) : this(name, description, type) { }
 
-    public required string Name { get; set; }
+    public required virtual string Name { get; set; }
 
     public virtual string? Description { get; set; }
 
-    public virtual ParameterType Type { get; set; }
+    public required virtual Type Type { get; set; }
 
     public virtual ICollection<string> EnumValues { get; set; } = [];
+
+    public virtual bool IsRequired { get; set; }
 }

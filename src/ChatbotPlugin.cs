@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using ChatAIze.Abstractions.Chat;
 using ChatAIze.PluginApi.Interfaces;
 
 namespace ChatAIze.PluginApi;
