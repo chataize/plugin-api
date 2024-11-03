@@ -12,5 +12,5 @@ public class SelectionSetting : ISelectionSetting
 
     public virtual SelectionSettingStyle Style { get; set; }
 
-    public virtual required ICollection<ISelectionChoice> Choices { get; set; }
+    public virtual ICollection<ISelectionChoice> Choices { get; set; } = [];
 }
