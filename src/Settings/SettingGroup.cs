@@ -2,7 +2,7 @@ using ChatAIze.Abstractions.Settings;
 
 namespace ChatAIze.PluginApi.Settings;
 
-public class SettingGroup : ISettingGroup
+public class SettingGroup : ISettingsGroup
 {
     public virtual required string Title { get; set; }
 
