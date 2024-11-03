@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Chat;
+using ChatAIze.Abstractions.Settings;
 using ChatAIze.PluginApi.Interfaces;
 
 namespace ChatAIze.PluginApi;
@@ -31,6 +32,8 @@ public class ChatbotPlugin : IChatbotPlugin
     public virtual string? Description { get; set; }
 
     public virtual string Version { get; set; } = "1.0.0";
+
+    public virtual ICollection<IPluginSetting> Settings { get; set; } = [];
 
     public virtual ICollection<IChatFunction> Functions { get; set; } = [];
 }
