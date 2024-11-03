@@ -4,13 +4,13 @@ namespace ChatAIze.PluginApi.Settings;
 
 public class BooleanSetting : IBooleanSetting
 {
-    public required string Key { get; set; }
+    public virtual required string Key { get; set; }
 
-    public required string Title { get; set; }
+    public virtual required string Title { get; set; }
 
-    public string? Description { get; set; }
+    public virtual string? Description { get; set; }
 
-    public BooleanSettingStyle Style { get; set; }
+    public virtual BooleanSettingStyle Style { get; set; }
 
-    public bool DefaultValue { get; set; }
+    public virtual bool DefaultValue { get; set; }
 }

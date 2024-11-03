@@ -4,9 +4,9 @@ namespace ChatAIze.PluginApi.Settings;
 
 public class SettingSection : ISettingSection
 {
-    public required string Title { get; set; }
+    public virtual required string Title { get; set; }
 
-    public string? Description { get; set; }
+    public virtual string? Description { get; set; }
 
-    public ICollection<IPluginSetting> Settings { get; set; } = [];
+    public virtual ICollection<IPluginSetting> Settings { get; set; } = [];
 }

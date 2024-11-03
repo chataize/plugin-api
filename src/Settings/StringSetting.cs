@@ -4,19 +4,19 @@ namespace ChatAIze.PluginApi.Settings;
 
 public class StringSetting : IStringSetting
 {
-    public required string Key { get; set; }
+    public virtual required string Key { get; set; }
 
-    public required string Title { get; set; }
+    public virtual required string Title { get; set; }
 
-    public string? Description { get; set; }
+    public virtual string? Description { get; set; }
 
-    public string? DefaultValue { get; set; }
+    public virtual string? DefaultValue { get; set; }
 
-    public string? Placeholder { get; set; }
+    public virtual string? Placeholder { get; set; }
 
-    public int MaxLength { get; set; }
+    public virtual int MaxLength { get; set; }
 
-    public int EditorLines { get; set; }
+    public virtual int EditorLines { get; set; }
 
-    public bool IsSecret { get; set; }
+    public virtual bool IsSecret { get; set; }
 }
