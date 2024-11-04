@@ -10,10 +10,21 @@ public class ChatbotPlugin : IChatbotPlugin
     public ChatbotPlugin() { }
 
     [SetsRequiredMembers]
-    public ChatbotPlugin(Guid id, string name, ICollection<IChatFunction>? functions = null) : this(id, name, null, "1.0.0", functions) { }
+    public ChatbotPlugin(Guid id, string name, ICollection<IChatFunction>? functions = null)
+    {
+        Id = id;
+        Name = name;
+        Functions = functions ?? [];
+    }
 
     [SetsRequiredMembers]
-    public ChatbotPlugin(Guid id, string name, string? description, ICollection<IChatFunction>? functions = null) : this(id, name, description, "1.0.0", functions) { }
+    public ChatbotPlugin(Guid id, string name, string? description, ICollection<IChatFunction>? functions = null)
+    {
+        Id = id;
+        Name = name;
+        Description = description;
+        Functions = functions ?? [];
+    }
 
     [SetsRequiredMembers]
     public ChatbotPlugin(Guid id, string name, string? description = null, string version = "1.0.0", ICollection<IChatFunction>? functions = null)
