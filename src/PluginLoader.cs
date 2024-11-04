@@ -1,4 +1,4 @@
-using ChatAIze.PluginApi.Interfaces;
+using ChatAIze.Abstractions.Plugins;
 
 namespace ChatAIze.PluginApi;
 
