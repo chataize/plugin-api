@@ -10,6 +10,12 @@ public class ChatbotPlugin : IChatbotPlugin
     public ChatbotPlugin() { }
 
     [SetsRequiredMembers]
+    public ChatbotPlugin(Guid id, string name, ICollection<IChatFunction>? functions = null) : this(id, name, null, "1.0.0", functions) { }
+
+    [SetsRequiredMembers]
+    public ChatbotPlugin(Guid id, string name, string? description, ICollection<IChatFunction>? functions = null) : this(id, name, description, "1.0.0", functions) { }
+
+    [SetsRequiredMembers]
     public ChatbotPlugin(Guid id, string name, string? description = null, string version = "1.0.0", ICollection<IChatFunction>? functions = null)
     {
         Id = id;
@@ -18,12 +24,6 @@ public class ChatbotPlugin : IChatbotPlugin
         Version = version;
         Functions = functions ?? [];
     }
-
-    [SetsRequiredMembers]
-    public ChatbotPlugin(Guid id, string name, ICollection<IChatFunction>? functions = null) : this(id, name, null, "1.0.0", functions) { }
-
-    [SetsRequiredMembers]
-    public ChatbotPlugin(Guid id, string name, string? description = null, ICollection<IChatFunction>? functions = null) : this(id, name, description, "1.0.0", functions) { }
 
     public virtual required Guid Id { get; set; }
 
