@@ -15,11 +15,26 @@ public class SettingSection : ISettingsSection
     }
 
     [SetsRequiredMembers]
+    public SettingSection(string title, params IPluginSetting[] settings)
+    {
+        Title = title;
+        Settings = settings;
+    }
+
+    [SetsRequiredMembers]
     public SettingSection(string title, string? description, ICollection<IPluginSetting>? settings = null)
     {
         Title = title;
         Description = description;
         Settings = settings ?? [];
+    }
+
+    [SetsRequiredMembers]
+    public SettingSection(string title, string? description, params IPluginSetting[] settings)
+    {
+        Title = title;
+        Description = description;
+        Settings = settings;
     }
 
     public virtual required string Title { get; set; }

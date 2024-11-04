@@ -16,12 +16,29 @@ public class SelectionSetting : ISelectionSetting
     }
 
     [SetsRequiredMembers]
+    public SelectionSetting(string key, string title, params ISelectionChoice[] choices)
+    {
+        Key = key;
+        Title = title;
+        Choices = choices;
+    }
+
+    [SetsRequiredMembers]
     public SelectionSetting(string key, string title, SelectionSettingStyle style, ICollection<ISelectionChoice>? choices = null)
     {
         Key = key;
         Title = title;
         Style = style;
         Choices = choices ?? [];
+    }
+
+    [SetsRequiredMembers]
+    public SelectionSetting(string key, string title, SelectionSettingStyle style, params ISelectionChoice[] choices)
+    {
+        Key = key;
+        Title = title;
+        Style = style;
+        Choices = choices;
     }
 
     [SetsRequiredMembers]
@@ -32,6 +49,16 @@ public class SelectionSetting : ISelectionSetting
         Description = description;
         Style = style;
         Choices = choices ?? [];
+    }
+
+    [SetsRequiredMembers]
+    public SelectionSetting(string key, string title, string? description, SelectionSettingStyle style = SelectionSettingStyle.Automatic, params ISelectionChoice[] choices)
+    {
+        Key = key;
+        Title = title;
+        Description = description;
+        Style = style;
+        Choices = choices;
     }
 
     public virtual required string Key { get; set; }
