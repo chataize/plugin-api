@@ -18,21 +18,31 @@ public class ChatbotPlugin : IChatbotPlugin
     }
 
     [SetsRequiredMembers]
-    public ChatbotPlugin(Guid id, string name, string? description, ICollection<IChatFunction>? functions = null)
+    public ChatbotPlugin(Guid id, string name, params IChatFunction[] functions)
+    {
+        Id = id;
+        Name = name;
+        Functions = functions;
+    }
+
+    [SetsRequiredMembers]
+    public ChatbotPlugin(Guid id, string name, string? description, ICollection<IPluginSetting>? settings = null, ICollection<IChatFunction>? functions = null)
     {
         Id = id;
         Name = name;
         Description = description;
+        Settings = settings ?? [];
         Functions = functions ?? [];
     }
 
     [SetsRequiredMembers]
-    public ChatbotPlugin(Guid id, string name, string? description = null, string version = "1.0.0", ICollection<IChatFunction>? functions = null)
+    public ChatbotPlugin(Guid id, string name, string? description = null, string version = "1.0.0", ICollection<IPluginSetting>? settings = null, ICollection<IChatFunction>? functions = null)
     {
         Id = id;
         Name = name;
         Description = description;
         Version = version;
+        Settings = settings ?? [];
         Functions = functions ?? [];
     }
 
