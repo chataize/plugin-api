@@ -1,4 +1,5 @@
 ﻿using ChatAIze.PluginApi.Interfaces;
+using ChatAIze.PluginApi.Settings;
 
 namespace ChatAIze.PluginApi.ExamplePlugin;
 
@@ -17,12 +18,35 @@ public class MyShop : IPluginLoader
             Callback = GetOrderStatus
         };
 
+        var setting1 = new StringSetting
+        {
+            Key = "my_shop:setting1",
+            Title = "Setting 1",
+            Description = "This is a test setting",
+            DefaultValue = "default value",
+            Placeholder = "Enter a value",
+            MaxLength = 50,
+            EditorLines = 1,
+            IsSecret = false
+        };
+
+        var setting2 = new IntegerSetting
+        {
+            Key = "my_shop:setting2",
+            Title = "Setting 2",
+            Description = "This is a test setting",
+            DefaultValue = 5,
+            MinValue = 3,
+            MaxValue = 10
+        };
+
         var plugin = new ChatbotPlugin
         {
             Id = new("55bc120a-b623-4d5f-91e6-ae2b9f3bf6e2"),
             Name = "MyShop",
             Description = "A simple shop plugin",
             Version = "1.0.0",
+            Settings = [setting1, setting2],
             Functions = [getProducts]
         };
 
