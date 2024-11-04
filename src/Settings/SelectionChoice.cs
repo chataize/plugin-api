@@ -3,12 +3,12 @@ using ChatAIze.Abstractions.Settings;
 
 namespace ChatAIze.PluginApi.Settings;
 
-public class SelectionChoice : ISelectionChoice
+public class SelectionChoice<T> : ISelectionChoice<T>
 {
     public SelectionChoice() { }
 
     [SetsRequiredMembers]
-    public SelectionChoice(string label, string value)
+    public SelectionChoice(string label, T value)
     {
         Label = label;
         Value = value;
@@ -16,5 +16,5 @@ public class SelectionChoice : ISelectionChoice
 
     public virtual required string Label { get; set; }
 
-    public virtual required string Value { get; set; }
+    public virtual required T Value { get; set; }
 }
