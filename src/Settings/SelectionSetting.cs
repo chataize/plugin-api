@@ -3,12 +3,12 @@ using ChatAIze.Abstractions.Settings;
 
 namespace ChatAIze.PluginApi.Settings;
 
-public class SelectionSetting<T> : ISelectionSetting<T>
+public class SelectionSetting : ISelectionSetting
 {
     public SelectionSetting() { }
 
     [SetsRequiredMembers]
-    public SelectionSetting(string key, string title, T defaultValue, ICollection<ISelectionChoice<T>> choices)
+    public SelectionSetting(string key, string title, string defaultValue, ICollection<ISelectionChoice> choices)
     {
         Key = key;
         Title = title;
@@ -17,7 +17,7 @@ public class SelectionSetting<T> : ISelectionSetting<T>
     }
 
     [SetsRequiredMembers]
-    public SelectionSetting(string key, string title, T defaultValue, params ISelectionChoice<T>[] choices)
+    public SelectionSetting(string key, string title, string defaultValue, params ISelectionChoice[] choices)
     {
         Key = key;
         Title = title;
@@ -26,27 +26,27 @@ public class SelectionSetting<T> : ISelectionSetting<T>
     }
 
     [SetsRequiredMembers]
-    public SelectionSetting(string key, string title, string? description, T defaultValue, ICollection<ISelectionChoice<T>> choices)
-    {
-        Key = key;
-        Title = title;
-        Description = description;
-        DefaultValue = defaultValue;
-        Choices = choices;
-    }
-
-    [SetsRequiredMembers]
-    public SelectionSetting(string key, string title, string? description, T defaultValue, params ISelectionChoice<T>[] choices)
+    public SelectionSetting(string key, string title, string? description, string defaultValue, ICollection<ISelectionChoice> choices)
     {
         Key = key;
         Title = title;
         Description = description;
+        DefaultValue = defaultValue;
+        Choices = choices;
+    }
+
+    [SetsRequiredMembers]
+    public SelectionSetting(string key, string title, string? description, string defaultValue, params ISelectionChoice[] choices)
+    {
+        Key = key;
+        Title = title;
+        Description = description;
         Choices = choices;
         DefaultValue = defaultValue;
     }
 
     [SetsRequiredMembers]
-    public SelectionSetting(string key, string title, SelectionSettingStyle style, T defaultValue, ICollection<ISelectionChoice<T>> choices)
+    public SelectionSetting(string key, string title, SelectionSettingStyle style, string defaultValue, ICollection<ISelectionChoice> choices)
     {
         Key = key;
         Title = title;
@@ -56,7 +56,7 @@ public class SelectionSetting<T> : ISelectionSetting<T>
     }
 
     [SetsRequiredMembers]
-    public SelectionSetting(string key, string title, SelectionSettingStyle style, T defaultValue, params ISelectionChoice<T>[] choices)
+    public SelectionSetting(string key, string title, SelectionSettingStyle style, string defaultValue, params ISelectionChoice[] choices)
     {
         Key = key;
         Title = title;
@@ -66,7 +66,7 @@ public class SelectionSetting<T> : ISelectionSetting<T>
     }
 
     [SetsRequiredMembers]
-    public SelectionSetting(string key, string title, string? description, SelectionSettingStyle style, T defaultValue, ICollection<ISelectionChoice<T>> choices)
+    public SelectionSetting(string key, string title, string? description, SelectionSettingStyle style, string defaultValue, ICollection<ISelectionChoice> choices)
     {
         Key = key;
         Title = title;
@@ -77,7 +77,7 @@ public class SelectionSetting<T> : ISelectionSetting<T>
     }
 
     [SetsRequiredMembers]
-    public SelectionSetting(string key, string title, string? description, SelectionSettingStyle style, T defaultValue, params ISelectionChoice<T>[] choices)
+    public SelectionSetting(string key, string title, string? description, SelectionSettingStyle style, string defaultValue, params ISelectionChoice[] choices)
     {
         Key = key;
         Title = title;
@@ -95,7 +95,7 @@ public class SelectionSetting<T> : ISelectionSetting<T>
 
     public virtual SelectionSettingStyle Style { get; set; }
 
-    public required virtual T DefaultValue { get; set; }
+    public required virtual string DefaultValue { get; set; }
 
-    public virtual ICollection<ISelectionChoice<T>> Choices { get; set; } = [];
+    public virtual ICollection<ISelectionChoice> Choices { get; set; } = [];
 }
