@@ -3,26 +3,26 @@ using ChatAIze.Abstractions.Settings;
 
 namespace ChatAIze.PluginApi.Settings;
 
-public class SettingGroup : ISettingsGroup
+public class SettingsGroup : ISettingsGroup
 {
-    public SettingGroup() { }
+    public SettingsGroup() { }
 
     [SetsRequiredMembers]
-    public SettingGroup(string title, ICollection<IPluginSetting>? settings = null)
+    public SettingsGroup(string title, ICollection<IPluginSetting>? settings = null)
     {
         Title = title;
         Settings = settings ?? [];
     }
 
     [SetsRequiredMembers]
-    public SettingGroup(string title, params IPluginSetting[] settings)
+    public SettingsGroup(string title, params IPluginSetting[] settings)
     {
         Title = title;
         Settings = settings;
     }
 
     [SetsRequiredMembers]
-    public SettingGroup(string title, string? description, ICollection<IPluginSetting>? settings = null)
+    public SettingsGroup(string title, string? description, ICollection<IPluginSetting>? settings = null)
     {
         Title = title;
         Description = description;
@@ -30,7 +30,7 @@ public class SettingGroup : ISettingsGroup
     }
 
     [SetsRequiredMembers]
-    public SettingGroup(string title, string? description, params IPluginSetting[] settings)
+    public SettingsGroup(string title, string? description, params IPluginSetting[] settings)
     {
         Title = title;
         Description = description;
