@@ -99,6 +99,4 @@ public class SelectionSetting : ISelectionSetting
     public required virtual string DefaultValue { get; set; }
 
     public virtual ICollection<ISelectionChoice> Choices { get; set; } = [];
-
-    SelectionSettingStyle ISelectionSetting.Style => throw new NotImplementedException();
 }

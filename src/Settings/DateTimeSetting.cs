@@ -82,6 +82,4 @@ public class DateTimeSetting : IDateTimeSetting
     public virtual DateTimeOffset MinValue { get; set; } = DateTimeOffset.MinValue;
 
     public virtual DateTimeOffset MaxValue { get; set; } = DateTimeOffset.MaxValue;
-
-    DateTimeSettingStyle IDateTimeSetting.Style => throw new NotImplementedException();
 }
