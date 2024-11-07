@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Settings;
+using ChatAIze.Abstractions.UI;
 
 namespace ChatAIze.PluginApi.Settings;
 
@@ -38,4 +39,6 @@ public class SettingsButton : ISettingsButton
     public virtual ButtonStyle Style { get; set; }
 
     public virtual Func<ValueTask> Callback { get; set; } = () => ValueTask.CompletedTask;
+
+    ButtonStyle ISettingsButton.Style => throw new NotImplementedException();
 }

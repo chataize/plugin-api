@@ -35,4 +35,6 @@ public class ListSetting : IListSetting
     public virtual int MaxItems { get; set; } = 100;
 
     public virtual int MaxItemLength { get; set; } = 100;
+
+    public string ItemPlaceholder => throw new NotImplementedException();
 }

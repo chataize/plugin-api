@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Settings;
+using ChatAIze.Abstractions.UI;
 
 namespace ChatAIze.PluginApi.Settings;
 
@@ -98,4 +99,6 @@ public class SelectionSetting : ISelectionSetting
     public required virtual string DefaultValue { get; set; }
 
     public virtual ICollection<ISelectionChoice> Choices { get; set; } = [];
+
+    SelectionSettingStyle ISelectionSetting.Style => throw new NotImplementedException();
 }

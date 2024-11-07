@@ -1,5 +1,6 @@
 ﻿using ChatAIze.Abstractions.Plugins;
 using ChatAIze.Abstractions.Settings;
+using ChatAIze.Abstractions.UI;
 using ChatAIze.PluginApi.Settings;
 
 namespace ChatAIze.PluginApi.ExamplePlugin;

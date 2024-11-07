@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Settings;
+using ChatAIze.Abstractions.UI;
 
 namespace ChatAIze.PluginApi.Settings;
 
@@ -43,4 +44,6 @@ public class BooleanSetting : IBooleanSetting
     public virtual BooleanSettingStyle Style { get; set; }
 
     public virtual bool DefaultValue { get; set; }
+
+    public virtual bool IsCompact { get; set; }
 }
