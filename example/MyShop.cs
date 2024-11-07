@@ -174,6 +174,18 @@ public class MyShop : IPluginLoader
             Content = "You can use this plugin to display products, manage orders, and more."
         };
 
+        var setting15 = new MapSetting
+        {
+            Key = "myshop:prices",
+            Title = "Prices",
+            Description = "The prices of products.",
+            KeyPlaceholder = "Product",
+            ValuePlaceholder = "Price",
+            MaxItems = 5,
+            MaxKeyLength = 10,
+            MaxValueLength = 20
+        };
+
         var group1 = new SettingsGroup
         {
             Title = "General Settings",
@@ -208,7 +220,7 @@ public class MyShop : IPluginLoader
             Name = "MyShop",
             Description = "A simple shop plugin",
             Version = "1.0.0",
-            Settings = [section1, section2, setting13, setting14],
+            Settings = [section1, section2, setting13, setting14, setting15],
             Functions = [getProducts]
         };
 
