@@ -8,26 +8,22 @@ public class FunctionParameter : IFunctionParameter
     public FunctionParameter() { }
 
     [SetsRequiredMembers]
-    public FunctionParameter(string name, string? description, Type type)
+    public FunctionParameter(Type type, string name, string? description = null, bool isRequired = false, ICollection<string>? enumValues = null)
     {
+        Type = type;
         Name = name;
         Description = description;
-        Type = type;
+        IsRequired = isRequired;
+        EnumValues = enumValues ?? [];
     }
 
-    [SetsRequiredMembers]
-    public FunctionParameter(string name, Type type, string? description = null) : this(name, description, type) { }
-
-    [SetsRequiredMembers]
-    public FunctionParameter(Type type, string name, string? description = null) : this(name, description, type) { }
+    public required virtual Type Type { get; set; }
 
     public required virtual string Name { get; set; }
 
     public virtual string? Description { get; set; }
 
-    public required virtual Type Type { get; set; }
+    public virtual bool IsRequired { get; set; }
 
     public virtual ICollection<string> EnumValues { get; set; } = [];
-
-    public virtual bool IsRequired { get; set; }
 }

@@ -16,7 +16,7 @@ public class MyShop : IPluginLoader
             Description = "Gets the status of an order with the given order id.",
             Parameters =
             [
-                new FunctionParameter("order_id", "The order id to get the status for.", typeof(string))
+                new FunctionParameter(typeof(string), "order_id", "The order id to get the status for.")
             ],
             Callback = GetOrderStatus
         };
