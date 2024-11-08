@@ -12,7 +12,7 @@ public class ChatFunction : IChatFunction
     {
         Name = name;
         Description = description;
-        Parameters = parameters ?? [];
+        Parameters = parameters;
         Callback = callback;
     }
 
@@ -29,7 +29,7 @@ public class ChatFunction : IChatFunction
 
     public virtual string? Description { get; set; }
 
-    public virtual ICollection<IFunctionParameter> Parameters { get; set; } = [];
+    public virtual ICollection<IFunctionParameter>? Parameters { get; set; }
 
     public virtual bool RequiresDoubleCheck { get; set; }
 
