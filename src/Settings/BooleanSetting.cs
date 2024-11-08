@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Settings;
 using ChatAIze.Abstractions.UI;
 
@@ -5,6 +6,20 @@ namespace ChatAIze.PluginApi.Settings;
 
 public class BooleanSetting : IBooleanSetting
 {
+    public BooleanSetting() { }
+
+    [SetsRequiredMembers]
+    public BooleanSetting(string key, string? title = null, string? description = null, BooleanSettingStyle style = BooleanSettingStyle.ToggleSwitch, bool defaultValue = false, bool isCompact = false, bool isDisabled = false)
+    {
+        Key = key;
+        Title = title;
+        Description = description;
+        Style = style;
+        DefaultValue = defaultValue;
+        IsCompact = isCompact;
+        IsDisabled = isDisabled;
+    }
+
     public virtual required string Key { get; set; }
 
     public virtual string? Title { get; set; }
