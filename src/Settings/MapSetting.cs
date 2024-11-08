@@ -1,9 +1,26 @@
+using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Settings;
 
 namespace ChatAIze.PluginApi.Settings;
 
 public class MapSetting : IMapSetting
 {
+    public MapSetting() { }
+
+    [SetsRequiredMembers]
+    public MapSetting(string key, string? title = null, string? description = null, string? keyPlaceholder = null, string? valuePlaceholder = null, int maxItems = 100, int maxKeyLength = 100, int maxValueLength = 100, bool isDisabled = false)
+    {
+        Key = key;
+        Title = title;
+        Description = description;
+        KeyPlaceholder = keyPlaceholder;
+        ValuePlaceholder = valuePlaceholder;
+        MaxItems = maxItems;
+        MaxKeyLength = maxKeyLength;
+        MaxValueLength = maxValueLength;
+        IsDisabled = isDisabled;
+    }
+
     public virtual required string Key { get; set; }
 
     public virtual string? Title { get; set; }
