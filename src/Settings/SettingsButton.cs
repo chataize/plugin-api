@@ -9,14 +9,14 @@ public class SettingsButton : ISettingsButton
     public SettingsButton() { }
 
     [SetsRequiredMembers]
-    public SettingsButton(string key, string? title = null, string? description = null, ButtonStyle style = ButtonStyle.Primary, bool isDisabled = false, Func<ValueTask>? callback = null)
+    public SettingsButton(string key, string? title = null, string? description = null, ButtonStyle style = ButtonStyle.Primary, bool isDisabled = false, Func<CancellationToken, ValueTask>? callback = null)
     {
         Key = key;
         Title = title;
         Description = description;
         Style = style;
         IsDisabled = isDisabled;
-        Callback = callback ?? (() => ValueTask.CompletedTask);
+        Callback = callback;
     }
 
     public virtual required string Key { get; set; }
@@ -29,5 +29,5 @@ public class SettingsButton : ISettingsButton
 
     public virtual bool IsDisabled { get; set; }
 
-    public virtual Func<ValueTask> Callback { get; set; } = () => ValueTask.CompletedTask;
+    public virtual Func<CancellationToken, ValueTask>? Callback { get; set; }
 }

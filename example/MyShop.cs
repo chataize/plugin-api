@@ -163,7 +163,7 @@ public class MyShop : IPluginLoader
             Key = "myshop:open_store",
             Title = "Open Store",
             Description = "Opens the store in a new tab.",
-            Callback = () =>
+            Callback = (_) =>
             {
                 Console.WriteLine("Opening store...");
                 return ValueTask.CompletedTask;
@@ -226,8 +226,8 @@ public class MyShop : IPluginLoader
             Title = "MyShop",
             Description = "A simple shop plugin",
             Version = "1.0.0",
-            SettingsCallback = () => ValueTask.FromResult<ICollection<IPluginSetting>>([section1, section2, setting13, setting14, setting15]),
-            FunctionsCallback = () => ValueTask.FromResult<ICollection<IChatFunction>>([getProducts])
+            SettingsCallback = (_) => ValueTask.FromResult<ICollection<IPluginSetting>>([section1, section2, setting13, setting14, setting15]),
+            FunctionsCallback = (_) => ValueTask.FromResult<ICollection<IChatFunction>>([getProducts])
         };
 
         return ValueTask.FromResult<IChatbotPlugin>(plugin);
