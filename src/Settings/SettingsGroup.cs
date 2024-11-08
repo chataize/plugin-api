@@ -17,6 +17,16 @@ public class SettingsGroup : ISettingsGroup
         Settings = settings ?? [];
     }
 
+    [SetsRequiredMembers]
+    public SettingsGroup(string key, string? title = null, string? description = null, bool isDisabled = false, params IPluginSetting[] settings)
+    {
+        Key = key;
+        Title = title;
+        Description = description;
+        IsDisabled = isDisabled;
+        Settings = settings;
+    }
+
     public virtual required string Key { get; set; }
 
     public virtual string? Title { get; set; }
