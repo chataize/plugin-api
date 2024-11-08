@@ -1,4 +1,5 @@
-﻿using ChatAIze.Abstractions.Plugins;
+﻿using ChatAIze.Abstractions.Chat;
+using ChatAIze.Abstractions.Plugins;
 using ChatAIze.Abstractions.Settings;
 using ChatAIze.Abstractions.UI;
 using ChatAIze.PluginApi.Settings;
@@ -79,9 +80,9 @@ public class MyShop : IPluginLoader
             DefaultValue = "USD",
             Choices =
             [
-                new SelectionChoice("USD", "US Dollar"),
-                new SelectionChoice("EUR", "Euro"),
-                new SelectionChoice("GBP", "British Pound"),
+            new SelectionChoice { Title = "US Dollar", Value = "USD" },
+            new SelectionChoice { Title = "Euro", Value = "EUR" },
+            new SelectionChoice { Title = "British Pound", Value = "GBP" }
             ]
         };
 
@@ -93,10 +94,10 @@ public class MyShop : IPluginLoader
             Style = SelectionSettingStyle.RadioButtons,
             DefaultValue = "USD",
             Choices =
-           [
-               new SelectionChoice("USD", "US Dollar"),
-                new SelectionChoice("EUR", "Euro"),
-                new SelectionChoice("GBP", "British Pound"),
+            [
+            new SelectionChoice { Title = "US Dollar", Value = "USD" },
+            new SelectionChoice { Title = "Euro", Value = "EUR" },
+            new SelectionChoice { Title = "British Pound", Value = "GBP" }
             ]
         };
 
@@ -109,9 +110,9 @@ public class MyShop : IPluginLoader
             DefaultValue = "USD",
             Choices =
             [
-               new SelectionChoice("USD", "US Dollar"),
-                new SelectionChoice("EUR", "Euro"),
-                new SelectionChoice("GBP", "British Pound"),
+                new SelectionChoice { Title = "US Dollar", Value = "USD" },
+                new SelectionChoice { Title = "Euro", Value = "EUR" },
+                new SelectionChoice { Title = "British Pound", Value = "GBP" }
             ]
         };
 
@@ -159,6 +160,7 @@ public class MyShop : IPluginLoader
 
         var setting13 = new SettingsButton
         {
+            Key = "myshop:open_store",
             Title = "Open Store",
             Description = "Opens the store in a new tab.",
             Callback = () =>
@@ -170,7 +172,7 @@ public class MyShop : IPluginLoader
 
         var setting14 = new SettingsParagraph
         {
-            Title = "Welcome to My Shop!",
+            Key = "myshop:welcome_message",
             Content = "You can use this plugin to display products, manage orders, and more."
         };
 
@@ -188,6 +190,7 @@ public class MyShop : IPluginLoader
 
         var group1 = new SettingsGroup
         {
+            Key = "myshop:general_settings",
             Title = "General Settings",
             Description = "Settings for the shop.",
             Settings = [setting3, setting4, setting5]
@@ -195,6 +198,7 @@ public class MyShop : IPluginLoader
 
         var group2 = new SettingsGroup
         {
+            Key = "myshop:appearance_settings",
             Title = "Appearance Settings",
             Description = "Settings for the appearance of the shop.",
             Settings = [setting6, setting7, setting8]
@@ -202,6 +206,7 @@ public class MyShop : IPluginLoader
 
         var section1 = new SettingsSection
         {
+            Key = "myshop:shop_settings",
             Title = "Shop Settings",
             Description = "Settings for the shop.",
             Settings = [setting2, group1, group2, setting9]
@@ -209,6 +214,7 @@ public class MyShop : IPluginLoader
 
         var section2 = new SettingsSection
         {
+            Key = "myshop:order_settings",
             Title = "Order Settings",
             Description = "Settings for orders.",
             Settings = [setting10, setting11, setting12]
@@ -217,11 +223,11 @@ public class MyShop : IPluginLoader
         var plugin = new ChatbotPlugin
         {
             Id = new("55bc120a-b623-4d5f-91e6-ae2b9f3bf6e2"),
-            Name = "MyShop",
+            Title = "MyShop",
             Description = "A simple shop plugin",
             Version = "1.0.0",
-            Settings = [section1, section2, setting13, setting14, setting15],
-            Functions = [getProducts]
+            SettingsCallback = () => ValueTask.FromResult<ICollection<IPluginSetting>>([section1, section2, setting13, setting14, setting15]),
+            FunctionsCallback = () => ValueTask.FromResult<ICollection<IChatFunction>>([getProducts])
         };
 
         return ValueTask.FromResult<IChatbotPlugin>(plugin);

@@ -1,30 +1,12 @@
-using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Settings;
 
 namespace ChatAIze.PluginApi.Settings;
 
 public class SettingsParagraph : ISettingsParagraph
 {
-    public SettingsParagraph() { }
+    public virtual required string Key { get; set; }
 
-    [SetsRequiredMembers]
-    public SettingsParagraph(string title, string content)
-    {
-        Title = title;
-        Content = content;
-    }
+    public virtual string? Content { get; set; }
 
-    [SetsRequiredMembers]
-    public SettingsParagraph(string title, string? description, string content)
-    {
-        Title = title;
-        Description = description;
-        Content = content;
-    }
-
-    public virtual required string Title { get; set; }
-
-    public virtual string? Description { get; set; }
-
-    public virtual required string Content { get; set; }
+    public virtual bool IsDisabled { get; set; }
 }
