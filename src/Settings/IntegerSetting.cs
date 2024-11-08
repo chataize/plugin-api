@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Settings;
 using ChatAIze.Abstractions.UI;
 
@@ -5,6 +6,26 @@ namespace ChatAIze.PluginApi.Settings;
 
 public class IntegerSetting : IIntegerSetting
 {
+    public IntegerSetting() { }
+
+    [SetsRequiredMembers]
+    public IntegerSetting(string key, string? title = null, string? description = null, IntegerSettingStyle style = IntegerSettingStyle.Stepper, int defaultValue = 0, int minValue = int.MinValue, int maxValue = int.MaxValue, int step = 1, bool showSliderValue = true, bool showSliderPercentage = false, string? minValueLabel = null, string? maxValueLabel = null, bool isDisabled = false)
+    {
+        Key = key;
+        Title = title;
+        Description = description;
+        Style = style;
+        DefaultValue = defaultValue;
+        MinValue = minValue;
+        MaxValue = maxValue;
+        Step = step;
+        ShowSliderValue = showSliderValue;
+        ShowSliderPercentage = showSliderPercentage;
+        MinValueLabel = minValueLabel;
+        MaxValueLabel = maxValueLabel;
+        IsDisabled = isDisabled;
+    }
+
     public virtual required string Key { get; set; }
 
     public virtual string? Title { get; set; }
@@ -21,7 +42,7 @@ public class IntegerSetting : IIntegerSetting
 
     public virtual int Step { get; set; } = 1;
 
-    public virtual bool ShowSliderValue { get; set; }
+    public virtual bool ShowSliderValue { get; set; } = true;
 
     public virtual bool ShowSliderPercentage { get; set; }
 
