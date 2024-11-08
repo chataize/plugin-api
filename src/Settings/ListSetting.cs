@@ -1,9 +1,24 @@
+using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Settings;
 
 namespace ChatAIze.PluginApi.Settings;
 
 public class ListSetting : IListSetting
 {
+    public ListSetting() { }
+
+    [SetsRequiredMembers]
+    public ListSetting(string key, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
+    {
+        Key = key;
+        Title = title;
+        Description = description;
+        ItemPlaceholder = itemPlaceholder;
+        MaxItems = maxItems;
+        MaxItemLength = maxItemLength;
+        IsDisabled = isDisabled;
+    }
+
     public virtual required string Key { get; set; }
 
     public virtual string? Title { get; set; }
