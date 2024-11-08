@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Settings;
 
 namespace ChatAIze.PluginApi.Settings;
@@ -6,6 +7,7 @@ public class StringSetting : IStringSetting
 {
     public StringSetting() { }
 
+    [SetsRequiredMembers]
     public StringSetting(string key, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, int maxLength = 100, int editorLines = 1, bool isSecure = false, bool isDisabled = false)
     {
         Key = key;
