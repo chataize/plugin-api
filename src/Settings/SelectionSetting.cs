@@ -9,7 +9,7 @@ public class SelectionSetting : ISelectionSetting
     public SelectionSetting() { }
 
     [SetsRequiredMembers]
-    public SelectionSetting(string key, string? title = null, string? description = null, SelectionSettingStyle style = SelectionSettingStyle.Automatic, string? defaultValue = null, bool isCompact = false, bool isDisabled = false)
+    public SelectionSetting(string key, string? title = null, string? description = null, SelectionSettingStyle style = SelectionSettingStyle.Automatic, string? defaultValue = null, bool isCompact = false, bool isDisabled = false, ICollection<ISelectionChoice>? choices = null)
     {
         Key = key;
         Title = title;
@@ -18,6 +18,7 @@ public class SelectionSetting : ISelectionSetting
         DefaultValue = defaultValue;
         IsCompact = isCompact;
         IsDisabled = isDisabled;
+        Choices = choices ?? [];
     }
 
     public virtual required string Key { get; set; }
@@ -30,9 +31,9 @@ public class SelectionSetting : ISelectionSetting
 
     public virtual string? DefaultValue { get; set; }
 
-    public virtual ICollection<ISelectionChoice> Choices { get; set; } = [];
-
     public virtual bool IsCompact { get; set; }
 
     public virtual bool IsDisabled { get; set; }
+
+    public virtual ICollection<ISelectionChoice> Choices { get; set; } = [];
 }
