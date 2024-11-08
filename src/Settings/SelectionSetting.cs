@@ -21,6 +21,19 @@ public class SelectionSetting : ISelectionSetting
         Choices = choices ?? [];
     }
 
+    [SetsRequiredMembers]
+    public SelectionSetting(string key, string? title = null, string? description = null, SelectionSettingStyle style = SelectionSettingStyle.Automatic, string? defaultValue = null, bool isCompact = false, bool isDisabled = false, params ISelectionChoice[] choices)
+    {
+        Key = key;
+        Title = title;
+        Description = description;
+        Style = style;
+        DefaultValue = defaultValue;
+        IsCompact = isCompact;
+        IsDisabled = isDisabled;
+        Choices = choices;
+    }
+
     public virtual required string Key { get; set; }
 
     public virtual string? Title { get; set; }
