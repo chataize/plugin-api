@@ -16,6 +16,15 @@ public class ChatFunction : IChatFunction
         Parameters = parameters;
     }
 
+    [SetsRequiredMembers]
+    public ChatFunction(string name, string? description = null, Delegate? callback = null, params IFunctionParameter[] parameters)
+    {
+        Name = name;
+        Description = description;
+        Callback = callback;
+        Parameters = parameters;
+    }
+
     public virtual required string Name { get; set; }
 
     public virtual string? Description { get; set; }
