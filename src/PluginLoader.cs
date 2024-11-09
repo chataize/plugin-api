@@ -5,5 +5,5 @@ namespace ChatAIze.PluginApi;
 
 public abstract class PluginLoader : IPluginLoader
 {
-    public abstract ValueTask<IChatbotPlugin> LoadAsync(IPluginSettings settings, CancellationToken cancellationToken = default);
+    public abstract ValueTask<IChatbotPlugin> LoadAsync(CancellationToken cancellationToken = default);
 }
