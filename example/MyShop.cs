@@ -8,7 +8,7 @@ namespace ChatAIze.PluginApi.ExamplePlugin;
 
 public class MyShop : IPluginLoader
 {
-    public ValueTask<IChatbotPlugin> LoadAsync(CancellationToken cancellationToken = default)
+    public ValueTask<IChatbotPlugin> LoadAsync(IPluginSettings setting, CancellationToken cancellationToken = default)
     {
         var getProducts = new ChatFunction
         {
