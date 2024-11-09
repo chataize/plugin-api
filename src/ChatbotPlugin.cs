@@ -10,7 +10,7 @@ public class ChatbotPlugin : IChatbotPlugin
     public ChatbotPlugin() { }
 
     [SetsRequiredMembers]
-    public ChatbotPlugin(Guid id, string title, string? description = null, string? website = null, string? author = null, string version = "1.0.0", DateTimeOffset? releaseTime = null, DateTimeOffset? lastUpdateTime = null, Func<CancellationToken, ValueTask<ICollection<IPluginSetting>>>? settingsCallback = null, Func<CancellationToken, ValueTask<ICollection<IChatFunction>>>? functionsCallback = null)
+    public ChatbotPlugin(Guid id, string title, string? description = null, string? website = null, string? author = null, string version = "1.0.0", DateTimeOffset? releaseTime = null, DateTimeOffset? lastUpdateTime = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IPluginSetting>>>? settingsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IChatFunction>>>? functionsCallback = null)
     {
         Id = id;
         Title = title;
@@ -40,7 +40,7 @@ public class ChatbotPlugin : IChatbotPlugin
 
     public virtual DateTimeOffset? LastUpdateTime { get; set; }
 
-    public virtual Func<CancellationToken, ValueTask<ICollection<IPluginSetting>>>? SettingsCallback { get; set; }
+    public virtual Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IPluginSetting>>>? SettingsCallback { get; set; }
 
-    public virtual Func<CancellationToken, ValueTask<ICollection<IChatFunction>>>? FunctionsCallback { get; set; }
+    public virtual Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IChatFunction>>>? FunctionsCallback { get; set; }
 }

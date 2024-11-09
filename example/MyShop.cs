@@ -8,7 +8,7 @@ namespace ChatAIze.PluginApi.ExamplePlugin;
 
 public class MyShop : IPluginLoader
 {
-    public ValueTask<IChatbotPlugin> LoadAsync(IPluginSettings setting, CancellationToken cancellationToken = default)
+    public ValueTask<IChatbotPlugin> LoadAsync(CancellationToken cancellationToken = default)
     {
         var getProducts = new ChatFunction
         {
@@ -226,8 +226,8 @@ public class MyShop : IPluginLoader
             Title = "MyShop",
             Description = "A simple shop plugin",
             Version = "1.0.0",
-            SettingsCallback = (_) => ValueTask.FromResult<ICollection<IPluginSetting>>([section1, section2, setting13, setting14, setting15]),
-            FunctionsCallback = (_) => ValueTask.FromResult<ICollection<IChatFunction>>([getProducts])
+            SettingsCallback = (_, _) => ValueTask.FromResult<ICollection<IPluginSetting>>([section1, section2, setting13, setting14, setting15]),
+            FunctionsCallback = (_, _) => ValueTask.FromResult<ICollection<IChatFunction>>([getProducts])
         };
 
         return ValueTask.FromResult<IChatbotPlugin>(plugin);
