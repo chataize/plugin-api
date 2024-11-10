@@ -10,17 +10,6 @@ public class MyShop : IPluginLoader
 {
     public ValueTask<IChatbotPlugin> LoadAsync(CancellationToken cancellationToken = default)
     {
-        var getProducts = new ChatFunction
-        {
-            Name = "get_order_status",
-            Description = "Gets the status of an order with the given order id.",
-            Parameters =
-            [
-                new FunctionParameter(typeof(string), "order_id", "The order id to get the status for.")
-            ],
-            Callback = GetOrderStatus
-        };
-
         var setting1 = new StringSetting
         {
             Key = "myshop:name",
@@ -227,8 +216,9 @@ public class MyShop : IPluginLoader
             Description = "A simple shop plugin",
             Version = "1.0.0",
             SettingsCallback = (_, _) => ValueTask.FromResult<ICollection<IPluginSetting>>([section1, section2, setting13, setting14, setting15]),
-            FunctionsCallback = (_, _) => ValueTask.FromResult<ICollection<IChatFunction>>([getProducts])
         };
+
+        plugin.AddFunction(GetOrderStatus);
 
         return ValueTask.FromResult<IChatbotPlugin>(plugin);
     }
