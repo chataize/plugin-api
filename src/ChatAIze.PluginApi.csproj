@@ -40,6 +40,6 @@
   <ItemGroup>
     <PackageReference
         Include="ChatAIze.Abstractions"
-        Version="0.6.0" />
+        Version="0.6.1" />
   </ItemGroup>
 </Project>
