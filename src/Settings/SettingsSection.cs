@@ -45,4 +45,10 @@ public static class SettingsSectionExtensions
         var section = new SettingsSection(key, title, description, isDisabled, settings);
         plugin.Settings.Add(section);
     }
+
+    public static void AddSettingsSection(this ChatbotPlugin plugin, string key, string? title = null, string? description = null, bool isDisabled = false, params IPluginSetting[] settings)
+    {
+        var section = new SettingsSection(key, title, description, isDisabled, settings);
+        plugin.Settings.Add(section);
+    }
 }
