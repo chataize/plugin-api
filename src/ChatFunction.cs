@@ -1,4 +1,6 @@
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Reflection;
 using ChatAIze.Abstractions.Chat;
 using ChatAIze.Utilities.Extensions;
 
@@ -12,6 +14,7 @@ public class ChatFunction : IChatFunction
     public ChatFunction(Delegate callback)
     {
         Name = callback.GetNormalizedMethodName();
+        Description = callback.Method.GetCustomAttribute<DescriptionAttribute>()?.Description;
         Callback = callback;
     }
 
