@@ -14,7 +14,7 @@ public class ChatbotPlugin : IChatbotPlugin
     }
 
     [SetsRequiredMembers]
-    public ChatbotPlugin(Guid id, string title, string? description = null, string? website = null, string? author = null, Version? version = null, DateTimeOffset? releaseTime = null, DateTimeOffset? lastUpdateTime = null, ICollection<IPluginSetting>? settings = null, ICollection<IChatFunction>? functions = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IPluginSetting>>>? settingsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IChatFunction>>>? functionsCallback = null, IDictionary<string, Func<IDictionary<string, object?>?, CancellationToken, ValueTask<object?>>>? sharedMethods = null)
+    public ChatbotPlugin(Guid id, string title, string? description = null, string? website = null, string? author = null, Version? version = null, DateTimeOffset? releaseTime = null, DateTimeOffset? lastUpdateTime = null, ICollection<IPluginSetting>? settings = null, ICollection<IChatFunction>? functions = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IPluginSetting>>>? settingsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IChatFunction>>>? functionsCallback = null)
     {
         Id = id;
         Title = title;
@@ -44,8 +44,6 @@ public class ChatbotPlugin : IChatbotPlugin
         {
             FunctionsCallback = functionsCallback;
         }
-
-        SharedMethods = sharedMethods ?? new Dictionary<string, Func<IDictionary<string, object?>?, CancellationToken, ValueTask<object?>>>();
     }
 
     public virtual required Guid Id { get; set; }
@@ -63,8 +61,6 @@ public class ChatbotPlugin : IChatbotPlugin
     public virtual DateTimeOffset? ReleaseTime { get; set; }
 
     public virtual DateTimeOffset? LastUpdateTime { get; set; }
-
-    public IDictionary<string, Func<IDictionary<string, object?>?, CancellationToken, ValueTask<object?>>> SharedMethods { get; set; } = new Dictionary<string, Func<IDictionary<string, object?>?, CancellationToken, ValueTask<object?>>>();
 
     public virtual ICollection<IPluginSetting> Settings { get; set; } = [];
 
@@ -87,10 +83,5 @@ public class ChatbotPlugin : IChatbotPlugin
     public virtual void AddFunction(Delegate function)
     {
         Functions.Add(new ChatFunction(function));
-    }
-
-    public virtual void AddSharedMethod(string name, Func<IDictionary<string, object?>?, CancellationToken, ValueTask<object?>> method)
-    {
-        SharedMethods[name] = method;
     }
 }
