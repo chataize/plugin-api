@@ -14,14 +14,14 @@ public class ChatbotPlugin : IChatbotPlugin
     }
 
     [SetsRequiredMembers]
-    public ChatbotPlugin(Guid id, string title, string? description = null, string? website = null, string? author = null, string version = "1.0.0", DateTimeOffset? releaseTime = null, DateTimeOffset? lastUpdateTime = null, ICollection<IPluginSetting>? settings = null, ICollection<IChatFunction>? functions = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IPluginSetting>>>? settingsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IChatFunction>>>? functionsCallback = null, IDictionary<string, Func<IDictionary<string, object?>?, CancellationToken, ValueTask<object?>>>? sharedMethods = null)
+    public ChatbotPlugin(Guid id, string title, string? description = null, string? website = null, string? author = null, Version? version = null, DateTimeOffset? releaseTime = null, DateTimeOffset? lastUpdateTime = null, ICollection<IPluginSetting>? settings = null, ICollection<IChatFunction>? functions = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IPluginSetting>>>? settingsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IChatFunction>>>? functionsCallback = null, IDictionary<string, Func<IDictionary<string, object?>?, CancellationToken, ValueTask<object?>>>? sharedMethods = null)
     {
         Id = id;
         Title = title;
         Description = description;
         Website = website;
         Author = author;
-        Version = version;
+        Version = version ?? new Version(1, 0, 0, 0);
         ReleaseTime = releaseTime;
         LastUpdateTime = lastUpdateTime;
         Settings = settings ?? [];
@@ -58,7 +58,7 @@ public class ChatbotPlugin : IChatbotPlugin
 
     public virtual string? Author { get; set; }
 
-    public virtual string Version { get; set; } = "1.0.0";
+    public virtual Version Version { get; set; } = new Version(1, 0, 0, 0);
 
     public virtual DateTimeOffset? ReleaseTime { get; set; }
 

@@ -214,7 +214,7 @@ public class MyShop : IPluginLoader
             Id = new("55bc120a-b623-4d5f-91e6-ae2b9f3bf6e2"),
             Title = "MyShop",
             Description = "A simple shop plugin",
-            Version = "1.0.0",
+            Version = new Version(1, 0, 0, 0),
             SettingsCallback = (_, _) => ValueTask.FromResult<ICollection<IPluginSetting>>([section1, section2, setting13, setting14, setting15]),
         };
 
