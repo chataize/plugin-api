@@ -73,4 +73,24 @@ public class ChatbotPlugin : IChatbotPlugin
     public virtual Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IPluginSetting>>>? SettingsCallback { get; set; }
 
     public virtual Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IChatFunction>>>? FunctionsCallback { get; set; }
+
+    public virtual void AddSetttng(IPluginSetting setting)
+    {
+        Settings.Add(setting);
+    }
+
+    public virtual void AddFunction(IChatFunction function)
+    {
+        Functions.Add(function);
+    }
+
+    public virtual void AddFunction(Delegate function)
+    {
+        Functions.Add(new ChatFunction(function));
+    }
+
+    public virtual void AddSharedMethod(string name, Func<IDictionary<string, object?>?, CancellationToken, ValueTask<object?>> method)
+    {
+        SharedMethods[name] = method;
+    }
 }
