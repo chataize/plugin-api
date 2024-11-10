@@ -1,5 +1,4 @@
-﻿using ChatAIze.Abstractions.Chat;
-using ChatAIze.Abstractions.Plugins;
+﻿using ChatAIze.Abstractions.Plugins;
 using ChatAIze.Abstractions.Settings;
 using ChatAIze.Abstractions.UI;
 using ChatAIze.PluginApi.Settings;
@@ -8,7 +7,7 @@ namespace ChatAIze.PluginApi.ExamplePlugin;
 
 public class MyShop : IPluginLoader
 {
-    public ValueTask<IChatbotPlugin> LoadAsync(CancellationToken cancellationToken = default)
+    public IChatbotPlugin Load()
     {
         var setting1 = new StringSetting
         {
@@ -220,7 +219,7 @@ public class MyShop : IPluginLoader
 
         plugin.AddFunction(GetOrderStatus);
 
-        return ValueTask.FromResult<IChatbotPlugin>(plugin);
+        return plugin;
     }
 
     private static string GetOrderStatus()
