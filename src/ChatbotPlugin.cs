@@ -10,7 +10,7 @@ public class ChatbotPlugin : IChatbotPlugin
     public ChatbotPlugin() { }
 
     [SetsRequiredMembers]
-    public ChatbotPlugin(Guid id, string title, string? description = null, string? website = null, string? author = null, string version = "1.0.0", DateTimeOffset? releaseTime = null, DateTimeOffset? lastUpdateTime = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IPluginSetting>>>? settingsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IChatFunction>>>? functionsCallback = null)
+    public ChatbotPlugin(Guid id, string title, string? description = null, string? website = null, string? author = null, string version = "1.0.0", DateTimeOffset? releaseTime = null, DateTimeOffset? lastUpdateTime = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IPluginSetting>>>? settingsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IChatFunction>>>? functionsCallback = null, IDictionary<string, Func<IDictionary<string, object?>?, ValueTask<object?>>>? sharedMethods = null)
     {
         Id = id;
         Title = title;
@@ -22,6 +22,7 @@ public class ChatbotPlugin : IChatbotPlugin
         LastUpdateTime = lastUpdateTime;
         SettingsCallback = settingsCallback;
         FunctionsCallback = functionsCallback;
+        SharedMethods = sharedMethods ?? new Dictionary<string, Func<IDictionary<string, object?>?, ValueTask<object?>>>();
     }
 
     public virtual required Guid Id { get; set; }
@@ -39,6 +40,8 @@ public class ChatbotPlugin : IChatbotPlugin
     public virtual DateTimeOffset? ReleaseTime { get; set; }
 
     public virtual DateTimeOffset? LastUpdateTime { get; set; }
+
+    public IDictionary<string, Func<IDictionary<string, object?>?, ValueTask<object?>>> SharedMethods { get; set; } = new Dictionary<string, Func<IDictionary<string, object?>?, ValueTask<object?>>>();
 
     public virtual Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IPluginSetting>>>? SettingsCallback { get; set; }
 
