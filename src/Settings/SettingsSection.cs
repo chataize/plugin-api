@@ -37,3 +37,12 @@ public class SettingsSection : ISettingsSection
 
     public virtual ICollection<IPluginSetting> Settings { get; set; } = [];
 }
+
+public static class SettingsSectionExtensions
+{
+    public static void AddSettingsSection(this ChatbotPlugin plugin, string key, string? title = null, string? description = null, bool isDisabled = false, ICollection<IPluginSetting>? settings = null)
+    {
+        var section = new SettingsSection(key, title, description, isDisabled, settings);
+        plugin.Settings.Add(section);
+    }
+}

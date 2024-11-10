@@ -45,3 +45,12 @@ public class DecimalSetting : IDecimalSetting
 
     public virtual bool IsDisabled { get; set; }
 }
+
+public static class DecimalSettingExtensions
+{
+    public static void AddDecimalSetting(this ChatbotPlugin plugin, string key, string? title = null, string? description = null, double defaultValue = 0.0, double minValue = double.MinValue, double maxValue = double.MaxValue, bool showSliderValue = true, bool showSliderPercentage = false, string? minValueLabel = null, string? maxValueLabel = null, bool isDisabled = false)
+    {
+        var setting = new DecimalSetting(key, title, description, defaultValue, minValue, maxValue, showSliderValue, showSliderPercentage, minValueLabel, maxValueLabel, isDisabled);
+        plugin.Settings.Add(setting);
+    }
+}

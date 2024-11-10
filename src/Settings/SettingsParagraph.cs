@@ -21,3 +21,12 @@ public class SettingsParagraph : ISettingsParagraph
 
     public virtual bool IsDisabled { get; set; }
 }
+
+public static class SettingsParagraphExtensions
+{
+    public static void AddSettingsParagraph(this ChatbotPlugin plugin, string key, string? content = null, bool isDisabled = false)
+    {
+        var paragraph = new SettingsParagraph(key, content, isDisabled);
+        plugin.Settings.Add(paragraph);
+    }
+}

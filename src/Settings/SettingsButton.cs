@@ -31,3 +31,12 @@ public class SettingsButton : ISettingsButton
 
     public virtual Func<CancellationToken, ValueTask>? Callback { get; set; }
 }
+
+public static class SettingsButtonExtensions
+{
+    public static void AddSettingsButton(this ChatbotPlugin plugin, string key, string? title = null, string? description = null, ButtonStyle style = ButtonStyle.Primary, bool isDisabled = false, Func<CancellationToken, ValueTask>? callback = null)
+    {
+        var setting = new SettingsButton(key, title, description, style, isDisabled, callback);
+        plugin.Settings.Add(setting);
+    }
+}

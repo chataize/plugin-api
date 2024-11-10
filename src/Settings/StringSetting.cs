@@ -40,3 +40,12 @@ public class StringSetting : IStringSetting
 
     public virtual bool IsDisabled { get; set; }
 }
+
+public static class StringSettingExtensions
+{
+    public static void AddStringSetting(this ChatbotPlugin plugin, string key, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isSecure = false, bool isDisabled = false)
+    {
+        var setting = new StringSetting(key, title, description, placeholder, defaultValue, textFieldType, maxLength, editorLines, isSecure, isDisabled);
+        plugin.Settings.Add(setting);
+    }
+}

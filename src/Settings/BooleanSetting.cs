@@ -34,3 +34,12 @@ public class BooleanSetting : IBooleanSetting
 
     public bool IsDisabled { get; set; }
 }
+
+public static class BooleanSettingExtensions
+{
+    public static void AddBooleanSetting(this ChatbotPlugin plugin, string key, string? title = null, string? description = null, BooleanSettingStyle style = BooleanSettingStyle.ToggleSwitch, bool defaultValue = false, bool isCompact = false, bool isDisabled = false)
+    {
+        var setting = new BooleanSetting(key, title, description, style, defaultValue, isCompact, isDisabled);
+        plugin.Settings.Add(setting);
+    }
+}

@@ -39,3 +39,12 @@ public class MapSetting : IMapSetting
 
     public bool IsDisabled { get; set; }
 }
+
+public static class MapSettingExtensions
+{
+    public static void AddMapSetting(this ChatbotPlugin plugin, string key, string? title = null, string? description = null, string? keyPlaceholder = null, string? valuePlaceholder = null, int maxItems = 100, int maxKeyLength = 100, int maxValueLength = 100, bool isDisabled = false)
+    {
+        var setting = new MapSetting(key, title, description, keyPlaceholder, valuePlaceholder, maxItems, maxKeyLength, maxValueLength, isDisabled);
+        plugin.Settings.Add(setting);
+    }
+}

@@ -52,3 +52,12 @@ public class IntegerSetting : IIntegerSetting
 
     public virtual bool IsDisabled { get; set; }
 }
+
+public static class IntegerSettingExtensions
+{
+    public static void AddIntegerSetting(this ChatbotPlugin plugin, string key, string? title = null, string? description = null, IntegerSettingStyle style = IntegerSettingStyle.Stepper, int defaultValue = 0, int minValue = int.MinValue, int maxValue = int.MaxValue, int step = 1, bool showSliderValue = true, bool showSliderPercentage = false, string? minValueLabel = null, string? maxValueLabel = null, bool isDisabled = false)
+    {
+        var setting = new IntegerSetting(key, title, description, style, defaultValue, minValue, maxValue, step, showSliderValue, showSliderPercentage, minValueLabel, maxValueLabel, isDisabled);
+        plugin.Settings.Add(setting);
+    }
+}

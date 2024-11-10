@@ -33,3 +33,12 @@ public class ListSetting : IListSetting
 
     public bool IsDisabled { get; set; }
 }
+
+public static class ListSettingExtensions
+{
+    public static void AddListSetting(this ChatbotPlugin plugin, string key, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
+    {
+        var setting = new ListSetting(key, title, description, itemPlaceholder, maxItems, maxItemLength, isDisabled);
+        plugin.Settings.Add(setting);
+    }
+}
