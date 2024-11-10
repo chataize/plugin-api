@@ -45,4 +45,10 @@ public static class SettingsGroupExtensions
         var group = new SettingsGroup(key, title, description, isDisabled, settings);
         plugin.Settings.Add(group);
     }
+
+    public static void AddSettingsGroup(this ChatbotPlugin plugin, string key, string? title = null, string? description = null, bool isDisabled = false, params IPluginSetting[] settings)
+    {
+        var group = new SettingsGroup(key, title, description, isDisabled, settings);
+        plugin.Settings.Add(group);
+    }
 }
