@@ -1,11 +1,19 @@
 using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Chat;
+using ChatAIze.Utilities.Extensions;
 
 namespace ChatAIze.PluginApi;
 
 public class ChatFunction : IChatFunction
 {
     public ChatFunction() { }
+
+    [SetsRequiredMembers]
+    public ChatFunction(Delegate callback)
+    {
+        Name = callback.GetNormalizedMethodName();
+        Callback = callback;
+    }
 
     [SetsRequiredMembers]
     public ChatFunction(string name, string? description = null, Delegate? callback = null, ICollection<IFunctionParameter>? parameters = null)
