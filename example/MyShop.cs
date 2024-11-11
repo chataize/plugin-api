@@ -1,6 +1,7 @@
 ﻿using ChatAIze.Abstractions.Plugins;
 using ChatAIze.Abstractions.Settings;
 using ChatAIze.Abstractions.UI;
+using ChatAIze.PluginApi.Actions;
 using ChatAIze.PluginApi.Settings;
 
 namespace ChatAIze.PluginApi.ExamplePlugin;
@@ -218,6 +219,11 @@ public class MyShop : IPluginLoader
         };
 
         plugin.AddFunction(GetOrderStatus);
+
+        var action1 = new FunctionAction(key: "myshop:create_order", title: "CreateOrder");
+        action1.AddStringSetting(key: "product_name", title: "Product Name");
+
+        plugin.AddAction(action1);
 
         return plugin;
     }
