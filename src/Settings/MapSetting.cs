@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Settings;
+using ChatAIze.PluginApi.Actions;
 
 namespace ChatAIze.PluginApi.Settings;
 
@@ -46,5 +47,11 @@ public static class MapSettingExtensions
     {
         var setting = new MapSetting(key, title, description, keyPlaceholder, valuePlaceholder, maxItems, maxKeyLength, maxValueLength, isDisabled);
         plugin.Settings.Add(setting);
+    }
+
+    public static void AddMapSetting(this FunctionAction action, string key, string? title = null, string? description = null, string? keyPlaceholder = null, string? valuePlaceholder = null, int maxItems = 100, int maxKeyLength = 100, int maxValueLength = 100, bool isDisabled = false)
+    {
+        var setting = new MapSetting(key, title, description, keyPlaceholder, valuePlaceholder, maxItems, maxKeyLength, maxValueLength, isDisabled);
+        action.Settings.Add(setting);
     }
 }

@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Settings;
+using ChatAIze.PluginApi.Actions;
 
 namespace ChatAIze.PluginApi.Settings;
 
@@ -40,5 +41,11 @@ public static class ListSettingExtensions
     {
         var setting = new ListSetting(key, title, description, itemPlaceholder, maxItems, maxItemLength, isDisabled);
         plugin.Settings.Add(setting);
+    }
+
+    public static void AddListSetting(this FunctionAction action, string key, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
+    {
+        var setting = new ListSetting(key, title, description, itemPlaceholder, maxItems, maxItemLength, isDisabled);
+        action.Settings.Add(setting);
     }
 }

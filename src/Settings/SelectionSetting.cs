@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Settings;
 using ChatAIze.Abstractions.UI;
+using ChatAIze.PluginApi.Actions;
 
 namespace ChatAIze.PluginApi.Settings;
 
@@ -63,5 +64,11 @@ public static class SelectionSettingExtensions
     {
         var setting = new SelectionSetting(key, title, description, style, defaultValue, isCompact, isDisabled, choices);
         plugin.Settings.Add(setting);
+    }
+
+    public static void AddSelectionSetting(this FunctionAction action, string key, string? title = null, string? description = null, SelectionSettingStyle style = SelectionSettingStyle.Automatic, string? defaultValue = null, bool isCompact = false, bool isDisabled = false, ICollection<ISelectionChoice>? choices = null)
+    {
+        var setting = new SelectionSetting(key, title, description, style, defaultValue, isCompact, isDisabled, choices);
+        action.Settings.Add(setting);
     }
 }
