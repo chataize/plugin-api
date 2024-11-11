@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Actions;
 using ChatAIze.Abstractions.Settings;
 
@@ -7,6 +8,7 @@ public class FunctionAction : IFunctionAction
 {
     public FunctionAction() { }
 
+    [SetsRequiredMembers]
     public FunctionAction(string key, string title, Func<IDictionary<string, object>, ValueTask<object>>? callback = null, ICollection<IPluginSetting>? settings = null)
     {
         Key = key;
@@ -15,6 +17,7 @@ public class FunctionAction : IFunctionAction
         Settings = settings ?? [];
     }
 
+    [SetsRequiredMembers]
     public FunctionAction(string key, string title, Func<IDictionary<string, object>, ValueTask<object>>? callback = null, params IPluginSetting[] settings)
     {
         Key = key;
