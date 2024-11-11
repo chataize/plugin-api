@@ -9,7 +9,7 @@ public class FunctionAction : IFunctionAction
     public FunctionAction() { }
 
     [SetsRequiredMembers]
-    public FunctionAction(string key, string title, Func<IDictionary<string, object>, ValueTask<object>>? callback = null, ICollection<IPluginSetting>? settings = null)
+    public FunctionAction(string key, string title, Func<IDictionary<string, object>, IActionContext, CancellationToken, ValueTask<object>>? callback = null, ICollection<IPluginSetting>? settings = null)
     {
         Key = key;
         Title = title;
@@ -18,7 +18,7 @@ public class FunctionAction : IFunctionAction
     }
 
     [SetsRequiredMembers]
-    public FunctionAction(string key, string title, Func<IDictionary<string, object>, ValueTask<object>>? callback = null, params IPluginSetting[] settings)
+    public FunctionAction(string key, string title, Func<IDictionary<string, object>, IActionContext, CancellationToken, ValueTask<object>>? callback = null, params IPluginSetting[] settings)
     {
         Key = key;
         Title = title;
@@ -30,7 +30,7 @@ public class FunctionAction : IFunctionAction
 
     public virtual required string Title { get; set; }
 
-    public virtual Func<IDictionary<string, object>, ValueTask<object>>? Callback { get; set; }
+    public virtual Func<IDictionary<string, object>, IActionContext, CancellationToken, ValueTask<object>>? Callback { get; set; }
 
     public virtual ICollection<IPluginSetting> Settings { get; set; } = [];
 
