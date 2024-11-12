@@ -1,7 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
-using ChatAIze.Abstractions.Settings;
+using ChatAIze.Abstractions;
+using ChatAIze.PluginApi.Settings;
 
-namespace ChatAIze.PluginApi.Settings;
+namespace ChatAIze.PluginApi;
 
 public class SelectionChoice : ISelectionChoice
 {

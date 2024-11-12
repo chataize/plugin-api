@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Actions;
-using ChatAIze.Abstractions.Settings;
+using ChatAIze.Abstractions.Actions.Properties;
 
 namespace ChatAIze.PluginApi.Actions;
 
@@ -9,33 +9,33 @@ public class FunctionAction : IFunctionAction
     public FunctionAction() { }
 
     [SetsRequiredMembers]
-    public FunctionAction(string key, string title, Func<IDictionary<string, object>, IActionContext, CancellationToken, ValueTask<object>>? callback = null, ICollection<IPluginSetting>? settings = null)
+    public FunctionAction(string key, string title, Delegate? callback = null, ICollection<IActionProperty>? properties = null)
     {
-        Key = key;
+        Id = key;
         Title = title;
         Callback = callback;
-        Settings = settings ?? [];
+        Properties = properties ?? [];
     }
 
     [SetsRequiredMembers]
-    public FunctionAction(string key, string title, Func<IDictionary<string, object>, IActionContext, CancellationToken, ValueTask<object>>? callback = null, params IPluginSetting[] settings)
+    public FunctionAction(string key, string title, Delegate? callback = null, params IActionProperty[] properties)
     {
-        Key = key;
+        Id = key;
         Title = title;
         Callback = callback;
-        Settings = settings ?? [];
+        Properties = properties ?? [];
     }
 
-    public virtual required string Key { get; set; }
+    public virtual required string Id { get; set; }
 
     public virtual required string Title { get; set; }
 
-    public virtual Func<IDictionary<string, object>, IActionContext, CancellationToken, ValueTask<object>>? Callback { get; set; }
+    public virtual Delegate? Callback { get; set; }
 
-    public virtual ICollection<IPluginSetting> Settings { get; set; } = [];
+    public virtual ICollection<IActionProperty> Properties { get; set; } = [];
 
-    public void AddSetting(IPluginSetting setting)
+    public void AddProperty(IActionProperty property)
     {
-        Settings.Add(setting);
+        Properties.Add(property);
     }
 }

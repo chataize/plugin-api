@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Settings;
-using ChatAIze.PluginApi.Actions;
 
 namespace ChatAIze.PluginApi.Settings;
 
@@ -51,17 +50,5 @@ public static class SettingsSectionExtensions
     {
         var section = new SettingsSection(key, title, description, isDisabled, settings);
         plugin.Settings.Add(section);
-    }
-
-    public static void AddSettingsSection(this FunctionAction action, string key, string? title = null, string? description = null, bool isDisabled = false, ICollection<IPluginSetting>? settings = null)
-    {
-        var section = new SettingsSection(key, title, description, isDisabled, settings);
-        action.Settings.Add(section);
-    }
-
-    public static void AddSettingsSection(this FunctionAction action, string key, string? title = null, string? description = null, bool isDisabled = false, params IPluginSetting[] settings)
-    {
-        var section = new SettingsSection(key, title, description, isDisabled, settings);
-        action.Settings.Add(section);
     }
 }

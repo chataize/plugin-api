@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Settings;
 using ChatAIze.Abstractions.UI;
-using ChatAIze.PluginApi.Actions;
 
 namespace ChatAIze.PluginApi.Settings;
 
@@ -45,11 +44,5 @@ public static class DateTimeSettingExtensions
     {
         var setting = new DateTimeSetting(key, title, description, style, defaultValue, minValue, maxValue, isDisabled);
         plugin.Settings.Add(setting);
-    }
-
-    public static void AddDateTimeSetting(this FunctionAction action, string key, string? title = null, string? description = null, DateTimeSettingStyle style = DateTimeSettingStyle.DateTime, DateTimeOffset? defaultValue = null, DateTimeOffset? minValue = null, DateTimeOffset? maxValue = null, bool isDisabled = false)
-    {
-        var setting = new DateTimeSetting(key, title, description, style, defaultValue, minValue, maxValue, isDisabled);
-        action.Settings.Add(setting);
     }
 }

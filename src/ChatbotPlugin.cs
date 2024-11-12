@@ -17,7 +17,7 @@ public class ChatbotPlugin : IChatbotPlugin
     }
 
     [SetsRequiredMembers]
-    public ChatbotPlugin(Guid id, string title, string? description = null, string? website = null, string? author = null, Version? version = null, DateTimeOffset? releaseTime = null, DateTimeOffset? lastUpdateTime = null, ICollection<IPluginSetting>? settings = null, ICollection<IChatFunction>? functions = null, ICollection<FunctionAction>? actions = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IPluginSetting>>>? settingsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IChatFunction>>>? functionsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IFunctionAction>>>? actionsCallback = null)
+    public ChatbotPlugin(string id, string title, string? description = null, string? website = null, string? author = null, Version? version = null, DateTimeOffset? releaseTime = null, DateTimeOffset? lastUpdateTime = null, ICollection<IPluginSetting>? settings = null, ICollection<IChatFunction>? functions = null, ICollection<FunctionAction>? actions = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IPluginSetting>>>? settingsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IChatFunction>>>? functionsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<ICollection<IFunctionAction>>>? actionsCallback = null)
     {
         Id = id;
         Title = title;
@@ -58,7 +58,7 @@ public class ChatbotPlugin : IChatbotPlugin
         }
     }
 
-    public virtual required Guid Id { get; set; }
+    public virtual required string Id { get; set; }
 
     public virtual required string Title { get; set; }
 

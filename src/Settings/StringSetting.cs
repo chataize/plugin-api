@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Settings;
 using ChatAIze.Abstractions.UI;
-using ChatAIze.PluginApi.Actions;
 
 namespace ChatAIze.PluginApi.Settings;
 
@@ -48,11 +47,5 @@ public static class StringSettingExtensions
     {
         var setting = new StringSetting(key, title, description, placeholder, defaultValue, textFieldType, maxLength, editorLines, isSecure, isDisabled);
         plugin.Settings.Add(setting);
-    }
-
-    public static void AddStringSetting(this FunctionAction action, string key, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isSecure = false, bool isDisabled = false)
-    {
-        var setting = new StringSetting(key, title, description, placeholder, defaultValue, textFieldType, maxLength, editorLines, isSecure, isDisabled);
-        action.Settings.Add(setting);
     }
 }

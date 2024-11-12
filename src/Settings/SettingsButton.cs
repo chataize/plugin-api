@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Settings;
 using ChatAIze.Abstractions.UI;
-using ChatAIze.PluginApi.Actions;
 
 namespace ChatAIze.PluginApi.Settings;
 
@@ -39,11 +38,5 @@ public static class SettingsButtonExtensions
     {
         var setting = new SettingsButton(key, title, description, style, isDisabled, callback);
         plugin.Settings.Add(setting);
-    }
-
-    public static void AddSettingsButton(this FunctionAction action, string key, string? title = null, string? description = null, ButtonStyle style = ButtonStyle.Primary, bool isDisabled = false, Func<CancellationToken, ValueTask>? callback = null)
-    {
-        var setting = new SettingsButton(key, title, description, style, isDisabled, callback);
-        action.Settings.Add(setting);
     }
 }
