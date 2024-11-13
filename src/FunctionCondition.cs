@@ -9,9 +9,9 @@ public class FunctionCondition : IFunctionCondition
     public FunctionCondition() { }
 
     [SetsRequiredMembers]
-    public FunctionCondition(string key, string title, Func<IConditionContext, CancellationToken, ValueTask<(bool, string?)>> callback, params ICollection<ISetting>? settings)
+    public FunctionCondition(string id, string title, Func<IConditionContext, CancellationToken, ValueTask<(bool, string?)>> callback, params ICollection<ISetting>? settings)
     {
-        Id = key;
+        Id = id;
         Title = title;
         Callback = callback;
         Settings = settings ?? [];

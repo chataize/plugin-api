@@ -9,9 +9,9 @@ public class FunctionAction : IFunctionAction
     public FunctionAction() { }
 
     [SetsRequiredMembers]
-    public FunctionAction(string key, string title, Delegate callback, params ICollection<ISetting>? settings)
+    public FunctionAction(string id, string title, Delegate callback, params ICollection<ISetting>? settings)
     {
-        Id = key;
+        Id = id;
         Title = title;
         Callback = callback;
         Settings = settings ?? [];
