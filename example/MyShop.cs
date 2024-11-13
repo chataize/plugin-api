@@ -219,10 +219,25 @@ public class MyShop : IPluginLoader
 
         plugin.AddFunction(GetOrderStatus);
 
-        var action1 = new FunctionAction(key: "myshop:create_order", title: "CreateOrder", callback: () => "order created, id: 3321");
+        var action1 = new FunctionAction(id: "myshop:create_order", title: "Create Order", callback: () => "order created, id: 3321");
         action1.AddStringSetting(id: "productName", title: "Product Name");
 
         plugin.AddAction(action1);
+
+        var condition1 = new FunctionCondition(id: "myshop:is_domain_user", title: "Is Domain User", callback: (context, _) =>
+        {
+            if (context.UserEmail?.EndsWith("@chataize.com", StringComparison.InvariantCultureIgnoreCase) == true)
+            {
+                return ValueTask.FromResult((true, (string?)null));
+            }
+            else
+            {
+                return ValueTask.FromResult((false, (string?)"You must be a ChatAIze staff member to use this feature."));
+            }
+        });
+
+        condition1.AddStringSetting(id: "domain", title: "Domain", description: "The domain to check for.");
+        plugin.AddCondition(condition1);
 
         return plugin;
     }
