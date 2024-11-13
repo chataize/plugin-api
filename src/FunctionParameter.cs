@@ -26,4 +26,6 @@ public class FunctionParameter : IFunctionParameter
     public virtual bool IsRequired { get; set; }
 
     public virtual ICollection<string> EnumValues { get; set; } = [];
+
+    IReadOnlyCollection<string> IFunctionParameter.EnumValues => (IReadOnlyCollection<string>)EnumValues;
 }

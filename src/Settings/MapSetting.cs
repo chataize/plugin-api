@@ -8,9 +8,9 @@ public class MapSetting : IMapSetting
     public MapSetting() { }
 
     [SetsRequiredMembers]
-    public MapSetting(string key, string? title = null, string? description = null, string? keyPlaceholder = null, string? valuePlaceholder = null, int maxItems = 100, int maxKeyLength = 100, int maxValueLength = 100, bool isDisabled = false)
+    public MapSetting(string id, string? title = null, string? description = null, string? keyPlaceholder = null, string? valuePlaceholder = null, int maxItems = 100, int maxKeyLength = 100, int maxValueLength = 100, bool isDisabled = false)
     {
-        Key = key;
+        Id = id;
         Title = title;
         Description = description;
         KeyPlaceholder = keyPlaceholder;
@@ -21,7 +21,7 @@ public class MapSetting : IMapSetting
         IsDisabled = isDisabled;
     }
 
-    public virtual required string Key { get; set; }
+    public virtual required string Id { get; set; }
 
     public virtual string? Title { get; set; }
 
@@ -42,9 +42,21 @@ public class MapSetting : IMapSetting
 
 public static class MapSettingExtensions
 {
-    public static void AddMapSetting(this ChatbotPlugin plugin, string key, string? title = null, string? description = null, string? keyPlaceholder = null, string? valuePlaceholder = null, int maxItems = 100, int maxKeyLength = 100, int maxValueLength = 100, bool isDisabled = false)
+    public static void AddMapSetting(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, string? keyPlaceholder = null, string? valuePlaceholder = null, int maxItems = 100, int maxKeyLength = 100, int maxValueLength = 100, bool isDisabled = false)
     {
-        var setting = new MapSetting(key, title, description, keyPlaceholder, valuePlaceholder, maxItems, maxKeyLength, maxValueLength, isDisabled);
+        var setting = new MapSetting(id, title, description, keyPlaceholder, valuePlaceholder, maxItems, maxKeyLength, maxValueLength, isDisabled);
         plugin.Settings.Add(setting);
+    }
+
+    public static void AddMapSetting(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, string? keyPlaceholder = null, string? valuePlaceholder = null, bool isDisabled = false)
+    {
+        var setting = new MapSetting(id, title, description, keyPlaceholder, valuePlaceholder, isDisabled: isDisabled);
+        plugin.Settings.Add(setting);
+    }
+
+    public static void AddMapSetting(this FunctionAction action, string id, string? title = null, string? description = null, string? keyPlaceholder = null, string? valuePlaceholder = null, int maxItems = 100, int maxKeyLength = 100, int maxValueLength = 100, bool isDisabled = false)
+    {
+        var setting = new MapSetting(id, title, description, keyPlaceholder, valuePlaceholder, maxItems, maxKeyLength, maxValueLength, isDisabled);
+        action.Settings.Add(setting);
     }
 }

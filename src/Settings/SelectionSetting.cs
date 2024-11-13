@@ -10,9 +10,9 @@ public class SelectionSetting : ISelectionSetting
     public SelectionSetting() { }
 
     [SetsRequiredMembers]
-    public SelectionSetting(string key, string? title = null, string? description = null, SelectionSettingStyle style = SelectionSettingStyle.Automatic, string? defaultValue = null, bool isCompact = false, bool isDisabled = false, ICollection<ISelectionChoice>? choices = null)
+    public SelectionSetting(string id, string? title = null, string? description = null, SelectionSettingStyle style = SelectionSettingStyle.Automatic, string? defaultValue = null, bool isCompact = false, bool isDisabled = false, params ICollection<ISelectionChoice>? choices)
     {
-        Key = key;
+        Id = id;
         Title = title;
         Description = description;
         Style = style;
@@ -22,20 +22,7 @@ public class SelectionSetting : ISelectionSetting
         Choices = choices ?? [];
     }
 
-    [SetsRequiredMembers]
-    public SelectionSetting(string key, string? title = null, string? description = null, SelectionSettingStyle style = SelectionSettingStyle.Automatic, string? defaultValue = null, bool isCompact = false, bool isDisabled = false, params ISelectionChoice[] choices)
-    {
-        Key = key;
-        Title = title;
-        Description = description;
-        Style = style;
-        DefaultValue = defaultValue;
-        IsCompact = isCompact;
-        IsDisabled = isDisabled;
-        Choices = choices;
-    }
-
-    public virtual required string Key { get; set; }
+    public virtual required string Id { get; set; }
 
     public virtual string? Title { get; set; }
 
@@ -50,19 +37,27 @@ public class SelectionSetting : ISelectionSetting
     public virtual bool IsDisabled { get; set; }
 
     public virtual ICollection<ISelectionChoice> Choices { get; set; } = [];
+
+    IReadOnlyCollection<ISelectionChoice> ISelectionSetting.Choices => (IReadOnlyCollection<ISelectionChoice>)Choices;
 }
 
 public static class SelectionSettingExtensions
 {
-    public static void AddSelectionSetting(this ChatbotPlugin plugin, string key, string? title = null, string? description = null, SelectionSettingStyle style = SelectionSettingStyle.Automatic, string? defaultValue = null, bool isCompact = false, bool isDisabled = false, ICollection<ISelectionChoice>? choices = null)
+    public static void AddSelectionSetting(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, SelectionSettingStyle style = SelectionSettingStyle.Automatic, string? defaultValue = null, bool isCompact = false, bool isDisabled = false, params ICollection<ISelectionChoice>? choices)
     {
-        var setting = new SelectionSetting(key, title, description, style, defaultValue, isCompact, isDisabled, choices);
+        var setting = new SelectionSetting(id, title, description, style, defaultValue, isCompact, isDisabled, choices);
         plugin.Settings.Add(setting);
     }
 
-    public static void AddSelectionSetting(this ChatbotPlugin plugin, string key, string? title = null, string? description = null, SelectionSettingStyle style = SelectionSettingStyle.Automatic, string? defaultValue = null, bool isCompact = false, bool isDisabled = false, params ISelectionChoice[] choices)
+    public static void AddSelectionSetting(this FunctionAction action, string id, string? title = null, string? description = null, SelectionSettingStyle style = SelectionSettingStyle.Automatic, string? defaultValue = null, bool isCompact = false, bool isDisabled = false, params ICollection<ISelectionChoice>? choices)
     {
-        var setting = new SelectionSetting(key, title, description, style, defaultValue, isCompact, isDisabled, choices);
-        plugin.Settings.Add(setting);
+        var setting = new SelectionSetting(id, title, description, style, defaultValue, isCompact, isDisabled, choices);
+        action.Settings.Add(setting);
+    }
+
+    public static void AddSelectionSetting(this FunctionCondition condition, string id, string? title = null, string? description = null, SelectionSettingStyle style = SelectionSettingStyle.Automatic, string? defaultValue = null, bool isCompact = false, bool isDisabled = false, params ICollection<ISelectionChoice>? choices)
+    {
+        var setting = new SelectionSetting(id, title, description, style, defaultValue, isCompact, isDisabled, choices);
+        condition.Settings.Add(setting);
     }
 }

@@ -8,9 +8,9 @@ public class DecimalSetting : IDecimalSetting
     public DecimalSetting() { }
 
     [SetsRequiredMembers]
-    public DecimalSetting(string key, string? title = null, string? description = null, double defaultValue = 0.0, double minValue = double.MinValue, double maxValue = double.MaxValue, bool showSliderValue = true, bool showSliderPercentage = false, string? minValueLabel = null, string? maxValueLabel = null, bool isDisabled = false)
+    public DecimalSetting(string id, string? title = null, string? description = null, double defaultValue = 0.0, double minValue = double.MinValue, double maxValue = double.MaxValue, bool showSliderValue = true, bool showSliderPercentage = false, string? minValueLabel = null, string? maxValueLabel = null, bool isDisabled = false)
     {
-        Key = key;
+        Id = id;
         Title = title;
         Description = description;
         DefaultValue = defaultValue;
@@ -23,7 +23,7 @@ public class DecimalSetting : IDecimalSetting
         IsDisabled = isDisabled;
     }
 
-    public virtual required string Key { get; set; }
+    public virtual required string Id { get; set; }
 
     public virtual string? Title { get; set; }
 
@@ -48,9 +48,21 @@ public class DecimalSetting : IDecimalSetting
 
 public static class DecimalSettingExtensions
 {
-    public static void AddDecimalSetting(this ChatbotPlugin plugin, string key, string? title = null, string? description = null, double defaultValue = 0.0, double minValue = double.MinValue, double maxValue = double.MaxValue, bool showSliderValue = true, bool showSliderPercentage = false, string? minValueLabel = null, string? maxValueLabel = null, bool isDisabled = false)
+    public static void AddDecimalSetting(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, double defaultValue = 0.0, double minValue = double.MinValue, double maxValue = double.MaxValue, bool showSliderValue = true, bool showSliderPercentage = false, string? minValueLabel = null, string? maxValueLabel = null, bool isDisabled = false)
     {
-        var setting = new DecimalSetting(key, title, description, defaultValue, minValue, maxValue, showSliderValue, showSliderPercentage, minValueLabel, maxValueLabel, isDisabled);
+        var setting = new DecimalSetting(id, title, description, defaultValue, minValue, maxValue, showSliderValue, showSliderPercentage, minValueLabel, maxValueLabel, isDisabled);
         plugin.Settings.Add(setting);
+    }
+
+    public static void AddDecimalSetting(this FunctionAction action, string id, string? title = null, string? description = null, double defaultValue = 0.0, double minValue = double.MinValue, double maxValue = double.MaxValue, bool showSliderValue = true, bool showSliderPercentage = false, string? minValueLabel = null, string? maxValueLabel = null, bool isDisabled = false)
+    {
+        var setting = new DecimalSetting(id, title, description, defaultValue, minValue, maxValue, showSliderValue, showSliderPercentage, minValueLabel, maxValueLabel, isDisabled);
+        action.Settings.Add(setting);
+    }
+
+    public static void AddDecimalSetting(this FunctionCondition condition, string id, string? title = null, string? description = null, double defaultValue = 0.0, double minValue = double.MinValue, double maxValue = double.MaxValue, bool showSliderValue = true, bool showSliderPercentage = false, string? minValueLabel = null, string? maxValueLabel = null, bool isDisabled = false)
+    {
+        var setting = new DecimalSetting(id, title, description, defaultValue, minValue, maxValue, showSliderValue, showSliderPercentage, minValueLabel, maxValueLabel, isDisabled);
+        condition.Settings.Add(setting);
     }
 }

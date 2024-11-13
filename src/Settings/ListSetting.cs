@@ -8,9 +8,9 @@ public class ListSetting : IListSetting
     public ListSetting() { }
 
     [SetsRequiredMembers]
-    public ListSetting(string key, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
+    public ListSetting(string id, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
     {
-        Key = key;
+        Id = id;
         Title = title;
         Description = description;
         ItemPlaceholder = itemPlaceholder;
@@ -19,7 +19,7 @@ public class ListSetting : IListSetting
         IsDisabled = isDisabled;
     }
 
-    public virtual required string Key { get; set; }
+    public virtual required string Id { get; set; }
 
     public virtual string? Title { get; set; }
 
@@ -36,9 +36,21 @@ public class ListSetting : IListSetting
 
 public static class ListSettingExtensions
 {
-    public static void AddListSetting(this ChatbotPlugin plugin, string key, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
+    public static void AddListSetting(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
     {
-        var setting = new ListSetting(key, title, description, itemPlaceholder, maxItems, maxItemLength, isDisabled);
+        var setting = new ListSetting(id, title, description, itemPlaceholder, maxItems, maxItemLength, isDisabled);
         plugin.Settings.Add(setting);
+    }
+
+    public static void AddListSetting(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, string? itemPlaceholder = null, bool isDisabled = false)
+    {
+        var setting = new ListSetting(id, title, description, itemPlaceholder, isDisabled: isDisabled);
+        plugin.Settings.Add(setting);
+    }
+
+    public static void AddListSetting(this FunctionAction action, string id, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
+    {
+        var setting = new ListSetting(id, title, description, itemPlaceholder, maxItems, maxItemLength, isDisabled);
+        action.Settings.Add(setting);
     }
 }

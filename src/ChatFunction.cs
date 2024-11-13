@@ -19,17 +19,7 @@ public class ChatFunction : IChatFunction
     }
 
     [SetsRequiredMembers]
-    public ChatFunction(string name, string? description = null, bool requiresDoubleCheck = false, Delegate? callback = null, ICollection<IFunctionParameter>? parameters = null)
-    {
-        Name = name;
-        Description = description;
-        RequiresDoubleCheck = requiresDoubleCheck;
-        Callback = callback;
-        Parameters = parameters;
-    }
-
-    [SetsRequiredMembers]
-    public ChatFunction(string name, string? description = null, bool requiresDoubleCheck = false, Delegate? callback = null, params IFunctionParameter[] parameters)
+    public ChatFunction(string name, string? description = null, bool requiresDoubleCheck = false, Delegate? callback = null, params ICollection<IFunctionParameter>? parameters)
     {
         Name = name;
         Description = description;
@@ -47,4 +37,6 @@ public class ChatFunction : IChatFunction
     public virtual Delegate? Callback { get; set; }
 
     public virtual ICollection<IFunctionParameter>? Parameters { get; set; }
+
+    IReadOnlyCollection<IFunctionParameter>? IChatFunction.Parameters => (IReadOnlyCollection<IFunctionParameter>?)Parameters;
 }

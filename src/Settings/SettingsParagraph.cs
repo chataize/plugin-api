@@ -8,14 +8,14 @@ public class SettingsParagraph : ISettingsParagraph
     public SettingsParagraph() { }
 
     [SetsRequiredMembers]
-    public SettingsParagraph(string key, string? content = null, bool isDisabled = false)
+    public SettingsParagraph(string id, string? content = null, bool isDisabled = false)
     {
-        Key = key;
+        Id = id;
         Content = content;
         IsDisabled = isDisabled;
     }
 
-    public virtual required string Key { get; set; }
+    public virtual required string Id { get; set; }
 
     public virtual string? Content { get; set; }
 
@@ -24,9 +24,21 @@ public class SettingsParagraph : ISettingsParagraph
 
 public static class SettingsParagraphExtensions
 {
-    public static void AddSettingsParagraph(this ChatbotPlugin plugin, string key, string? content = null, bool isDisabled = false)
+    public static void AddSettingsParagraph(this ChatbotPlugin plugin, string id, string? content = null, bool isDisabled = false)
     {
-        var paragraph = new SettingsParagraph(key, content, isDisabled);
+        var paragraph = new SettingsParagraph(id, content, isDisabled);
         plugin.Settings.Add(paragraph);
+    }
+
+    public static void AddSettingsParagraph(this ChatbotPlugin plugin, string id, string? content = null)
+    {
+        var paragraph = new SettingsParagraph(id, content);
+        plugin.Settings.Add(paragraph);
+    }
+
+    public static void AddSettingsParagraph(this FunctionAction action, string id, string? content = null, bool isDisabled = false)
+    {
+        var paragraph = new SettingsParagraph(id, content, isDisabled);
+        action.Settings.Add(paragraph);
     }
 }

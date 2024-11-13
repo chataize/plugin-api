@@ -1,8 +1,6 @@
 ﻿using ChatAIze.Abstractions.Plugins;
 using ChatAIze.Abstractions.Settings;
 using ChatAIze.Abstractions.UI;
-using ChatAIze.PluginApi.Actions;
-using ChatAIze.PluginApi.Actions.Properties;
 using ChatAIze.PluginApi.Settings;
 
 namespace ChatAIze.PluginApi.ExamplePlugin;
@@ -13,7 +11,7 @@ public class MyShop : IPluginLoader
     {
         var setting1 = new StringSetting
         {
-            Key = "myshop:name",
+            Id = "myshop:name",
             Title = "Name",
             Description = "The name of the shop.",
             Placeholder = "Shop",
@@ -23,7 +21,7 @@ public class MyShop : IPluginLoader
 
         var setting2 = new IntegerSetting
         {
-            Key = "myshop:products_per_page",
+            Id = "myshop:products_per_page",
             Title = "Products per page",
             Description = "The number of products to show per page.",
             Style = IntegerSettingStyle.Stepper,
@@ -34,7 +32,7 @@ public class MyShop : IPluginLoader
 
         var setting3 = new IntegerSetting
         {
-            Key = "myshop:products_per_row",
+            Id = "myshop:products_per_row",
             Title = "Products per row",
             Description = "The number of products to show per row.",
             Style = IntegerSettingStyle.Slider,
@@ -45,7 +43,7 @@ public class MyShop : IPluginLoader
 
         var setting4 = new BooleanSetting
         {
-            Key = "myshop:show_out_of_stock",
+            Id = "myshop:show_out_of_stock",
             Title = "Show out of stock products",
             Description = "Whether to show products that are out of stock.",
             Style = BooleanSettingStyle.ToggleSwitch,
@@ -54,7 +52,7 @@ public class MyShop : IPluginLoader
 
         var setting5 = new BooleanSetting
         {
-            Key = "myshop:show_prices",
+            Id = "myshop:show_prices",
             Title = "Show prices",
             Description = "Whether to show prices for products.",
             Style = BooleanSettingStyle.CheckBox,
@@ -63,7 +61,7 @@ public class MyShop : IPluginLoader
 
         var setting6 = new SelectionSetting
         {
-            Key = "myshop:currency",
+            Id = "myshop:currency",
             Title = "Currency",
             Description = "The currency to display prices in.",
             Style = SelectionSettingStyle.SegmentedControl,
@@ -78,7 +76,7 @@ public class MyShop : IPluginLoader
 
         var setting7 = new SelectionSetting
         {
-            Key = "myshop:currency",
+            Id = "myshop:currency",
             Title = "Currency",
             Description = "The currency to display prices in.",
             Style = SelectionSettingStyle.RadioButtons,
@@ -93,7 +91,7 @@ public class MyShop : IPluginLoader
 
         var setting8 = new SelectionSetting
         {
-            Key = "myshop:currency",
+            Id = "myshop:currency",
             Title = "Currency",
             Description = "The currency to display prices in.",
             Style = SelectionSettingStyle.DropDown,
@@ -108,7 +106,7 @@ public class MyShop : IPluginLoader
 
         var setting9 = new DateTimeSetting
         {
-            Key = "myshop:opening_hours",
+            Id = "myshop:opening_hours",
             Title = "Opening hours",
             Description = "The opening hours of the shop.",
             Style = DateTimeSettingStyle.DateTime,
@@ -119,7 +117,7 @@ public class MyShop : IPluginLoader
 
         var setting10 = new DateTimeSetting
         {
-            Key = "myshop:opening_hours",
+            Id = "myshop:opening_hours",
             Title = "Opening hours",
             Description = "The opening hours of the shop.",
             Style = DateTimeSettingStyle.DateTime,
@@ -130,7 +128,7 @@ public class MyShop : IPluginLoader
 
         var setting11 = new DateTimeSetting
         {
-            Key = "myshop:opening_hours",
+            Id = "myshop:opening_hours",
             Title = "Opening hours",
             Description = "The opening hours of the shop.",
             Style = DateTimeSettingStyle.TimeOnly,
@@ -141,7 +139,7 @@ public class MyShop : IPluginLoader
 
         var setting12 = new ListSetting
         {
-            Key = "myshop:categories",
+            Id = "myshop:categories",
             Title = "Categories",
             Description = "The categories of products to show.",
             MaxItems = 5,
@@ -150,7 +148,7 @@ public class MyShop : IPluginLoader
 
         var setting13 = new SettingsButton
         {
-            Key = "myshop:open_store",
+            Id = "myshop:open_store",
             Title = "Open Store",
             Description = "Opens the store in a new tab.",
             Callback = (_) =>
@@ -162,13 +160,13 @@ public class MyShop : IPluginLoader
 
         var setting14 = new SettingsParagraph
         {
-            Key = "myshop:welcome_message",
+            Id = "myshop:welcome_message",
             Content = "You can use this plugin to display products, manage orders, and more."
         };
 
         var setting15 = new MapSetting
         {
-            Key = "myshop:prices",
+            Id = "myshop:prices",
             Title = "Prices",
             Description = "The prices of products.",
             KeyPlaceholder = "Product",
@@ -180,7 +178,7 @@ public class MyShop : IPluginLoader
 
         var group1 = new SettingsGroup
         {
-            Key = "myshop:general_settings",
+            Id = "myshop:general_settings",
             Title = "General Settings",
             Description = "Settings for the shop.",
             Settings = [setting3, setting4, setting5]
@@ -188,7 +186,7 @@ public class MyShop : IPluginLoader
 
         var group2 = new SettingsGroup
         {
-            Key = "myshop:appearance_settings",
+            Id = "myshop:appearance_settings",
             Title = "Appearance Settings",
             Description = "Settings for the appearance of the shop.",
             Settings = [setting6, setting7, setting8]
@@ -196,7 +194,7 @@ public class MyShop : IPluginLoader
 
         var section1 = new SettingsSection
         {
-            Key = "myshop:shop_settings",
+            Id = "myshop:shop_settings",
             Title = "Shop Settings",
             Description = "Settings for the shop.",
             Settings = [setting2, group1, group2, setting9]
@@ -204,7 +202,7 @@ public class MyShop : IPluginLoader
 
         var section2 = new SettingsSection
         {
-            Key = "myshop:order_settings",
+            Id = "myshop:order_settings",
             Title = "Order Settings",
             Description = "Settings for orders.",
             Settings = [setting10, setting11, setting12]
@@ -216,13 +214,13 @@ public class MyShop : IPluginLoader
             Title = "MyShop",
             Description = "A simple shop plugin",
             Version = new Version(1, 0, 0, 0),
-            SettingsCallback = (_, _) => ValueTask.FromResult<ICollection<IPluginSetting>>([section1, section2, setting13, setting14, setting15]),
+            SettingsCallback = (_, _) => ValueTask.FromResult<IReadOnlyCollection<ISetting>>([section1, section2, setting13, setting14, setting15]),
         };
 
         plugin.AddFunction(GetOrderStatus);
 
         var action1 = new FunctionAction(key: "myshop:create_order", title: "CreateOrder", callback: () => "order created, id: 3321");
-        action1.AddStringProperty(parameter: "productName", title: "Product Name");
+        action1.AddStringSetting(id: "productName", title: "Product Name");
 
         plugin.AddAction(action1);
 

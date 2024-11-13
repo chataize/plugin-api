@@ -8,26 +8,16 @@ public class SettingsGroup : ISettingsGroup
     public SettingsGroup() { }
 
     [SetsRequiredMembers]
-    public SettingsGroup(string key, string? title = null, string? description = null, bool isDisabled = false, ICollection<IPluginSetting>? settings = null)
+    public SettingsGroup(string id, string? title = null, string? description = null, bool isDisabled = false, params ICollection<ISetting>? settings)
     {
-        Key = key;
+        Id = id;
         Title = title;
         Description = description;
         IsDisabled = isDisabled;
         Settings = settings ?? [];
     }
 
-    [SetsRequiredMembers]
-    public SettingsGroup(string key, string? title = null, string? description = null, bool isDisabled = false, params IPluginSetting[] settings)
-    {
-        Key = key;
-        Title = title;
-        Description = description;
-        IsDisabled = isDisabled;
-        Settings = settings;
-    }
-
-    public virtual required string Key { get; set; }
+    public virtual required string Id { get; set; }
 
     public virtual string? Title { get; set; }
 
@@ -35,20 +25,28 @@ public class SettingsGroup : ISettingsGroup
 
     public virtual bool IsDisabled { get; set; }
 
-    public virtual ICollection<IPluginSetting> Settings { get; set; } = [];
+    public virtual ICollection<ISetting> Settings { get; set; } = [];
+
+    IReadOnlyCollection<ISetting> ISettingsGroup.Settings => (IReadOnlyCollection<ISetting>)Settings;
 }
 
 public static class SettingsGroupExtensions
 {
-    public static void AddSettingsGroup(this ChatbotPlugin plugin, string key, string? title = null, string? description = null, bool isDisabled = false, ICollection<IPluginSetting>? settings = null)
+    public static void AddSettingsGroup(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, bool isDisabled = false, params ICollection<ISetting>? settings)
     {
-        var group = new SettingsGroup(key, title, description, isDisabled, settings);
+        var group = new SettingsGroup(id, title, description, isDisabled, settings);
         plugin.Settings.Add(group);
     }
 
-    public static void AddSettingsGroup(this ChatbotPlugin plugin, string key, string? title = null, string? description = null, bool isDisabled = false, params IPluginSetting[] settings)
+    public static void AddSettingsGroup(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, bool isDisabled = false)
     {
-        var group = new SettingsGroup(key, title, description, isDisabled, settings);
+        var group = new SettingsGroup(id, title, description, isDisabled);
         plugin.Settings.Add(group);
+    }
+
+    public static void AddSettingsGroup(this FunctionAction action, string id, string? title = null, string? description = null, bool isDisabled = false, params ICollection<ISetting>? settings)
+    {
+        var group = new SettingsGroup(id, title, description, isDisabled, settings);
+        action.Settings.Add(group);
     }
 }
