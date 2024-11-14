@@ -27,7 +27,7 @@ public class FunctionCondition : IFunctionCondition
 
     public virtual ICollection<ISetting> Settings { get; set; } = [];
 
-    IReadOnlyCollection<ISetting> IFunctionCondition.Settings => (IReadOnlyCollection<ISetting>)Settings;
+    IReadOnlyCollection<ISetting> ISettingsContainer.Settings => (IReadOnlyCollection<ISetting>)Settings;
 
     public void AddSetting(ISetting setting)
     {

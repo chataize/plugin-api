@@ -25,7 +25,7 @@ public class FunctionAction : IFunctionAction
 
     public virtual ICollection<ISetting> Settings { get; set; } = [];
 
-    IReadOnlyCollection<ISetting> IFunctionAction.Settings => (IReadOnlyCollection<ISetting>)Settings;
+    IReadOnlyCollection<ISetting> ISettingsContainer.Settings => (IReadOnlyCollection<ISetting>)Settings;
 
     public void AddSetting(ISetting setting)
     {

@@ -27,7 +27,7 @@ public class SettingsGroup : ISettingsGroup
 
     public virtual ICollection<ISetting> Settings { get; set; } = [];
 
-    IReadOnlyCollection<ISetting> ISettingsGroup.Settings => (IReadOnlyCollection<ISetting>)Settings;
+    IReadOnlyCollection<ISetting> ISettingsContainer.Settings => (IReadOnlyCollection<ISetting>)Settings;
 }
 
 public static class SettingsGroupExtensions
