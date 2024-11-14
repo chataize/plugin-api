@@ -9,7 +9,7 @@ public class FunctionCondition : IFunctionCondition
     public FunctionCondition() { }
 
     [SetsRequiredMembers]
-    public FunctionCondition(string id, string title, Func<IConditionContext, CancellationToken, ValueTask<(bool, string?)>> callback, params ICollection<ISetting>? settings)
+    public FunctionCondition(string id, string title, Delegate callback, params ICollection<ISetting>? settings)
     {
         Id = id;
         Title = title;
@@ -23,7 +23,7 @@ public class FunctionCondition : IFunctionCondition
 
     public virtual bool IsPrecondition { get; set; }
 
-    public virtual required Func<IConditionContext, CancellationToken, ValueTask<(bool, string?)>> Callback { get; set; }
+    public virtual required Delegate Callback { get; set; }
 
     public virtual ICollection<ISetting> Settings { get; set; } = [];
 

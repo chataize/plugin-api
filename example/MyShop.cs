@@ -1,4 +1,5 @@
-﻿using ChatAIze.Abstractions.Plugins;
+﻿using ChatAIze.Abstractions.Chat;
+using ChatAIze.Abstractions.Plugins;
 using ChatAIze.Abstractions.Settings;
 using ChatAIze.Abstractions.UI;
 using ChatAIze.PluginApi.Settings;
@@ -224,17 +225,7 @@ public class MyShop : IPluginLoader
 
         plugin.AddAction(action1);
 
-        var condition1 = new FunctionCondition(id: "myshop:is_domain_user", title: "Is Domain User", callback: (context, _) =>
-        {
-            if (context.UserEmail?.EndsWith("@chataize.com", StringComparison.InvariantCultureIgnoreCase) == true)
-            {
-                return ValueTask.FromResult((true, (string?)null));
-            }
-            else
-            {
-                return ValueTask.FromResult((false, (string?)"You must be a ChatAIze staff member to use this feature."));
-            }
-        });
+        var condition1 = new FunctionCondition(id: "myshop:is_domain_user", title: "Is Domain User", callback: CheckDomainUser);
 
         condition1.AddStringSetting(id: "domain", title: "Domain", description: "The domain to check for.");
         plugin.AddCondition(condition1);
@@ -245,5 +236,17 @@ public class MyShop : IPluginLoader
     private static string GetOrderStatus()
     {
         return "Order status: shipped";
+    }
+
+    private static bool CheckDomainUser(IConditionContext context, string domain)
+    {
+        if (context.UserEmail?.EndsWith(domain, StringComparison.InvariantCultureIgnoreCase) == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
