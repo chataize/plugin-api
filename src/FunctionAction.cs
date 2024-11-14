@@ -1,10 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Chat;
 using ChatAIze.Abstractions.Settings;
+using ChatAIze.PluginApi.Settings;
 
 namespace ChatAIze.PluginApi;
 
-public class FunctionAction : IFunctionAction
+public class FunctionAction : IFunctionAction, IEditableSettingsContainer
 {
     public FunctionAction() { }
 

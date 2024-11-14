@@ -48,21 +48,9 @@ public class DecimalSetting : IDecimalSetting
 
 public static class DecimalSettingExtensions
 {
-    public static void AddDecimalSetting(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, double defaultValue = 0.0, double minValue = double.MinValue, double maxValue = double.MaxValue, bool showSliderValue = true, bool showSliderPercentage = false, string? minValueLabel = null, string? maxValueLabel = null, bool isDisabled = false)
+    public static void AddDecimalSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, double defaultValue = 0.0, double minValue = double.MinValue, double maxValue = double.MaxValue, bool showSliderValue = true, bool showSliderPercentage = false, string? minValueLabel = null, string? maxValueLabel = null, bool isDisabled = false)
     {
         var setting = new DecimalSetting(id, title, description, defaultValue, minValue, maxValue, showSliderValue, showSliderPercentage, minValueLabel, maxValueLabel, isDisabled);
-        plugin.Settings.Add(setting);
-    }
-
-    public static void AddDecimalSetting(this FunctionAction action, string id, string? title = null, string? description = null, double defaultValue = 0.0, double minValue = double.MinValue, double maxValue = double.MaxValue, bool showSliderValue = true, bool showSliderPercentage = false, string? minValueLabel = null, string? maxValueLabel = null, bool isDisabled = false)
-    {
-        var setting = new DecimalSetting(id, title, description, defaultValue, minValue, maxValue, showSliderValue, showSliderPercentage, minValueLabel, maxValueLabel, isDisabled);
-        action.Settings.Add(setting);
-    }
-
-    public static void AddDecimalSetting(this FunctionCondition condition, string id, string? title = null, string? description = null, double defaultValue = 0.0, double minValue = double.MinValue, double maxValue = double.MaxValue, bool showSliderValue = true, bool showSliderPercentage = false, string? minValueLabel = null, string? maxValueLabel = null, bool isDisabled = false)
-    {
-        var setting = new DecimalSetting(id, title, description, defaultValue, minValue, maxValue, showSliderValue, showSliderPercentage, minValueLabel, maxValueLabel, isDisabled);
-        condition.Settings.Add(setting);
+        container.Settings.Add(setting);
     }
 }

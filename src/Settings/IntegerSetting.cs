@@ -55,21 +55,9 @@ public class IntegerSetting : IIntegerSetting
 
 public static class IntegerSettingExtensions
 {
-    public static void AddIntegerSetting(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, IntegerSettingStyle style = IntegerSettingStyle.Stepper, int defaultValue = 0, int minValue = int.MinValue, int maxValue = int.MaxValue, int step = 1, bool showSliderValue = true, bool showSliderPercentage = false, string? minValueLabel = null, string? maxValueLabel = null, bool isDisabled = false)
+    public static void AddIntegerSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, IntegerSettingStyle style = IntegerSettingStyle.Stepper, int defaultValue = 0, int minValue = int.MinValue, int maxValue = int.MaxValue, int step = 1, bool showSliderValue = true, bool showSliderPercentage = false, string? minValueLabel = null, string? maxValueLabel = null, bool isDisabled = false)
     {
         var setting = new IntegerSetting(id, title, description, style, defaultValue, minValue, maxValue, step, showSliderValue, showSliderPercentage, minValueLabel, maxValueLabel, isDisabled);
-        plugin.Settings.Add(setting);
-    }
-
-    public static void AddIntegerSetting(this FunctionAction action, string id, string? title = null, string? description = null, IntegerSettingStyle style = IntegerSettingStyle.Stepper, int defaultValue = 0, int minValue = int.MinValue, int maxValue = int.MaxValue, int step = 1, bool showSliderValue = true, bool showSliderPercentage = false, string? minValueLabel = null, string? maxValueLabel = null, bool isDisabled = false)
-    {
-        var setting = new IntegerSetting(id, title, description, style, defaultValue, minValue, maxValue, step, showSliderValue, showSliderPercentage, minValueLabel, maxValueLabel, isDisabled);
-        action.Settings.Add(setting);
-    }
-
-    public static void AddIntegerSetting(this FunctionCondition condition, string id, string? title = null, string? description = null, IntegerSettingStyle style = IntegerSettingStyle.Stepper, int defaultValue = 0, int minValue = int.MinValue, int maxValue = int.MaxValue, int step = 1, bool showSliderValue = true, bool showSliderPercentage = false, string? minValueLabel = null, string? maxValueLabel = null, bool isDisabled = false)
-    {
-        var setting = new IntegerSetting(id, title, description, style, defaultValue, minValue, maxValue, step, showSliderValue, showSliderPercentage, minValueLabel, maxValueLabel, isDisabled);
-        condition.Settings.Add(setting);
+        container.Settings.Add(setting);
     }
 }

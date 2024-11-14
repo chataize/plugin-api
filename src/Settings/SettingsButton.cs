@@ -34,21 +34,9 @@ public class SettingsButton : ISettingsButton
 
 public static class SettingsButtonExtensions
 {
-    public static void AddSettingsButton(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, ButtonStyle style = ButtonStyle.Primary, bool isDisabled = false, Func<CancellationToken, ValueTask>? callback = null)
+    public static void AddSettingsButton(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, ButtonStyle style = ButtonStyle.Primary, bool isDisabled = false, Func<CancellationToken, ValueTask>? callback = null)
     {
         var setting = new SettingsButton(id, title, description, style, isDisabled, callback);
-        plugin.Settings.Add(setting);
-    }
-
-    public static void AddSettingsButton(this FunctionAction action, string id, string? title = null, string? description = null, ButtonStyle style = ButtonStyle.Primary, bool isDisabled = false, Func<CancellationToken, ValueTask>? callback = null)
-    {
-        var setting = new SettingsButton(id, title, description, style, isDisabled, callback);
-        action.Settings.Add(setting);
-    }
-
-    public static void AddSettingsButton(this FunctionCondition condition, string id, string? title = null, string? description = null, ButtonStyle style = ButtonStyle.Primary, bool isDisabled = false, Func<CancellationToken, ValueTask>? callback = null)
-    {
-        var setting = new SettingsButton(id, title, description, style, isDisabled, callback);
-        condition.Settings.Add(setting);
+        container.Settings.Add(setting);
     }
 }

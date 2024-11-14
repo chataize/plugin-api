@@ -43,21 +43,9 @@ public class SelectionSetting : ISelectionSetting
 
 public static class SelectionSettingExtensions
 {
-    public static void AddSelectionSetting(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, SelectionSettingStyle style = SelectionSettingStyle.Automatic, string? defaultValue = null, bool isCompact = false, bool isDisabled = false, params ICollection<ISelectionChoice>? choices)
+    public static void AddSelectionSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, SelectionSettingStyle style = SelectionSettingStyle.Automatic, string? defaultValue = null, bool isCompact = false, bool isDisabled = false, params ICollection<ISelectionChoice>? choices)
     {
         var setting = new SelectionSetting(id, title, description, style, defaultValue, isCompact, isDisabled, choices);
-        plugin.Settings.Add(setting);
-    }
-
-    public static void AddSelectionSetting(this FunctionAction action, string id, string? title = null, string? description = null, SelectionSettingStyle style = SelectionSettingStyle.Automatic, string? defaultValue = null, bool isCompact = false, bool isDisabled = false, params ICollection<ISelectionChoice>? choices)
-    {
-        var setting = new SelectionSetting(id, title, description, style, defaultValue, isCompact, isDisabled, choices);
-        action.Settings.Add(setting);
-    }
-
-    public static void AddSelectionSetting(this FunctionCondition condition, string id, string? title = null, string? description = null, SelectionSettingStyle style = SelectionSettingStyle.Automatic, string? defaultValue = null, bool isCompact = false, bool isDisabled = false, params ICollection<ISelectionChoice>? choices)
-    {
-        var setting = new SelectionSetting(id, title, description, style, defaultValue, isCompact, isDisabled, choices);
-        condition.Settings.Add(setting);
+        container.Settings.Add(setting);
     }
 }

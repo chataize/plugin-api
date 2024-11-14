@@ -40,21 +40,9 @@ public class DateTimeSetting : IDateTimeSetting
 
 public static class DateTimeSettingExtensions
 {
-    public static void AddDateTimeSetting(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, DateTimeSettingStyle style = DateTimeSettingStyle.DateTime, DateTimeOffset? defaultValue = null, DateTimeOffset? minValue = null, DateTimeOffset? maxValue = null, bool isDisabled = false)
+    public static void AddDateTimeSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, DateTimeSettingStyle style = DateTimeSettingStyle.DateTime, DateTimeOffset? defaultValue = null, DateTimeOffset? minValue = null, DateTimeOffset? maxValue = null, bool isDisabled = false)
     {
         var setting = new DateTimeSetting(id, title, description, style, defaultValue, minValue, maxValue, isDisabled);
-        plugin.Settings.Add(setting);
-    }
-
-    public static void AddDateTimeSetting(this FunctionAction action, string id, string? title = null, string? description = null, DateTimeSettingStyle style = DateTimeSettingStyle.DateTime, DateTimeOffset? defaultValue = null, DateTimeOffset? minValue = null, DateTimeOffset? maxValue = null, bool isDisabled = false)
-    {
-        var setting = new DateTimeSetting(id, title, description, style, defaultValue, minValue, maxValue, isDisabled);
-        action.Settings.Add(setting);
-    }
-
-    public static void AddDateTimeSetting(this FunctionCondition condition, string id, string? title = null, string? description = null, DateTimeSettingStyle style = DateTimeSettingStyle.DateTime, DateTimeOffset? defaultValue = null, DateTimeOffset? minValue = null, DateTimeOffset? maxValue = null, bool isDisabled = false)
-    {
-        var setting = new DateTimeSetting(id, title, description, style, defaultValue, minValue, maxValue, isDisabled);
-        condition.Settings.Add(setting);
+        container.Settings.Add(setting);
     }
 }

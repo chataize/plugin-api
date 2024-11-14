@@ -3,7 +3,7 @@ using ChatAIze.Abstractions.Settings;
 
 namespace ChatAIze.PluginApi.Settings;
 
-public class SettingsGroup : ISettingsGroup
+public class SettingsGroup : ISettingsGroup, IEditableSettingsContainer
 {
     public SettingsGroup() { }
 
@@ -32,21 +32,9 @@ public class SettingsGroup : ISettingsGroup
 
 public static class SettingsGroupExtensions
 {
-    public static void AddSettingsGroup(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, bool isDisabled = false, params ICollection<ISetting>? settings)
+    public static void AddSettingsGroup(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, bool isDisabled = false, params ICollection<ISetting>? settings)
     {
-        var group = new SettingsGroup(id, title, description, isDisabled, settings);
-        plugin.Settings.Add(group);
-    }
-
-    public static void AddSettingsGroup(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, bool isDisabled = false)
-    {
-        var group = new SettingsGroup(id, title, description, isDisabled);
-        plugin.Settings.Add(group);
-    }
-
-    public static void AddSettingsGroup(this FunctionAction action, string id, string? title = null, string? description = null, bool isDisabled = false, params ICollection<ISetting>? settings)
-    {
-        var group = new SettingsGroup(id, title, description, isDisabled, settings);
-        action.Settings.Add(group);
+        var setting = new SettingsGroup(id, title, description, isDisabled, settings);
+        container.Settings.Add(setting);
     }
 }

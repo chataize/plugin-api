@@ -42,21 +42,9 @@ public class MapSetting : IMapSetting
 
 public static class MapSettingExtensions
 {
-    public static void AddMapSetting(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, string? keyPlaceholder = null, string? valuePlaceholder = null, int maxItems = 100, int maxKeyLength = 100, int maxValueLength = 100, bool isDisabled = false)
+    public static void AddMapSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, string? keyPlaceholder = null, string? valuePlaceholder = null, int maxItems = 100, int maxKeyLength = 100, int maxValueLength = 100, bool isDisabled = false)
     {
         var setting = new MapSetting(id, title, description, keyPlaceholder, valuePlaceholder, maxItems, maxKeyLength, maxValueLength, isDisabled);
-        plugin.Settings.Add(setting);
-    }
-
-    public static void AddMapSetting(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, string? keyPlaceholder = null, string? valuePlaceholder = null, bool isDisabled = false)
-    {
-        var setting = new MapSetting(id, title, description, keyPlaceholder, valuePlaceholder, isDisabled: isDisabled);
-        plugin.Settings.Add(setting);
-    }
-
-    public static void AddMapSetting(this FunctionAction action, string id, string? title = null, string? description = null, string? keyPlaceholder = null, string? valuePlaceholder = null, int maxItems = 100, int maxKeyLength = 100, int maxValueLength = 100, bool isDisabled = false)
-    {
-        var setting = new MapSetting(id, title, description, keyPlaceholder, valuePlaceholder, maxItems, maxKeyLength, maxValueLength, isDisabled);
-        action.Settings.Add(setting);
+        container.Settings.Add(setting);
     }
 }

@@ -36,21 +36,9 @@ public class ListSetting : IListSetting
 
 public static class ListSettingExtensions
 {
-    public static void AddListSetting(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
+    public static void AddListSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
     {
         var setting = new ListSetting(id, title, description, itemPlaceholder, maxItems, maxItemLength, isDisabled);
-        plugin.Settings.Add(setting);
-    }
-
-    public static void AddListSetting(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, string? itemPlaceholder = null, bool isDisabled = false)
-    {
-        var setting = new ListSetting(id, title, description, itemPlaceholder, isDisabled: isDisabled);
-        plugin.Settings.Add(setting);
-    }
-
-    public static void AddListSetting(this FunctionAction action, string id, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
-    {
-        var setting = new ListSetting(id, title, description, itemPlaceholder, maxItems, maxItemLength, isDisabled);
-        action.Settings.Add(setting);
+        container.Settings.Add(setting);
     }
 }

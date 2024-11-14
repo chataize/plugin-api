@@ -43,21 +43,9 @@ public class StringSetting : IStringSetting
 
 public static class StringSettingExtensions
 {
-    public static void AddStringSetting(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isSecure = false, bool isDisabled = false)
+    public static void AddStringSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isSecure = false, bool isDisabled = false)
     {
         var setting = new StringSetting(id, title, description, placeholder, defaultValue, textFieldType, maxLength, editorLines, isSecure, isDisabled);
-        plugin.Settings.Add(setting);
-    }
-
-    public static void AddStringSetting(this FunctionAction action, string id, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isSecure = false, bool isDisabled = false)
-    {
-        var setting = new StringSetting(id, title, description, placeholder, defaultValue, textFieldType, maxLength, editorLines, isSecure, isDisabled);
-        action.Settings.Add(setting);
-    }
-
-    public static void AddStringSetting(this FunctionCondition condition, string id, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isSecure = false, bool isDisabled = false)
-    {
-        var setting = new StringSetting(id, title, description, placeholder, defaultValue, textFieldType, maxLength, editorLines, isSecure, isDisabled);
-        condition.Settings.Add(setting);
+        container.Settings.Add(setting);
     }
 }

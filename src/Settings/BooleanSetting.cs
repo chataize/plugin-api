@@ -37,21 +37,9 @@ public class BooleanSetting : IBooleanSetting
 
 public static class BooleanSettingExtensions
 {
-    public static void AddBooleanSetting(this ChatbotPlugin plugin, string id, string? title = null, string? description = null, BooleanSettingStyle style = BooleanSettingStyle.ToggleSwitch, bool defaultValue = false, bool isCompact = false, bool isDisabled = false)
+    public static void AddBooleanSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, BooleanSettingStyle style = BooleanSettingStyle.ToggleSwitch, bool defaultValue = false, bool isCompact = false, bool isDisabled = false)
     {
         var setting = new BooleanSetting(id, title, description, style, defaultValue, isCompact, isDisabled);
-        plugin.Settings.Add(setting);
-    }
-
-    public static void AddBooleanSetting(this FunctionAction action, string id, string? title = null, string? description = null, BooleanSettingStyle style = BooleanSettingStyle.ToggleSwitch, bool defaultValue = false, bool isCompact = false, bool isDisabled = false)
-    {
-        var setting = new BooleanSetting(id, title, description, style, defaultValue, isCompact, isDisabled);
-        action.Settings.Add(setting);
-    }
-
-    public static void AddBooleanSetting(this FunctionCondition condition, string id, string? title = null, string? description = null, BooleanSettingStyle style = BooleanSettingStyle.ToggleSwitch, bool defaultValue = false, bool isCompact = false, bool isDisabled = false)
-    {
-        var setting = new BooleanSetting(id, title, description, style, defaultValue, isCompact, isDisabled);
-        condition.Settings.Add(setting);
+        container.Settings.Add(setting);
     }
 }
