@@ -17,11 +17,12 @@ public class ChatbotPlugin : IChatbotPlugin, IEditableSettingsContainer
     }
 
     [SetsRequiredMembers]
-    public ChatbotPlugin(string id, string title, string? description = null, string? website = null, string? author = null, Version? version = null, DateTimeOffset? releaseTime = null, DateTimeOffset? lastUpdateTime = null, ICollection<ISetting>? settings = null, ICollection<IChatFunction>? functions = null, ICollection<IFunctionAction>? actions = null, ICollection<IFunctionCondition>? conditions = null, Func<IPluginSettings, CancellationToken, ValueTask<IReadOnlyCollection<ISetting>>>? settingsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<IReadOnlyCollection<IChatFunction>>>? functionsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<IReadOnlyCollection<IFunctionAction>>>? actionsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<IReadOnlyCollection<IFunctionCondition>>>? conditionsCallback = null)
+    public ChatbotPlugin(string id, string title, string? description = null, string? iconUrl = null, string? website = null, string? author = null, Version? version = null, DateTimeOffset? releaseTime = null, DateTimeOffset? lastUpdateTime = null, ICollection<ISetting>? settings = null, ICollection<IChatFunction>? functions = null, ICollection<IFunctionAction>? actions = null, ICollection<IFunctionCondition>? conditions = null, Func<IPluginSettings, CancellationToken, ValueTask<IReadOnlyCollection<ISetting>>>? settingsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<IReadOnlyCollection<IChatFunction>>>? functionsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<IReadOnlyCollection<IFunctionAction>>>? actionsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<IReadOnlyCollection<IFunctionCondition>>>? conditionsCallback = null)
     {
         Id = id;
         Title = title;
         Description = description;
+        IconUrl = iconUrl;
         Website = website;
         Author = author;
         Version = version ?? new Version(1, 0, 0, 0);
@@ -74,6 +75,8 @@ public class ChatbotPlugin : IChatbotPlugin, IEditableSettingsContainer
     public virtual required string Title { get; set; }
 
     public virtual string? Description { get; set; }
+
+    public virtual string? IconUrl { get; set; }
 
     public virtual string? Website { get; set; }
 
