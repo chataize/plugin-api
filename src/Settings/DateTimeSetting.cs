@@ -31,6 +31,8 @@ public class DateTimeSetting : IDateTimeSetting
 
     public virtual DateTimeOffset DefaultValue { get; set; }
 
+    public virtual object DefaultValueObject => DefaultValue;
+
     public virtual DateTimeOffset MinValue { get; set; } = DateTimeOffset.MinValue;
 
     public virtual DateTimeOffset MaxValue { get; set; } = DateTimeOffset.MaxValue;

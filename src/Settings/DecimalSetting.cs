@@ -31,6 +31,8 @@ public class DecimalSetting : IDecimalSetting
 
     public virtual double DefaultValue { get; set; }
 
+    public virtual object DefaultValueObject => DefaultValue;
+
     public virtual double MinValue { get; set; } = double.MinValue;
 
     public virtual double MaxValue { get; set; } = double.MaxValue;

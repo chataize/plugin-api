@@ -32,6 +32,8 @@ public class StringSetting : IStringSetting
 
     public virtual string? DefaultValue { get; set; }
 
+    public virtual object DefaultValueObject => DefaultValue ?? string.Empty;
+
     public virtual TextFieldType TextFieldType { get; set; }
 
     public virtual int MaxLength { get; set; } = 100;

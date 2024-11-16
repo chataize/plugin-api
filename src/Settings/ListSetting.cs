@@ -31,6 +31,8 @@ public class ListSetting : IListSetting
 
     public virtual int MaxItemLength { get; set; } = 100;
 
+    public virtual object DefaultValueObject => new List<string>();
+
     public bool IsDisabled { get; set; }
 }
 

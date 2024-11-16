@@ -32,6 +32,8 @@ public class SelectionSetting : ISelectionSetting
 
     public virtual string? DefaultValue { get; set; }
 
+    public virtual object DefaultValueObject => DefaultValue ?? Choices.FirstOrDefault()?.Value ?? string.Empty;
+
     public virtual bool IsCompact { get; set; }
 
     public virtual bool IsDisabled { get; set; }

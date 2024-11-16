@@ -30,6 +30,8 @@ public class BooleanSetting : IBooleanSetting
 
     public virtual bool DefaultValue { get; set; }
 
+    public virtual object DefaultValueObject => DefaultValue;
+
     public virtual bool IsCompact { get; set; }
 
     public bool IsDisabled { get; set; }

@@ -36,6 +36,8 @@ public class IntegerSetting : IIntegerSetting
 
     public virtual int DefaultValue { get; set; }
 
+    public virtual object DefaultValueObject => DefaultValue;
+
     public virtual int MinValue { get; set; } = int.MinValue;
 
     public virtual int MaxValue { get; set; } = int.MaxValue;
