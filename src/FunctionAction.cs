@@ -43,12 +43,12 @@ public class FunctionAction : IFunctionAction, IEditableSettingsContainer
 
     IReadOnlyCollection<string> IFunctionAction.Placeholders => (IReadOnlyCollection<string>)Placeholders;
 
-    public void AddSetting(ISetting setting)
+    public virtual void AddSetting(ISetting setting)
     {
         Settings.Add(setting);
     }
 
-    public void AddPlaceholder(string placeholder)
+    public virtual void AddPlaceholder(string placeholder)
     {
         Placeholders.Add(placeholder);
     }
