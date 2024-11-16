@@ -10,10 +10,12 @@ public class FunctionCondition : IFunctionCondition, IEditableSettingsContainer
     public FunctionCondition() { }
 
     [SetsRequiredMembers]
-    public FunctionCondition(string id, string title, Delegate callback, params ICollection<ISetting>? settings)
+    public FunctionCondition(string id, string title, Delegate callback, string? description = null, string? iconUrl = null, params ICollection<ISetting>? settings)
     {
         Id = id;
         Title = title;
+        Description = description;
+        IconUrl = iconUrl;
         Callback = callback;
         Settings = settings ?? [];
     }
@@ -21,6 +23,10 @@ public class FunctionCondition : IFunctionCondition, IEditableSettingsContainer
     public virtual required string Id { get; set; }
 
     public virtual required string Title { get; set; }
+
+    public virtual string? Description { get; set; }
+
+    public virtual string? IconUrl { get; set; }
 
     public virtual bool IsPrecondition { get; set; }
 
