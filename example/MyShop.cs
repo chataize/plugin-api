@@ -240,7 +240,7 @@ public class MyShop : IPluginLoader
 
     private static bool CheckDomainUser(IConditionContext context, string domain)
     {
-        if (context.UserEmail?.EndsWith(domain, StringComparison.InvariantCultureIgnoreCase) == true)
+        if (context.User.Email?.EndsWith(domain, StringComparison.InvariantCultureIgnoreCase) == true)
         {
             return true;
         }
