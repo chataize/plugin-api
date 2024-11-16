@@ -12,19 +12,23 @@ public class FunctionAction : IFunctionAction, IEditableSettingsContainer
 
     [SetsRequiredMembers]
     [OverloadResolutionPriority(1)]
-    public FunctionAction(string id, string title, Delegate callback, params ICollection<ISetting>? settings)
+    public FunctionAction(string id, string title, Delegate callback, string? description = null, string? iconUrl = null, params ICollection<ISetting>? settings)
     {
         Id = id;
         Title = title;
+        Description = description;
+        IconUrl = iconUrl;
         Callback = callback;
         Settings = settings ?? [];
     }
 
     [SetsRequiredMembers]
-    public FunctionAction(string id, string title, Delegate callback, params ICollection<string>? placeholders)
+    public FunctionAction(string id, string title, Delegate callback, string? description = null, string? iconUrl = null, params ICollection<string>? placeholders)
     {
         Id = id;
         Title = title;
+        Description = description;
+        IconUrl = iconUrl;
         Callback = callback;
         Placeholders = placeholders ?? [];
     }
@@ -32,6 +36,10 @@ public class FunctionAction : IFunctionAction, IEditableSettingsContainer
     public virtual required string Id { get; set; }
 
     public virtual required string Title { get; set; }
+
+    public virtual string? Description { get; set; }
+
+    public virtual string? IconUrl { get; set; }
 
     public virtual required Delegate Callback { get; set; }
 
