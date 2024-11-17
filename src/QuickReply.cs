@@ -1,8 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
+using ChatAIze.Abstractions.Chat;
 
 namespace ChatAIze.PluginApi;
 
-public record QuickReply
+public record QuickReply : IQuickReply
 {
     public QuickReply() { }
 
