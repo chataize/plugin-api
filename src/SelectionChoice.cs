@@ -28,8 +28,6 @@ public static class SelectionChoiceExtensions
     public static void AddChoice(this SelectionSetting setting, string value, string? title = null, bool isDisabled = false)
     {
         var choice = new SelectionChoice(value, title, isDisabled);
-
-        setting.Choices ??= [];
         setting.Choices.Add(choice);
     }
 }
