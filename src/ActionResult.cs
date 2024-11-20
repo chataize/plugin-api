@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace ChatAIze.PluginApi;
 
-public class ActionResult
+public record ActionResult
 {
     public ActionResult() { }
 
