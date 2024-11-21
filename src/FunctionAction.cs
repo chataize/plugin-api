@@ -1,18 +1,23 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
 using ChatAIze.Abstractions.Chat;
 using ChatAIze.Abstractions.Settings;
 using ChatAIze.PluginApi.Settings;
 
 namespace ChatAIze.PluginApi;
 
-public class FunctionAction : IFunctionAction, IEditableSettingsContainer
+public class FunctionAction : IFunctionAction, ISettingsContainer, IEditableSettingsContainer
 {
-    public FunctionAction() { }
+    public FunctionAction()
+    {
+        SettingsCallback ??= _ => ValueTask.FromResult((IReadOnlyCollection<ISetting>)Settings);
+        PlaceholdersCallback ??= _ => ValueTask.FromResult((IReadOnlyCollection<string>)Placeholders);
+    }
 
     [SetsRequiredMembers]
     [OverloadResolutionPriority(1)]
-    public FunctionAction(string id, string title, Delegate callback, string? description = null, string? iconUrl = null, bool runsSilently = false, params ICollection<ISetting>? settings)
+    public FunctionAction(string id, string title, Delegate callback, string? description = null, string? iconUrl = null, bool runsSilently = false, params ICollection<ISetting>? settings) : this()
     {
         Id = id;
         Title = title;
@@ -24,7 +29,7 @@ public class FunctionAction : IFunctionAction, IEditableSettingsContainer
     }
 
     [SetsRequiredMembers]
-    public FunctionAction(string id, string title, Delegate callback, string? description = null, string? iconUrl = null, bool runsSilently = false, params ICollection<string>? placeholders)
+    public FunctionAction(string id, string title, Delegate callback, string? description = null, string? iconUrl = null, bool runsSilently = false, params ICollection<string>? placeholders) : this()
     {
         Id = id;
         Title = title;
@@ -49,11 +54,13 @@ public class FunctionAction : IFunctionAction, IEditableSettingsContainer
 
     public virtual ICollection<ISetting> Settings { get; set; } = [];
 
-    public virtual ICollection<string> Placeholders { get; set; } = [];
-
     IReadOnlyCollection<ISetting> ISettingsContainer.Settings => (IReadOnlyCollection<ISetting>)Settings;
 
-    IReadOnlyCollection<string> IFunctionAction.Placeholders => (IReadOnlyCollection<string>)Placeholders;
+    public virtual ICollection<string> Placeholders { get; set; } = [];
+
+    public virtual Func<IReadOnlyDictionary<string, JsonElement>, ValueTask<IReadOnlyCollection<ISetting>>> SettingsCallback { get; set; }
+
+    public virtual Func<IReadOnlyDictionary<string, JsonElement>, ValueTask<IReadOnlyCollection<string>>> PlaceholdersCallback { get; set; }
 
     public virtual void AddSetting(ISetting setting)
     {
