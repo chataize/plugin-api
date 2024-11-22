@@ -10,10 +10,10 @@ public class ChatbotPlugin : IChatbotPlugin, IEditableSettingsContainer
 {
     public ChatbotPlugin()
     {
-        SettingsCallback ??= (_, _) => (IReadOnlyCollection<ISetting>)Settings;
-        FunctionsCallback ??= (_, _) => (IReadOnlyCollection<IChatFunction>)Functions;
-        ActionsCallback ??= (_, _) => (IReadOnlyCollection<IFunctionAction>)Actions;
-        ConditionsCallback ??= (_, _) => (IReadOnlyCollection<IFunctionCondition>)Conditions;
+        SettingsCallback ??= _ => (IReadOnlyCollection<ISetting>)Settings;
+        FunctionsCallback ??= _ => (IReadOnlyCollection<IChatFunction>)Functions;
+        ActionsCallback ??= _ => (IReadOnlyCollection<IFunctionAction>)Actions;
+        ConditionsCallback ??= _ => (IReadOnlyCollection<IFunctionCondition>)Conditions;
     }
 
     [SetsRequiredMembers]
@@ -60,13 +60,13 @@ public class ChatbotPlugin : IChatbotPlugin, IEditableSettingsContainer
 
     public virtual ICollection<IFunctionCondition> Conditions { get; set; } = [];
 
-    public virtual Func<IPluginSettings, CancellationToken, IReadOnlyCollection<ISetting>> SettingsCallback { get; set; }
+    public virtual Func<IPluginSettings, IReadOnlyCollection<ISetting>> SettingsCallback { get; set; }
 
-    public virtual Func<IPluginSettings, CancellationToken, IReadOnlyCollection<IChatFunction>> FunctionsCallback { get; set; }
+    public virtual Func<IPluginSettings, IReadOnlyCollection<IChatFunction>> FunctionsCallback { get; set; }
 
-    public virtual Func<IPluginSettings, CancellationToken, IReadOnlyCollection<IFunctionAction>> ActionsCallback { get; set; }
+    public virtual Func<IPluginSettings, IReadOnlyCollection<IFunctionAction>> ActionsCallback { get; set; }
 
-    public virtual Func<IPluginSettings, CancellationToken, IReadOnlyCollection<IFunctionCondition>> ConditionsCallback { get; set; }
+    public virtual Func<IPluginSettings, IReadOnlyCollection<IFunctionCondition>> ConditionsCallback { get; set; }
 
     public virtual void AddSetttng(ISetting setting)
     {
