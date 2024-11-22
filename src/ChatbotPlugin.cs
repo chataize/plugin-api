@@ -10,14 +10,14 @@ public class ChatbotPlugin : IChatbotPlugin, IEditableSettingsContainer
 {
     public ChatbotPlugin()
     {
-        SettingsCallback ??= (_, _) => ValueTask.FromResult((IReadOnlyCollection<ISetting>)Settings);
-        FunctionsCallback ??= (_, _) => ValueTask.FromResult((IReadOnlyCollection<IChatFunction>)Functions);
-        ActionsCallback ??= (_, _) => ValueTask.FromResult((IReadOnlyCollection<IFunctionAction>)Actions);
-        ConditionsCallback ??= (_, _) => ValueTask.FromResult((IReadOnlyCollection<IFunctionCondition>)Conditions);
+        SettingsCallback ??= (_, _) => (IReadOnlyCollection<ISetting>)Settings;
+        FunctionsCallback ??= (_, _) => (IReadOnlyCollection<IChatFunction>)Functions;
+        ActionsCallback ??= (_, _) => (IReadOnlyCollection<IFunctionAction>)Actions;
+        ConditionsCallback ??= (_, _) => (IReadOnlyCollection<IFunctionCondition>)Conditions;
     }
 
     [SetsRequiredMembers]
-    public ChatbotPlugin(string id, string title, string? description = null, string? iconUrl = null, string? website = null, string? author = null, Version? version = null, DateTimeOffset? releaseTime = null, DateTimeOffset? lastUpdateTime = null, ICollection<ISetting>? settings = null, ICollection<IChatFunction>? functions = null, ICollection<IFunctionAction>? actions = null, ICollection<IFunctionCondition>? conditions = null, Func<IPluginSettings, CancellationToken, ValueTask<IReadOnlyCollection<ISetting>>>? settingsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<IReadOnlyCollection<IChatFunction>>>? functionsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<IReadOnlyCollection<IFunctionAction>>>? actionsCallback = null, Func<IPluginSettings, CancellationToken, ValueTask<IReadOnlyCollection<IFunctionCondition>>>? conditionsCallback = null)
+    public ChatbotPlugin(string id, string title, string? description = null, string? iconUrl = null, string? website = null, string? author = null, Version? version = null, DateTimeOffset? releaseTime = null, DateTimeOffset? lastUpdateTime = null, ICollection<ISetting>? settings = null, ICollection<IChatFunction>? functions = null, ICollection<IFunctionAction>? actions = null, ICollection<IFunctionCondition>? conditions = null) : this()
     {
         Id = id;
         Title = title;
@@ -32,42 +32,6 @@ public class ChatbotPlugin : IChatbotPlugin, IEditableSettingsContainer
         Functions = functions ?? [];
         Actions = actions ?? [];
         Conditions = conditions ?? [];
-
-        if (settingsCallback is null)
-        {
-            SettingsCallback = (_, _) => ValueTask.FromResult((IReadOnlyCollection<ISetting>)Settings);
-        }
-        else
-        {
-            SettingsCallback = settingsCallback;
-        }
-
-        if (functionsCallback is null)
-        {
-            FunctionsCallback = (_, _) => ValueTask.FromResult((IReadOnlyCollection<IChatFunction>)Functions);
-        }
-        else
-        {
-            FunctionsCallback = functionsCallback;
-        }
-
-        if (actionsCallback is null)
-        {
-            ActionsCallback = (_, _) => ValueTask.FromResult((IReadOnlyCollection<IFunctionAction>)Actions);
-        }
-        else
-        {
-            ActionsCallback = actionsCallback;
-        }
-
-        if (conditionsCallback is null)
-        {
-            ConditionsCallback = (_, _) => ValueTask.FromResult((IReadOnlyCollection<IFunctionCondition>)Conditions);
-        }
-        else
-        {
-            ConditionsCallback = conditionsCallback;
-        }
     }
 
     public virtual required string Id { get; set; }
@@ -96,13 +60,13 @@ public class ChatbotPlugin : IChatbotPlugin, IEditableSettingsContainer
 
     public virtual ICollection<IFunctionCondition> Conditions { get; set; } = [];
 
-    public virtual Func<IPluginSettings, CancellationToken, ValueTask<IReadOnlyCollection<ISetting>>>? SettingsCallback { get; set; }
+    public virtual Func<IPluginSettings, CancellationToken, IReadOnlyCollection<ISetting>> SettingsCallback { get; set; }
 
-    public virtual Func<IPluginSettings, CancellationToken, ValueTask<IReadOnlyCollection<IChatFunction>>>? FunctionsCallback { get; set; }
+    public virtual Func<IPluginSettings, CancellationToken, IReadOnlyCollection<IChatFunction>> FunctionsCallback { get; set; }
 
-    public virtual Func<IPluginSettings, CancellationToken, ValueTask<IReadOnlyCollection<IFunctionAction>>>? ActionsCallback { get; set; }
+    public virtual Func<IPluginSettings, CancellationToken, IReadOnlyCollection<IFunctionAction>> ActionsCallback { get; set; }
 
-    public virtual Func<IPluginSettings, CancellationToken, ValueTask<IReadOnlyCollection<IFunctionCondition>>>? ConditionsCallback { get; set; }
+    public virtual Func<IPluginSettings, CancellationToken, IReadOnlyCollection<IFunctionCondition>> ConditionsCallback { get; set; }
 
     public virtual void AddSetttng(ISetting setting)
     {

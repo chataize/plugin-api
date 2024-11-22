@@ -11,8 +11,8 @@ public class FunctionAction : IFunctionAction, ISettingsContainer, IEditableSett
 {
     public FunctionAction()
     {
-        SettingsCallback ??= _ => ValueTask.FromResult((IReadOnlyCollection<ISetting>)Settings);
-        PlaceholdersCallback ??= _ => ValueTask.FromResult((IReadOnlyCollection<string>)Placeholders);
+        SettingsCallback ??= _ => (IReadOnlyCollection<ISetting>)Settings;
+        PlaceholdersCallback ??= _ => (IReadOnlyCollection<string>)Placeholders;
     }
 
     [SetsRequiredMembers]
@@ -58,9 +58,9 @@ public class FunctionAction : IFunctionAction, ISettingsContainer, IEditableSett
 
     public virtual ICollection<string> Placeholders { get; set; } = [];
 
-    public virtual Func<IReadOnlyDictionary<string, JsonElement>, ValueTask<IReadOnlyCollection<ISetting>>> SettingsCallback { get; set; }
+    public virtual Func<IReadOnlyDictionary<string, JsonElement>, IReadOnlyCollection<ISetting>> SettingsCallback { get; set; }
 
-    public virtual Func<IReadOnlyDictionary<string, JsonElement>, ValueTask<IReadOnlyCollection<string>>> PlaceholdersCallback { get; set; }
+    public virtual Func<IReadOnlyDictionary<string, JsonElement>, IReadOnlyCollection<string>> PlaceholdersCallback { get; set; }
 
     public virtual void AddSetting(ISetting setting)
     {
