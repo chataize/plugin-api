@@ -9,7 +9,7 @@ public class SettingsButton : ISettingsButton
     public SettingsButton() { }
 
     [SetsRequiredMembers]
-    public SettingsButton(string id, string? title = null, string? description = null, ButtonStyle style = ButtonStyle.Primary, bool isDisabled = false, Func<CancellationToken, ValueTask>? callback = null)
+    public SettingsButton(string id, Func<CancellationToken, ValueTask> callback, string? title = null, string? description = null, ButtonStyle style = ButtonStyle.Primary, bool isDisabled = false)
     {
         Id = id;
         Title = title;
@@ -29,14 +29,14 @@ public class SettingsButton : ISettingsButton
 
     public virtual bool IsDisabled { get; set; }
 
-    public virtual Func<CancellationToken, ValueTask>? Callback { get; set; }
+    public virtual required Func<CancellationToken, ValueTask> Callback { get; set; }
 }
 
 public static class SettingsButtonExtensions
 {
-    public static void AddSettingsButton(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, ButtonStyle style = ButtonStyle.Primary, bool isDisabled = false, Func<CancellationToken, ValueTask>? callback = null)
+    public static void AddSettingsButton(this IEditableSettingsContainer container, string id, Func<CancellationToken, ValueTask> callback, string? title = null, string? description = null, ButtonStyle style = ButtonStyle.Primary, bool isDisabled = false)
     {
-        var setting = new SettingsButton(id, title, description, style, isDisabled, callback);
+        var setting = new SettingsButton(id, callback, title, description, style, isDisabled);
         container.Settings.Add(setting);
     }
 }
