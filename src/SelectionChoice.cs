@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using ChatAIze.Abstractions;
+using ChatAIze.Abstractions.Settings;
 using ChatAIze.PluginApi.Settings;
 
 namespace ChatAIze.PluginApi;
