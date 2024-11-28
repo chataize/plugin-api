@@ -24,15 +24,19 @@ public class SettingsParagraph : ISettingsParagraph
 
 public static class SettingsParagraphExtensions
 {
-    public static void AddSettingsParagraph(this IEditableSettingsContainer container, string id, string? content = null, bool isDisabled = false)
+    public static IEditableSettingsContainer AddSettingsParagraph(this IEditableSettingsContainer container, string id, string? content = null, bool isDisabled = false)
     {
         var paragraph = new SettingsParagraph(id, content, isDisabled);
         container.Settings.Add(paragraph);
+
+        return container;
     }
 
-    public static void AddSettingsParagraph(this ICollection<ISetting> collection, string id, string? content = null, bool isDisabled = false)
+    public static ICollection<ISetting> AddSettingsParagraph(this ICollection<ISetting> collection, string id, string? content = null, bool isDisabled = false)
     {
         var paragraph = new SettingsParagraph(id, content, isDisabled);
         collection.Add(paragraph);
+
+        return collection;
     }
 }

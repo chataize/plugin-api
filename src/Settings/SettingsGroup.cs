@@ -32,15 +32,19 @@ public class SettingsGroup : ISettingsGroup, IEditableSettingsContainer
 
 public static class SettingsGroupExtensions
 {
-    public static void AddSettingsGroup(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, bool isDisabled = false, params ICollection<ISetting>? settings)
+    public static IEditableSettingsContainer AddSettingsGroup(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, bool isDisabled = false, params ICollection<ISetting>? settings)
     {
         var setting = new SettingsGroup(id, title, description, isDisabled, settings);
         container.Settings.Add(setting);
+
+        return container;
     }
 
-    public static void AddSettingsGroup(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, bool isDisabled = false, params ICollection<ISetting>? settings)
+    public static ICollection<ISetting> AddSettingsGroup(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, bool isDisabled = false, params ICollection<ISetting>? settings)
     {
         var setting = new SettingsGroup(id, title, description, isDisabled, settings);
         collection.Add(setting);
+
+        return collection;
     }
 }

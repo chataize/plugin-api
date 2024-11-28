@@ -38,15 +38,19 @@ public class ListSetting : IListSetting
 
 public static class ListSettingExtensions
 {
-    public static void AddListSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
+    public static IEditableSettingsContainer AddListSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
     {
         var setting = new ListSetting(id, title, description, itemPlaceholder, maxItems, maxItemLength, isDisabled);
         container.Settings.Add(setting);
+
+        return container;
     }
 
-    public static void AddListSetting(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
+    public static ICollection<ISetting> AddListSetting(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
     {
         var setting = new ListSetting(id, title, description, itemPlaceholder, maxItems, maxItemLength, isDisabled);
         collection.Add(setting);
+
+        return collection;
     }
 }

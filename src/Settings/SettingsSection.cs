@@ -32,15 +32,19 @@ public class SettingsSection : ISettingsSection, IEditableSettingsContainer
 
 public static class SettingsSectionExtensions
 {
-    public static void AddSettingsSection(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, bool isDisabled = false, params ICollection<ISetting>? settings)
+    public static IEditableSettingsContainer AddSettingsSection(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, bool isDisabled = false, params ICollection<ISetting>? settings)
     {
         var section = new SettingsSection(id, title, description, isDisabled, settings);
         container.Settings.Add(section);
+
+        return container;
     }
 
-    public static void AddSettingsSection(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, bool isDisabled = false, params ICollection<ISetting>? settings)
+    public static ICollection<ISetting> AddSettingsSection(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, bool isDisabled = false, params ICollection<ISetting>? settings)
     {
         var section = new SettingsSection(id, title, description, isDisabled, settings);
         collection.Add(section);
+
+        return collection;
     }
 }

@@ -39,15 +39,19 @@ public class BooleanSetting : IBooleanSetting
 
 public static class BooleanSettingExtensions
 {
-    public static void AddBooleanSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, BooleanSettingStyle style = BooleanSettingStyle.ToggleSwitch, bool defaultValue = false, bool isCompact = false, bool isDisabled = false)
+    public static IEditableSettingsContainer AddBooleanSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, BooleanSettingStyle style = BooleanSettingStyle.ToggleSwitch, bool defaultValue = false, bool isCompact = false, bool isDisabled = false)
     {
         var setting = new BooleanSetting(id, title, description, style, defaultValue, isCompact, isDisabled);
         container.Settings.Add(setting);
+
+        return container;
     }
 
-    public static void AddBooleanSetting(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, BooleanSettingStyle style = BooleanSettingStyle.ToggleSwitch, bool defaultValue = false, bool isCompact = false, bool isDisabled = false)
+    public static ICollection<ISetting> AddBooleanSetting(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, BooleanSettingStyle style = BooleanSettingStyle.ToggleSwitch, bool defaultValue = false, bool isCompact = false, bool isDisabled = false)
     {
         var setting = new BooleanSetting(id, title, description, style, defaultValue, isCompact, isDisabled);
         collection.Add(setting);
+
+        return collection;
     }
 }
