@@ -19,6 +19,7 @@ public class StringSetting : IStringSetting
         TextFieldType = textFieldType;
         MaxLength = maxLength;
         EditorLines = editorLines;
+        IsLowerCase = isLowerCase;
         IsDisabled = isDisabled;
     }
 
