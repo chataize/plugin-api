@@ -50,4 +50,10 @@ public static class StringSettingExtensions
         var setting = new StringSetting(id, title, description, placeholder, defaultValue, textFieldType, maxLength, editorLines, isSecure, isDisabled);
         container.Settings.Add(setting);
     }
+
+    public static void AddStringSetting(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isSecure = false, bool isDisabled = false)
+    {
+        var setting = new StringSetting(id, title, description, placeholder, defaultValue, textFieldType, maxLength, editorLines, isSecure, isDisabled);
+        collection.Add(setting);
+    }
 }

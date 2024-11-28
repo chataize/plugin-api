@@ -49,4 +49,10 @@ public static class MapSettingExtensions
         var setting = new MapSetting(id, title, description, keyPlaceholder, valuePlaceholder, maxItems, maxKeyLength, maxValueLength, isDisabled);
         container.Settings.Add(setting);
     }
+
+    public static void AddMapSetting(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, string? keyPlaceholder = null, string? valuePlaceholder = null, int maxItems = 100, int maxKeyLength = 100, int maxValueLength = 100, bool isDisabled = false)
+    {
+        var setting = new MapSetting(id, title, description, keyPlaceholder, valuePlaceholder, maxItems, maxKeyLength, maxValueLength, isDisabled);
+        collection.Add(setting);
+    }
 }

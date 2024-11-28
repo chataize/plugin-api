@@ -39,4 +39,10 @@ public static class SettingsButtonExtensions
         var setting = new SettingsButton(id, callback, title, description, style, isDisabled);
         container.Settings.Add(setting);
     }
+
+    public static void AddSettingsButton(this ICollection<ISetting> collction, string id, Func<CancellationToken, ValueTask> callback, string? title = null, string? description = null, ButtonStyle style = ButtonStyle.Primary, bool isDisabled = false)
+    {
+        var setting = new SettingsButton(id, callback, title, description, style, isDisabled);
+        collction.Add(setting);
+    }
 }

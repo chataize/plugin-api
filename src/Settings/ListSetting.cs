@@ -43,4 +43,10 @@ public static class ListSettingExtensions
         var setting = new ListSetting(id, title, description, itemPlaceholder, maxItems, maxItemLength, isDisabled);
         container.Settings.Add(setting);
     }
+
+    public static void AddListSetting(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
+    {
+        var setting = new ListSetting(id, title, description, itemPlaceholder, maxItems, maxItemLength, isDisabled);
+        collection.Add(setting);
+    }
 }

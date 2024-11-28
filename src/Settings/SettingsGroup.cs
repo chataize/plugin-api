@@ -37,4 +37,10 @@ public static class SettingsGroupExtensions
         var setting = new SettingsGroup(id, title, description, isDisabled, settings);
         container.Settings.Add(setting);
     }
+
+    public static void AddSettingsGroup(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, bool isDisabled = false, params ICollection<ISetting>? settings)
+    {
+        var setting = new SettingsGroup(id, title, description, isDisabled, settings);
+        collection.Add(setting);
+    }
 }

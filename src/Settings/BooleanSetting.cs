@@ -44,4 +44,10 @@ public static class BooleanSettingExtensions
         var setting = new BooleanSetting(id, title, description, style, defaultValue, isCompact, isDisabled);
         container.Settings.Add(setting);
     }
+
+    public static void AddBooleanSetting(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, BooleanSettingStyle style = BooleanSettingStyle.ToggleSwitch, bool defaultValue = false, bool isCompact = false, bool isDisabled = false)
+    {
+        var setting = new BooleanSetting(id, title, description, style, defaultValue, isCompact, isDisabled);
+        collection.Add(setting);
+    }
 }

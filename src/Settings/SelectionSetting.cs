@@ -50,4 +50,10 @@ public static class SelectionSettingExtensions
         var setting = new SelectionSetting(id, title, description, style, defaultValue, isCompact, isDisabled, choices);
         container.Settings.Add(setting);
     }
+
+    public static void AddSelectionSetting(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, SelectionSettingStyle style = SelectionSettingStyle.Automatic, string? defaultValue = null, bool isCompact = false, bool isDisabled = false, params ICollection<ISelectionChoice>? choices)
+    {
+        var setting = new SelectionSetting(id, title, description, style, defaultValue, isCompact, isDisabled, choices);
+        collection.Add(setting);
+    }
 }

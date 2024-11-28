@@ -29,4 +29,10 @@ public static class SettingsParagraphExtensions
         var paragraph = new SettingsParagraph(id, content, isDisabled);
         container.Settings.Add(paragraph);
     }
+
+    public static void AddSettingsParagraph(this ICollection<ISetting> collection, string id, string? content = null, bool isDisabled = false)
+    {
+        var paragraph = new SettingsParagraph(id, content, isDisabled);
+        collection.Add(paragraph);
+    }
 }

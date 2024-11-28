@@ -37,4 +37,10 @@ public static class SettingsSectionExtensions
         var section = new SettingsSection(id, title, description, isDisabled, settings);
         container.Settings.Add(section);
     }
+
+    public static void AddSettingsSection(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, bool isDisabled = false, params ICollection<ISetting>? settings)
+    {
+        var section = new SettingsSection(id, title, description, isDisabled, settings);
+        collection.Add(section);
+    }
 }
