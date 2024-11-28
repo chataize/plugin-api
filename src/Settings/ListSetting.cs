@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Settings;
+using ChatAIze.Abstractions.UI;
 
 namespace ChatAIze.PluginApi.Settings;
 
@@ -8,12 +9,13 @@ public class ListSetting : IListSetting
     public ListSetting() { }
 
     [SetsRequiredMembers]
-    public ListSetting(string id, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
+    public ListSetting(string id, string? title = null, string? description = null, string? itemPlaceholder = null, TextFieldType textFieldType = TextFieldType.Default, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
     {
         Id = id;
         Title = title;
         Description = description;
         ItemPlaceholder = itemPlaceholder;
+        TextFieldType = textFieldType;
         MaxItems = maxItems;
         MaxItemLength = maxItemLength;
         IsDisabled = isDisabled;
@@ -27,6 +29,8 @@ public class ListSetting : IListSetting
 
     public virtual string? ItemPlaceholder { get; set; }
 
+    public virtual TextFieldType TextFieldType { get; set; }
+
     public virtual int MaxItems { get; set; } = 100;
 
     public virtual int MaxItemLength { get; set; } = 100;
@@ -38,17 +42,17 @@ public class ListSetting : IListSetting
 
 public static class ListSettingExtensions
 {
-    public static IEditableSettingsContainer AddListSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
+    public static IEditableSettingsContainer AddListSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, string? itemPlaceholder = null, TextFieldType textFieldType = TextFieldType.Default, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
     {
-        var setting = new ListSetting(id, title, description, itemPlaceholder, maxItems, maxItemLength, isDisabled);
+        var setting = new ListSetting(id, title, description, itemPlaceholder, textFieldType, maxItems, maxItemLength, isDisabled);
         container.Settings.Add(setting);
 
         return container;
     }
 
-    public static ICollection<ISetting> AddListSetting(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, string? itemPlaceholder = null, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
+    public static ICollection<ISetting> AddListSetting(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, string? itemPlaceholder = null, TextFieldType textFieldType = TextFieldType.Default, int maxItems = 100, int maxItemLength = 100, bool isDisabled = false)
     {
-        var setting = new ListSetting(id, title, description, itemPlaceholder, maxItems, maxItemLength, isDisabled);
+        var setting = new ListSetting(id, title, description, itemPlaceholder, textFieldType, maxItems, maxItemLength, isDisabled);
         collection.Add(setting);
 
         return collection;
