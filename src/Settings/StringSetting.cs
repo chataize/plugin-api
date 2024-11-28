@@ -9,7 +9,7 @@ public class StringSetting : IStringSetting
     public StringSetting() { }
 
     [SetsRequiredMembers]
-    public StringSetting(string id, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isSecure = false, bool isDisabled = false)
+    public StringSetting(string id, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isDisabled = false)
     {
         Id = id;
         Title = title;
@@ -45,17 +45,17 @@ public class StringSetting : IStringSetting
 
 public static class StringSettingExtensions
 {
-    public static IEditableSettingsContainer AddStringSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isSecure = false, bool isDisabled = false)
+    public static IEditableSettingsContainer AddStringSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isDisabled = false)
     {
-        var setting = new StringSetting(id, title, description, placeholder, defaultValue, textFieldType, maxLength, editorLines, isSecure, isDisabled);
+        var setting = new StringSetting(id, title, description, placeholder, defaultValue, textFieldType, maxLength, editorLines, isDisabled);
         container.Settings.Add(setting);
 
         return container;
     }
 
-    public static ICollection<ISetting> AddStringSetting(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isSecure = false, bool isDisabled = false)
+    public static ICollection<ISetting> AddStringSetting(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isDisabled = false)
     {
-        var setting = new StringSetting(id, title, description, placeholder, defaultValue, textFieldType, maxLength, editorLines, isSecure, isDisabled);
+        var setting = new StringSetting(id, title, description, placeholder, defaultValue, textFieldType, maxLength, editorLines, isDisabled);
         collection.Add(setting);
 
         return collection;
