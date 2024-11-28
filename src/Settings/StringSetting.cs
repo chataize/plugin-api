@@ -9,7 +9,7 @@ public class StringSetting : IStringSetting
     public StringSetting() { }
 
     [SetsRequiredMembers]
-    public StringSetting(string id, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isLowerCase = false, bool isDisabled = false)
+    public StringSetting(string id, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isLowercase = false, bool isDisabled = false)
     {
         Id = id;
         Title = title;
@@ -19,7 +19,7 @@ public class StringSetting : IStringSetting
         TextFieldType = textFieldType;
         MaxLength = maxLength;
         EditorLines = editorLines;
-        IsLowerCase = isLowerCase;
+        IsLowercase = isLowercase;
         IsDisabled = isDisabled;
     }
 
@@ -41,24 +41,24 @@ public class StringSetting : IStringSetting
 
     public virtual int EditorLines { get; set; } = 1;
 
-    public virtual bool IsLowerCase { get; set; }
+    public virtual bool IsLowercase { get; set; }
 
     public virtual bool IsDisabled { get; set; }
 }
 
 public static class StringSettingExtensions
 {
-    public static IEditableSettingsContainer AddStringSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isLowerCase = false, bool isDisabled = false)
+    public static IEditableSettingsContainer AddStringSetting(this IEditableSettingsContainer container, string id, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isLowercase = false, bool isDisabled = false)
     {
-        var setting = new StringSetting(id, title, description, placeholder, defaultValue, textFieldType, maxLength, editorLines, isLowerCase, isDisabled);
+        var setting = new StringSetting(id, title, description, placeholder, defaultValue, textFieldType, maxLength, editorLines, isLowercase, isDisabled);
         container.Settings.Add(setting);
 
         return container;
     }
 
-    public static ICollection<ISetting> AddStringSetting(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isLowerCase = false, bool isDisabled = false)
+    public static ICollection<ISetting> AddStringSetting(this ICollection<ISetting> collection, string id, string? title = null, string? description = null, string? placeholder = null, string? defaultValue = null, TextFieldType textFieldType = TextFieldType.Default, int maxLength = 100, int editorLines = 1, bool isLowercase = false, bool isDisabled = false)
     {
-        var setting = new StringSetting(id, title, description, placeholder, defaultValue, textFieldType, maxLength, editorLines, isLowerCase, isDisabled);
+        var setting = new StringSetting(id, title, description, placeholder, defaultValue, textFieldType, maxLength, editorLines, isLowercase, isDisabled);
         collection.Add(setting);
 
         return collection;
