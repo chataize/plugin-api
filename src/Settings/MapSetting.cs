@@ -39,7 +39,7 @@ public class MapSetting : IMapSetting
 
     public virtual object DefaultValueObject => new Dictionary<string, string>();
 
-    public bool IsDisabled { get; set; }
+    public virtual bool IsDisabled { get; set; }
 }
 
 public static class MapSettingExtensions

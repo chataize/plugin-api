@@ -40,7 +40,7 @@ public class ListSetting : IListSetting
 
     public virtual bool AllowDuplicates { get; set; }
 
-    public bool IsDisabled { get; set; }
+    public virtual bool IsDisabled { get; set; }
 }
 
 public static class ListSettingExtensions

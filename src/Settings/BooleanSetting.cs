@@ -34,7 +34,7 @@ public class BooleanSetting : IBooleanSetting
 
     public virtual bool IsCompact { get; set; }
 
-    public bool IsDisabled { get; set; }
+    public virtual bool IsDisabled { get; set; }
 }
 
 public static class BooleanSettingExtensions

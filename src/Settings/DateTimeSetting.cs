@@ -37,7 +37,7 @@ public class DateTimeSetting : IDateTimeSetting
 
     public virtual DateTimeOffset MaxValue { get; set; } = DateTimeOffset.MaxValue;
 
-    public bool IsDisabled { get; set; }
+    public virtual bool IsDisabled { get; set; }
 }
 
 public static class DateTimeSettingExtensions
