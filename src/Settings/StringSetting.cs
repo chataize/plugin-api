@@ -37,7 +37,7 @@ public class StringSetting : IStringSetting
 
     public virtual TextFieldType TextFieldType { get; set; }
 
-    public virtual int MaxLength { get; set; } = 100;
+    public virtual int MaxLength { get; set; } = 300;
 
     public virtual int EditorLines { get; set; } = 1;
 
