@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Title>Plugin API</Title>
     <Product>Plugin API</Product>
-    <Version>0.10.11</Version>
+    <Version>0.10.12</Version>
     <Company>ChatAIze</Company>
     <Authors>Marcel Kwiatkowski</Authors>
     <Copyright>© ChatAIze 2024</Copyright>
