@@ -17,9 +17,9 @@ public class FunctionParameter : IFunctionParameter
         EnumValues = enumValues ?? [];
     }
 
-    public required virtual Type Type { get; set; }
+    public virtual required Type Type { get; set; }
 
-    public required virtual string Name { get; set; }
+    public virtual required string Name { get; set; }
 
     public virtual string? Description { get; set; }
 

@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using ChatAIze.Abstractions;
 using ChatAIze.Abstractions.Settings;
 using ChatAIze.Abstractions.UI;
 

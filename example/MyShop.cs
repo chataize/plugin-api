@@ -1,6 +1,5 @@
 ﻿using ChatAIze.Abstractions.Chat;
 using ChatAIze.Abstractions.Plugins;
-using ChatAIze.Abstractions.Settings;
 using ChatAIze.Abstractions.UI;
 using ChatAIze.PluginApi.Settings;
 
@@ -221,13 +220,13 @@ public class MyShop : IPluginLoader
         plugin.AddFunction(GetOrderStatus);
 
         var action1 = new FunctionAction(id: "myshop:create_order", title: "Create Order", callback: () => "order created, id: 3321");
-        action1.AddStringSetting(id: "productName", title: "Product Name");
+        _ = action1.AddStringSetting(id: "productName", title: "Product Name");
 
         plugin.AddAction(action1);
 
         var condition1 = new FunctionCondition(id: "myshop:is_domain_user", title: "Is Domain User", callback: CheckDomainUser);
 
-        condition1.AddStringSetting(id: "domain", title: "Domain", description: "The domain to check for.");
+        _ = condition1.AddStringSetting(id: "domain", title: "Domain", description: "The domain to check for.");
         plugin.AddCondition(condition1);
 
         return plugin;
