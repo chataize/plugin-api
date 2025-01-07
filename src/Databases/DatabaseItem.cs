@@ -1,8 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
+using ChatAIze.Abstractions.Databases;
 
 namespace ChatAIze.PluginApi.Databases;
 
-public class DatabaseItem
+public class DatabaseItem : IDatabaseItem
 {
     public DatabaseItem() { }
 
@@ -21,6 +22,8 @@ public class DatabaseItem
     public virtual string? Description { get; set; }
 
     public Dictionary<string, string?> Properties { get; set; } = [];
+
+    IReadOnlyDictionary<string, string?> IDatabaseItem.Properties => Properties;
 
     public DateTimeOffset CreationTime { get; set; } = DateTimeOffset.UtcNow;
 
