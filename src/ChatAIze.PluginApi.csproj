@@ -33,7 +33,7 @@
     <None Include="../README.md" Pack="true" PackagePath="" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ChatAIze.Abstractions" Version="0.11.12" />
+    <PackageReference Include="ChatAIze.Abstractions" Version="0.12.0" />
     <PackageReference Include="ChatAIze.Utilities" Version="0.4.16" />
   </ItemGroup>
 </Project>
