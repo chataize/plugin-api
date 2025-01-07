@@ -21,7 +21,7 @@ public class Database : IDatabase
 
     public virtual string? Description { get; set; }
 
-    public virtual DateTimeOffset CreationTime { get; set; }
+    public virtual DateTimeOffset CreationTime { get; set; } = DateTimeOffset.UtcNow;
 
     public virtual DateTimeOffset LastUpdateTime { get; set; } = DateTimeOffset.UtcNow;
 }
