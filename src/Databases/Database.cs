@@ -12,7 +12,6 @@ public class Database : IDatabase
     {
         Title = title;
         Description = description;
-        CreationTime = DateTimeOffset.UtcNow;
     }
 
     public virtual Guid Id { get; set; } = Guid.CreateVersion7();
