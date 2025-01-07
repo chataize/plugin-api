@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Databases;
 
 namespace ChatAIze.PluginApi.Databases;
@@ -6,6 +7,7 @@ public class Database : IDatabase
 {
     public Database() { }
 
+    [SetsRequiredMembers]
     public Database(string title, string? description = null)
     {
         Title = title;
