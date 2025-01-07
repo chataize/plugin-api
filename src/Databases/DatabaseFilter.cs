@@ -3,7 +3,7 @@ using ChatAIze.Abstractions.Databases;
 
 namespace ChatAIze.PluginApi.Databases;
 
-public class DatabaseFilter
+public record DatabaseFilter
 {
     public DatabaseFilter() { }
 
