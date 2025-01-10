@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using ChatAIze.Abstractions.Databases;
+using ChatAIze.Abstractions.Databases.Enums;
 
 namespace ChatAIze.PluginApi.Databases;
 
