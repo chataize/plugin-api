@@ -1,5 +1,6 @@
 ﻿using ChatAIze.Abstractions.Chat;
 using ChatAIze.Abstractions.Plugins;
+using ChatAIze.Abstractions.Settings;
 using ChatAIze.Abstractions.UI;
 using ChatAIze.PluginApi.Settings;
 
@@ -214,7 +215,7 @@ public class MyShop : IPluginLoader
             Title = "MyShop",
             Description = "A simple shop plugin",
             Version = new Version(1, 0, 0, 0),
-            SettingsCallback = _ => [section1, section2, setting13, setting14, setting15],
+            SettingsCallback = _ => ValueTask.FromResult<IReadOnlyCollection<ISetting>>([section1, section2, setting13, setting14, setting15]),
         };
 
         plugin.AddFunction(GetOrderStatus);

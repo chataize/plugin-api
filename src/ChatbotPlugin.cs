@@ -11,10 +11,10 @@ public class ChatbotPlugin : IChatbotPlugin, IEditableSettingsContainer
 {
     public ChatbotPlugin()
     {
-        SettingsCallback ??= _ => (IReadOnlyCollection<ISetting>)Settings;
-        FunctionsCallback ??= _ => (IReadOnlyCollection<IChatFunction>)Functions;
-        ActionsCallback ??= _ => (IReadOnlyCollection<IFunctionAction>)Actions;
-        ConditionsCallback ??= _ => (IReadOnlyCollection<IFunctionCondition>)Conditions;
+        SettingsCallback ??= _ => ValueTask.FromResult((IReadOnlyCollection<ISetting>)Settings);
+        FunctionsCallback ??= _ => ValueTask.FromResult((IReadOnlyCollection<IChatFunction>)Functions);
+        ActionsCallback ??= _ => ValueTask.FromResult((IReadOnlyCollection<IFunctionAction>)Actions);
+        ConditionsCallback ??= _ => ValueTask.FromResult((IReadOnlyCollection<IFunctionCondition>)Conditions);
     }
 
     [SetsRequiredMembers]
@@ -61,13 +61,13 @@ public class ChatbotPlugin : IChatbotPlugin, IEditableSettingsContainer
 
     public virtual ICollection<IFunctionCondition> Conditions { get; set; } = [];
 
-    public virtual Func<IChatbotContext, IReadOnlyCollection<ISetting>> SettingsCallback { get; set; }
+    public virtual Func<IChatbotContext, ValueTask<IReadOnlyCollection<ISetting>>> SettingsCallback { get; set; }
 
-    public virtual Func<IChatContext, IReadOnlyCollection<IChatFunction>> FunctionsCallback { get; set; }
+    public virtual Func<IChatContext, ValueTask<IReadOnlyCollection<IChatFunction>>> FunctionsCallback { get; set; }
 
-    public virtual Func<IChatbotContext, IReadOnlyCollection<IFunctionAction>> ActionsCallback { get; set; }
+    public virtual Func<IChatbotContext, ValueTask<IReadOnlyCollection<IFunctionAction>>> ActionsCallback { get; set; }
 
-    public virtual Func<IChatbotContext, IReadOnlyCollection<IFunctionCondition>> ConditionsCallback { get; set; }
+    public virtual Func<IChatbotContext, ValueTask<IReadOnlyCollection<IFunctionCondition>>> ConditionsCallback { get; set; }
 
     public virtual void AddSetttng(ISetting setting)
     {
