@@ -1,4 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
+using ChatAIze.Abstractions;
 using ChatAIze.Abstractions.Chat;
 using ChatAIze.Abstractions.Plugins;
 using ChatAIze.Abstractions.Settings;
@@ -60,13 +61,13 @@ public class ChatbotPlugin : IChatbotPlugin, IEditableSettingsContainer
 
     public virtual ICollection<IFunctionCondition> Conditions { get; set; } = [];
 
-    public virtual Func<IPluginSettings, IReadOnlyCollection<ISetting>> SettingsCallback { get; set; }
+    public virtual Func<IChatbotContext, IReadOnlyCollection<ISetting>> SettingsCallback { get; set; }
 
-    public virtual Func<IPluginSettings, IReadOnlyCollection<IChatFunction>> FunctionsCallback { get; set; }
+    public virtual Func<IChatContext, IReadOnlyCollection<IChatFunction>> FunctionsCallback { get; set; }
 
-    public virtual Func<IPluginSettings, IReadOnlyCollection<IFunctionAction>> ActionsCallback { get; set; }
+    public virtual Func<IChatbotContext, IReadOnlyCollection<IFunctionAction>> ActionsCallback { get; set; }
 
-    public virtual Func<IPluginSettings, IReadOnlyCollection<IFunctionCondition>> ConditionsCallback { get; set; }
+    public virtual Func<IChatbotContext, IReadOnlyCollection<IFunctionCondition>> ConditionsCallback { get; set; }
 
     public virtual void AddSetttng(ISetting setting)
     {
