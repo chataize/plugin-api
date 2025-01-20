@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Title>Plugin API</Title>
     <Product>Plugin API</Product>
-    <Version>0.11.2</Version>
+    <Version>0.11.3</Version>
     <Company>ChatAIze</Company>
     <Authors>Marcel Kwiatkowski</Authors>
     <Copyright>© ChatAIze 2024</Copyright>
@@ -29,11 +29,21 @@
     </PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="icon.png" Pack="true" PackagePath="\" />
-    <None Include="../README.md" Pack="true" PackagePath="" />
+    <None
+        Include="icon.png"
+        Pack="true"
+        PackagePath="\" />
+    <None
+        Include="../README.md"
+        Pack="true"
+        PackagePath="" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ChatAIze.Abstractions" Version="0.12.6" />
-    <PackageReference Include="ChatAIze.Utilities" Version="0.4.16" />
+    <PackageReference
+        Include="ChatAIze.Abstractions"
+        Version="0.12.6" />
+    <PackageReference
+        Include="ChatAIze.Utilities"
+        Version="0.4.16" />
   </ItemGroup>
 </Project>
