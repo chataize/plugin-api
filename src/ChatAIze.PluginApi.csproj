@@ -41,7 +41,7 @@
   <ItemGroup>
     <PackageReference
         Include="ChatAIze.Abstractions"
-        Version="0.12.7" />
+        Version="0.12.8" />
     <PackageReference
         Include="ChatAIze.Utilities"
         Version="0.4.16" />
