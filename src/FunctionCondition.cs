@@ -32,8 +32,6 @@ public class FunctionCondition : IFunctionCondition, ISettingsContainer, IEditab
 
     public virtual string? IconUrl { get; set; }
 
-    public virtual bool IsPrecondition { get; set; }
-
     public virtual required Delegate Callback { get; set; }
 
     public virtual ICollection<ISetting> Settings { get; set; } = [];
