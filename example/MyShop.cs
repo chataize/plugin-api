@@ -6,10 +6,24 @@ using ChatAIze.PluginApi.Settings;
 
 namespace ChatAIze.PluginApi.ExamplePlugin;
 
+/// <summary>
+/// A plugin loader that registers the <b>MyShop</b> plugin when the assembly is discovered.
+/// </summary>
+/// <remarks>
+/// The chatbot host will locate this class (because it implements <see cref="IPluginLoader"/>)
+/// and invoke <see cref="Load"/> to obtain the concrete <see cref="IChatbotPlugin"/> instance.
+/// </remarks>
 public class MyShop : IPluginLoader
 {
+    /// <summary>
+    /// Builds and returns a configured instance of the <b>MyShop</b> plugin.
+    /// </summary>
+    /// <returns>The fully‑configured <see cref="IChatbotPlugin"/>.</returns>
     public IChatbotPlugin Load()
     {
+        // ─────────────────────────────────────────────────────────────────────────────
+        // Settings – plain scalar controls
+        // ─────────────────────────────────────────────────────────────────────────────
         var setting1 = new StringSetting
         {
             Id = "myshop:name",
@@ -60,6 +74,9 @@ public class MyShop : IPluginLoader
             DefaultValue = true
         };
 
+        // ─────────────────────────────────────────────────────────────────────────────
+        // Settings – selection controls demonstrated with three different styles
+        // ─────────────────────────────────────────────────────────────────────────────
         var setting6 = new SelectionSetting
         {
             Id = "myshop:currency",
@@ -69,9 +86,9 @@ public class MyShop : IPluginLoader
             DefaultValue = "USD",
             Choices =
             [
-            new SelectionChoice { Title = "US Dollar", Value = "USD" },
-            new SelectionChoice { Title = "Euro", Value = "EUR" },
-            new SelectionChoice { Title = "British Pound", Value = "GBP" }
+                new SelectionChoice { Title = "US Dollar",     Value = "USD" },
+                new SelectionChoice { Title = "Euro",          Value = "EUR" },
+                new SelectionChoice { Title = "British Pound", Value = "GBP" }
             ]
         };
 
@@ -84,9 +101,9 @@ public class MyShop : IPluginLoader
             DefaultValue = "USD",
             Choices =
             [
-            new SelectionChoice { Title = "US Dollar", Value = "USD" },
-            new SelectionChoice { Title = "Euro", Value = "EUR" },
-            new SelectionChoice { Title = "British Pound", Value = "GBP" }
+                new SelectionChoice { Title = "US Dollar",     Value = "USD" },
+                new SelectionChoice { Title = "Euro",          Value = "EUR" },
+                new SelectionChoice { Title = "British Pound", Value = "GBP" }
             ]
         };
 
@@ -99,12 +116,15 @@ public class MyShop : IPluginLoader
             DefaultValue = "USD",
             Choices =
             [
-                new SelectionChoice { Title = "US Dollar", Value = "USD" },
-                new SelectionChoice { Title = "Euro", Value = "EUR" },
+                new SelectionChoice { Title = "US Dollar",     Value = "USD" },
+                new SelectionChoice { Title = "Euro",          Value = "EUR" },
                 new SelectionChoice { Title = "British Pound", Value = "GBP" }
             ]
         };
 
+        // ─────────────────────────────────────────────────────────────────────────────
+        // Settings – date/time variations
+        // ─────────────────────────────────────────────────────────────────────────────
         var setting9 = new DateTimeSetting
         {
             Id = "myshop:opening_hours",
@@ -121,7 +141,7 @@ public class MyShop : IPluginLoader
             Id = "myshop:opening_hours",
             Title = "Opening hours",
             Description = "The opening hours of the shop.",
-            Style = DateTimeSettingStyle.DateTime,
+            Style = DateTimeSettingStyle.DateOnly,
             DefaultValue = DateTimeOffset.UtcNow,
             MinValue = DateTimeOffset.UtcNow.AddDays(-7),
             MaxValue = DateTimeOffset.UtcNow.AddDays(7)
@@ -147,6 +167,9 @@ public class MyShop : IPluginLoader
             MaxItemLength = 20,
         };
 
+        // ─────────────────────────────────────────────────────────────────────────────
+        // Miscellaneous UI elements
+        // ─────────────────────────────────────────────────────────────────────────────
         var setting13 = new SettingsButton
         {
             Id = "myshop:open_store",
@@ -177,6 +200,9 @@ public class MyShop : IPluginLoader
             MaxValueLength = 20
         };
 
+        // ─────────────────────────────────────────────────────────────────────────────
+        // Grouping and sectioning
+        // ─────────────────────────────────────────────────────────────────────────────
         var group1 = new SettingsGroup
         {
             Id = "myshop:general_settings",
@@ -209,6 +235,9 @@ public class MyShop : IPluginLoader
             Settings = [setting10, setting11, setting12]
         };
 
+        // ─────────────────────────────────────────────────────────────────────────────
+        // Plugin instance
+        // ─────────────────────────────────────────────────────────────────────────────
         var plugin = new ChatbotPlugin
         {
             Id = new("55bc120a-b623-4d5f-91e6-ae2b9f3bf6e2"),
@@ -218,35 +247,53 @@ public class MyShop : IPluginLoader
             SettingsCallback = _ => ValueTask.FromResult<IReadOnlyCollection<ISetting>>([section1, section2, setting13, setting14, setting15]),
         };
 
+        // ─────────────────────────────────────────────────────────────────────────────
+        // Functions, actions, and conditions
+        // ─────────────────────────────────────────────────────────────────────────────
         plugin.AddFunction(GetOrderStatus);
 
-        var action1 = new FunctionAction(id: "myshop:create_order", title: "Create Order", callback: () => "order created, id: 3321");
-        _ = action1.AddStringSetting(id: "productName", title: "Product Name");
+        var action1 = new FunctionAction(
+            id: "myshop:create_order",
+            title: "Create Order",
+            callback: () => "order created, id: 3321");
+
+        _ = action1.AddStringSetting(
+            id: "productName",
+            title: "Product Name");
 
         plugin.AddAction(action1);
 
-        var condition1 = new FunctionCondition(id: "myshop:is_domain_user", title: "Is Domain User", callback: CheckDomainUser);
+        var condition1 = new FunctionCondition(
+            id: "myshop:is_domain_user",
+            title: "Is Domain User",
+            callback: CheckDomainUser);
 
-        _ = condition1.AddStringSetting(id: "domain", title: "Domain", description: "The domain to check for.");
+        _ = condition1.AddStringSetting(
+            id: "domain",
+            title: "Domain",
+            description: "The domain to check for.");
+
         plugin.AddCondition(condition1);
 
         return plugin;
     }
 
+    /// <summary>
+    /// Sample function that returns the status of an order.
+    /// </summary>
     private static string GetOrderStatus()
     {
         return "Order status: shipped";
     }
 
+    /// <summary>
+    /// Sample condition that allows execution only for users whose email ends with a specified domain.
+    /// </summary>
+    /// <param name="context">Current chat context.</param>
+    /// <param name="domain">Domain that the user's email must match.</param>
+    /// <returns><see langword="true"/> if the user's email ends with the specified domain; otherwise, <see langword="false"/>.</returns>
     private static bool CheckDomainUser(IConditionContext context, string domain)
     {
-        if (context.User.Email?.EndsWith(domain, StringComparison.InvariantCultureIgnoreCase) == true)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return context.User.Email?.EndsWith(domain, StringComparison.InvariantCultureIgnoreCase) == true;
     }
 }
