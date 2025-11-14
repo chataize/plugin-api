@@ -1,4 +1,4 @@
 ﻿<Solution>
   <Project Path="ChatAIze.PluginApi/ChatAIze.PluginApi.csproj" />
-  <Project Path="example/ChatAIze.PluginApi.ExamplePlugin.csproj" />
+  <Project Path="ChatAIze.PluginApi.ExamplePlugin/ChatAIze.PluginApi.ExamplePlugin.csproj" />
 </Solution>
