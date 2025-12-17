@@ -11,12 +11,42 @@ It builds on top of `ChatAIze.Abstractions` and provides convenient implementati
 
 If you want a working example, start with `ChatAIze.PluginApi.ExamplePlugin/MyShop.cs`.
 
+## TL;DR
+
+- Create a `net10.0` class library and reference `ChatAIze.PluginApi`.
+- Implement `IPluginLoader` (or `IAsyncPluginLoader`) and return a `ChatbotPlugin` with `Id`, `Title`, and `Version`.
+- Add settings/tools/actions/conditions (either via the collections or callback properties).
+- Build `Release` and deploy to ChatAIze.Chatbot (upload a single `.dll`, or copy the whole output folder for plugins with dependencies).
+
 ## What you can build
 
 - **Plugin settings** (dashboard UI): Admin-configured values like API keys and feature toggles.
 - **Tools** (LLM function calling): Model-callable functions that run code and return structured output.
 - **Workflow actions**: Reusable steps that admins compose into “integration functions” in the dashboard.
 - **Workflow conditions**: Gates that allow/deny an integration function for the current chat/user.
+
+## Contents
+
+- [TL;DR](#tldr)
+- [Requirements](#requirements)
+- [Install](#install)
+- [Quick Start](#quick-start-minimal-plugin)
+- [Deploy](#deploy-to-chataizechatbot)
+- [Release Checklist](#plugin-release-checklist)
+- [Core Concepts](#core-concepts)
+  - [Stable IDs](#stable-ids-plugins-settings-tools-actions-conditions)
+  - [Lifetime & Concurrency](#lifetime-concurrency-and-disposal)
+  - [Context Objects](#context-objects-what-you-can-access-at-runtime)
+  - [Glossary](#glossary-chataizechatbot-terms)
+- [Tools](#tools-llm-callable-functions)
+- [Settings](#settings-plugin-configuration-ui)
+  - [List Settings](#list-settings-listsetting)
+  - [Map Settings](#map-settings-mapsetting)
+- [Workflow Actions](#workflow-actions-integration-function-steps)
+- [Workflow Conditions](#workflow-conditions-gates)
+- [Useful Patterns](#useful-patterns)
+- [Troubleshooting](#troubleshooting)
+- [Examples](#examples)
 
 ## Requirements
 
@@ -101,6 +131,8 @@ public sealed class MyPluginLoader : IAsyncPluginLoader
 }
 ```
 
+Tip: `ChatbotPlugin` defaults to returning its in-memory `Settings` / `Functions` / `Actions` / `Conditions` collections from the callback properties. You can either populate the collections directly or override the callback properties to return context-dependent definitions.
+
 3) Build:
 
 ```bash
@@ -129,7 +161,19 @@ into the chatbot server’s `plugins/` directory.
 
 Tip: If you have extra dependencies, the safest approach is to copy everything from `bin/Release/net10.0/` (except `.pdb` if you don’t want symbols).
 
-### How plugin loading works (advanced)
+### Plugin release checklist
+
+- Target `net10.0` (match the host).
+- Set `IChatbotPlugin.Id` and keep it stable (loading a plugin with the same id replaces the previous one).
+- Set `IChatbotPlugin.Version` (ChatAIze.Chatbot treats missing versions as invalid).
+- Namespace plugin-level settings (`com.mycompany.myplugin:api_key`) to avoid collisions with other plugins.
+- Prefer named methods for tools (`AddFunction(MyTool)`), and keep tool names unique.
+- Respect `IsPreview` / `IsCommunicationSandboxed` before doing side effects (HTTP calls, emails/SMS, writes to external systems).
+- Don’t log secrets (API keys/tokens).
+- If you deploy dependencies, prefer copying the whole output folder to `plugins/` (don’t rely on dashboard upload for multi-file plugins).
+
+<details>
+<summary>How plugin loading works (advanced)</summary>
 
 ChatAIze.Chatbot loads plugins with an isolated, unloadable `AssemblyLoadContext`:
 
@@ -139,6 +183,7 @@ ChatAIze.Chatbot loads plugins with an isolated, unloadable `AssemblyLoadContext
 - Any other dependency must be resolvable via the plugin’s `.deps.json` (and present in the `plugins/` folder).
 
 This is why dashboard upload is best for “single dll” plugins, and file-copy deployment is best for plugins with external dependencies.
+</details>
 
 ## Core Concepts
 
@@ -175,6 +220,15 @@ Every callback can optionally accept a context parameter:
 - `IFunctionContext` (tools): adds knowledge search, quick replies, forms, prompt override, status/progress
 - `IActionContext` (workflow actions): adds action indices/results + placeholder APIs
 - `IConditionContext` (workflow conditions): currently just `IChatContext`
+
+### Glossary (ChatAIze.Chatbot terms)
+
+- **Plugin**: a loaded `.dll` that returns settings, tools, actions and/or conditions.
+- **Tool / function**: an `IChatFunction` exposed to the model as a callable tool (LLM function calling).
+- **Integration function**: a dashboard-configured function (also an `IChatFunction`) that executes a workflow of actions/conditions.
+- **Workflow action**: an `IFunctionAction` step used inside an integration function (not exposed to the model directly).
+- **Workflow condition**: an `IFunctionCondition` gate evaluated before an integration function runs.
+- **Placeholder**: a named value (`{placeholder}`) produced by actions and injected into later settings as plain-text substitution (supports nested access like `{ticket.id}` when the placeholder is a JSON object).
 
 ## Tools (LLM-Callable Functions)
 
@@ -238,6 +292,8 @@ public sealed class MyPluginLoader : IPluginLoader
   - `IFunctionContext` is injected by type,
   - `CancellationToken` is injected by type.
 
+Tip: Prefer named methods over lambdas for tools. Some compiler-generated lambda names are not stable/public-friendly and may fail normalization. If you need full control, register a `ChatFunction` with an explicit `Name`.
+
 ### Tool schema generation (what the model sees)
 
 In the ChatAIze stack, schema generation works like this:
@@ -274,6 +330,24 @@ If you rely on reflection-based schemas, you can improve the model-visible docum
 - `DescriptionAttribute` on the method and/or parameters
 - string data annotations such as `[Required]`, `[MinLength]`, `[MaxLength]`, `[StringLength]`
 
+Example (reflection schema + runtime validation for strings):
+
+```csharp
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using ChatAIze.Abstractions.Chat;
+
+[Description("Searches the knowledge base.")]
+private static async Task<string> SearchAsync(
+    IFunctionContext context,
+    [Description("Search query.")] [Required] [MinLength(2)] string query,
+    CancellationToken cancellationToken = default)
+{
+    var result = await context.SearchKnowledgeAsync(query, cancellationToken: cancellationToken);
+    return result.ToString();
+}
+```
+
 ### Error handling conventions
 
 - For **recoverable** failures, prefer returning a string that starts with `"Error: "`.
@@ -296,6 +370,18 @@ In ChatAIze.Chatbot, your `SettingsCallback` is invoked while rendering the plug
 
 - Containers: `SettingsSection`, `SettingsGroup`, `SettingsParagraph` (layout-only, do not store a value).
 - Leaf settings: `StringSetting`, `SelectionSetting`, `IntegerSetting`, `BooleanSetting`, `DecimalSetting`, `DateTimeSetting`, `ListSetting`, `MapSetting` (store a value under `ISetting.Id`).
+
+### Settings cheat sheet
+
+| Setting | Stored JSON kind | Typical use |
+| --- | --- | --- |
+| `StringSetting` | string | API keys, URLs, names |
+| `IntegerSetting` / `DecimalSetting` | number | thresholds, limits |
+| `BooleanSetting` | true/false | feature toggles |
+| `SelectionSetting` | string | “pick one” choices |
+| `DateTimeSetting` | string (date/time) | schedules, reminders |
+| `ListSetting` | array of strings | tags, allow/deny lists |
+| `MapSetting` | object (string → string) | headers, simple key/value configs |
 
 ### Example settings UI
 
@@ -611,6 +697,18 @@ context.SetStatus("Calling external API...", progress: 30);
 context.SetStatus("Done.", progress: 100);
 ```
 
+### Logging
+
+All context types expose `Log(...)` (wired to the host logging pipeline):
+
+```csharp
+using Microsoft.Extensions.Logging;
+
+context.Log(LogLevel.Information, "Starting order lookup...");
+```
+
+Tip: avoid logging secrets. In ChatAIze.Chatbot, logs can be visible to administrators.
+
 ### Forms and confirmations
 
 Plugins can prompt the current user with built-in UI dialogs (when supported by the host):
@@ -655,6 +753,20 @@ var lastOrderId = await context.User.GetPropertyAsync("com.mycompany.myplugin:la
 await context.User.SetPropertyAsync("com.mycompany.myplugin:last_order_id", "12345", cancellationToken);
 ```
 
+### Optional plugin-to-plugin integration
+
+If your plugin can optionally integrate with another plugin, you can ask the host for a plugin instance by type:
+
+```csharp
+var other = context.GetPlugin<OtherPluginType>(id: "com.other.plugin");
+if (other is not null)
+{
+    // Use the optional integration.
+}
+```
+
+Avoid hard dependencies on other plugins being present; always handle `null`.
+
 ### Custom databases
 
 Plugins can use `IDatabaseManager` via `context.Databases`:
@@ -683,6 +795,7 @@ var item = await context.Databases.GetFirstItemAsync(
 
 ### “My plugin loads but my tool never runs”
 
+- In ChatAIze.Chatbot, ensure Integrations are enabled in the dashboard settings (tools and integration functions are added only when integrations are enabled).
 - Ensure your tool name is unique across all plugins and integration functions.
 - Ensure `IChatFunction.Callback` is non-null (tools without callbacks are treated as integration functions and executed by the host’s default callback).
 - Prefer named methods over lambdas for `AddFunction(Delegate)`; compiler-generated names can be unstable.
