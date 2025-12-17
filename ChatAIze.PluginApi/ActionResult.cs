@@ -3,8 +3,18 @@ using System.Diagnostics.CodeAnalysis;
 namespace ChatAIze.PluginApi;
 
 /// <summary>
-/// Represents the result of an action execution, including its identifier, outcome value, and success flag.
+/// Serializable action result value object (id + result payload + success flag).
 /// </summary>
+/// <remarks>
+/// <para>
+/// This type is primarily a convenience DTO for plugin authors (for example: returning a list of results from a custom tool/function).
+/// </para>
+/// <para>
+/// In ChatAIze.Chatbot, workflow execution produces results implementing <see cref="ChatAIze.Abstractions.Chat.IActionResult"/>.
+/// While this <see cref="ActionResult"/> record does not implement that interface, it intentionally mirrors the same shape and
+/// is safe to serialize.
+/// </para>
+/// </remarks>
 public record ActionResult
 {
     /// <summary>

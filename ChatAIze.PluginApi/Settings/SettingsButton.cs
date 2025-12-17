@@ -7,6 +7,15 @@ namespace ChatAIze.PluginApi.Settings;
 /// <summary>
 /// Represents a clickable button in the settings UI that performs a custom action when pressed.
 /// </summary>
+/// <remarks>
+/// <para>
+/// Buttons are a UI affordance (no stored value). Use them for actions like "Test connection", "Sync now", or "Clear cache".
+/// </para>
+/// <para>
+/// In ChatAIze.Chatbot, the callback is executed on the server when the user clicks the button in the dashboard.
+/// The provided <see cref="CancellationToken"/> is canceled when the settings view is disposed.
+/// </para>
+/// </remarks>
 public class SettingsButton : ISettingsButton
 {
     /// <summary>
@@ -75,6 +84,9 @@ public static class SettingsButtonExtensions
     /// <param name="style">The visual style of the button (e.g., primary, accent, danger).</param>
     /// <param name="isDisabled">Indicates whether the button is disabled in the UI.</param>
     /// <returns>The same container instance, enabling method chaining.</returns>
+    /// <remarks>
+    /// Buttons are layout-only (no stored value). Ensure <paramref name="id"/> is stable so hosts can diff and cache settings trees.
+    /// </remarks>
     public static IEditableSettingsContainer AddSettingsButton(
         this IEditableSettingsContainer container,
         string id,
@@ -101,6 +113,9 @@ public static class SettingsButtonExtensions
     /// <param name="style">The visual style of the button (e.g., primary, accent, danger).</param>
     /// <param name="isDisabled">Indicates whether the button is disabled in the UI.</param>
     /// <returns>The modified collection of settings.</returns>
+    /// <remarks>
+    /// Buttons are layout-only (no stored value). Ensure <paramref name="id"/> is stable so hosts can diff and cache settings trees.
+    /// </remarks>
     public static ICollection<ISetting> AddSettingsButton(
         this ICollection<ISetting> collection,
         string id,

@@ -7,6 +7,10 @@ namespace ChatAIze.PluginApi.Settings;
 /// <summary>
 /// Represents a date and/or time setting that can be displayed and configured in the user interface.
 /// </summary>
+/// <remarks>
+/// The host stores the user-provided value as JSON under <see cref="ISetting.Id"/> (typically as a <see cref="DateTimeOffset"/>).
+/// For plugin-level settings in ChatAIze.Chatbot, ids should be globally unique across all plugins.
+/// </remarks>
 public class DateTimeSetting : IDateTimeSetting
 {
     /// <summary>

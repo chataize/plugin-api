@@ -6,6 +6,10 @@ namespace ChatAIze.PluginApi.Settings;
 /// <summary>
 /// Represents a decimal (floating-point) setting with support for slider presentation and value constraints.
 /// </summary>
+/// <remarks>
+/// The host stores the user-provided value as JSON under <see cref="ISetting.Id"/>.
+/// For plugin-level settings in ChatAIze.Chatbot, ids should be globally unique across all plugins.
+/// </remarks>
 public class DecimalSetting : IDecimalSetting
 {
     /// <summary>

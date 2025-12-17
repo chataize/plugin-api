@@ -6,6 +6,9 @@ namespace ChatAIze.PluginApi.Settings;
 /// <summary>
 /// Represents a static text paragraph displayed in the settings UI, typically used for instructions or explanations.
 /// </summary>
+/// <remarks>
+/// Paragraphs are a layout construct: they do not store a value, but they can provide context and guidance next to real settings.
+/// </remarks>
 public class SettingsParagraph : ISettingsParagraph
 {
     /// <summary>
@@ -50,6 +53,9 @@ public static class SettingsParagraphExtensions
     /// <param name="content">The paragraph content displayed as static text.</param>
     /// <param name="isDisabled">Indicates whether the paragraph is shown as disabled.</param>
     /// <returns>The modified settings container.</returns>
+    /// <remarks>
+    /// Paragraphs are layout-only (no stored value). Ensure <paramref name="id"/> is stable so hosts can diff and cache settings trees.
+    /// </remarks>
     public static IEditableSettingsContainer AddSettingsParagraph(
         this IEditableSettingsContainer container,
         string id,
@@ -70,6 +76,9 @@ public static class SettingsParagraphExtensions
     /// <param name="content">The paragraph content displayed as static text.</param>
     /// <param name="isDisabled">Indicates whether the paragraph is shown as disabled.</param>
     /// <returns>The modified collection of settings.</returns>
+    /// <remarks>
+    /// Paragraphs are layout-only (no stored value). Ensure <paramref name="id"/> is stable so hosts can diff and cache settings trees.
+    /// </remarks>
     public static ICollection<ISetting> AddSettingsParagraph(
         this ICollection<ISetting> collection,
         string id,

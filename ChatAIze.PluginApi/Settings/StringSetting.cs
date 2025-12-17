@@ -7,6 +7,16 @@ namespace ChatAIze.PluginApi.Settings;
 /// <summary>
 /// Represents a string input setting, allowing users to enter textual data with optional formatting and validation rules.
 /// </summary>
+/// <remarks>
+/// <para>
+/// The host stores the user-provided value as JSON under <see cref="ISetting.Id"/>.
+/// For plugin-level settings in ChatAIze.Chatbot, ids should be globally unique across all plugins
+/// (for example: <c>"com.example.my_plugin:api_key"</c>).
+/// </para>
+/// <para>
+/// Some UI hints (for example <see cref="TextFieldType"/> or <see cref="IsLowercase"/>) are host-dependent and may not be enforced by every UI.
+/// </para>
+/// </remarks>
 public class StringSetting : IStringSetting
 {
     /// <summary>
@@ -128,6 +138,18 @@ public static class StringSettingExtensions
     /// <summary>
     /// Adds a <see cref="StringSetting"/> to a collection of settings.
     /// </summary>
+    /// <param name="collection">The collection to which the setting will be added.</param>
+    /// <param name="id">The unique identifier of the setting.</param>
+    /// <param name="title">The title of the setting.</param>
+    /// <param name="description">Optional description or helper text.</param>
+    /// <param name="placeholder">Placeholder text shown when the input field is empty.</param>
+    /// <param name="defaultValue">The default value to use.</param>
+    /// <param name="textFieldType">The input field type (e.g., password, search, email).</param>
+    /// <param name="maxLength">The maximum number of characters allowed.</param>
+    /// <param name="editorLines">The number of visible lines (1 for single-line, more for textarea).</param>
+    /// <param name="isLowercase">Whether input is forced to lowercase.</param>
+    /// <param name="isDisabled">Whether the setting is disabled.</param>
+    /// <returns>The same collection instance, allowing method chaining.</returns>
     public static ICollection<ISetting> AddStringSetting(
         this ICollection<ISetting> collection,
         string id,

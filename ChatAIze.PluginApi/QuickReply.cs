@@ -3,7 +3,13 @@ using ChatAIze.Abstractions.Chat;
 
 namespace ChatAIze.PluginApi;
 
-/// <inheritdoc cref="IQuickReply"/>
+/// <summary>
+/// Simple <see cref="IQuickReply"/> implementation used to suggest follow-up messages in the chat UI.
+/// </summary>
+/// <remarks>
+/// In ChatAIze.Chatbot, quick replies can be set from within a tool/function by updating <see cref="IFunctionContext.QuickReplies"/>.
+/// The host typically renders them as clickable chips/buttons; selecting one sends <see cref="Content"/> as a new user message.
+/// </remarks>
 public record QuickReply : IQuickReply
 {
     /// <summary>

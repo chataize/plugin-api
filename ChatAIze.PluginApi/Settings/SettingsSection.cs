@@ -4,8 +4,16 @@ using ChatAIze.Abstractions.Settings;
 namespace ChatAIze.PluginApi.Settings;
 
 /// <summary>
-/// Represents a top-level container of settings rendered as a section in the UI. Sections typically group related groups and fields together under a visible header.
+/// Top-level settings container typically rendered as a "section" with a header and optional description.
 /// </summary>
+/// <remarks>
+/// <para>
+/// Sections are a layout construct: they contain other settings (<see cref="Settings"/>) but do not store a value themselves.
+/// </para>
+/// <para>
+/// In ChatAIze.Chatbot, <see cref="Title"/> and <see cref="Description"/> are rendered above the section contents.
+/// </para>
+/// </remarks>
 public class SettingsSection : ISettingsSection, IEditableSettingsContainer
 {
     /// <summary>
@@ -72,6 +80,9 @@ public static class SettingsSectionExtensions
     /// <param name="isDisabled">Indicates whether the section is disabled.</param>
     /// <param name="settings">The settings contained in this section.</param>
     /// <returns>The same container instance, allowing method chaining.</returns>
+    /// <remarks>
+    /// Sections are layout-only (no stored value). Ensure <paramref name="id"/> is stable so hosts can diff and cache settings trees.
+    /// </remarks>
     public static IEditableSettingsContainer AddSettingsSection(
         this IEditableSettingsContainer container,
         string id,
@@ -96,6 +107,9 @@ public static class SettingsSectionExtensions
     /// <param name="isDisabled">Indicates whether the section is disabled.</param>
     /// <param name="settings">The settings contained in this section.</param>
     /// <returns>The modified settings collection.</returns>
+    /// <remarks>
+    /// Sections are layout-only (no stored value). Ensure <paramref name="id"/> is stable so hosts can diff and cache settings trees.
+    /// </remarks>
     public static ICollection<ISetting> AddSettingsSection(
         this ICollection<ISetting> collection,
         string id,

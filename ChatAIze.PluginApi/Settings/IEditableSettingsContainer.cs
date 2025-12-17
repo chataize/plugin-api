@@ -3,10 +3,17 @@ using ChatAIze.Abstractions.Settings;
 namespace ChatAIze.PluginApi.Settings;
 
 /// <summary>
-/// Represents a container that allows modification of a collection of settings.
+/// Minimal abstraction for a settings container with a mutable <see cref="ISetting"/> collection.
 /// </summary>
 /// <remarks>
-/// This interface is typically used for programmatically constructing or extending plugin settings at runtime.
+/// This interface exists primarily to support fluent builder-style extension methods (for example <see cref="StringSettingExtensions"/>).
+/// It is implemented by common types such as <see cref="ChatAIze.PluginApi.ChatbotPlugin"/>,
+/// <see cref="ChatAIze.PluginApi.FunctionAction"/>, <see cref="ChatAIze.PluginApi.FunctionCondition"/>,
+/// and the various container settings (<see cref="SettingsSection"/>, <see cref="SettingsGroup"/>).
+/// <para>
+/// In ChatAIze.Chatbot, leaf settings (for example <see cref="StringSetting"/>) store values under their <see cref="ISetting.Id"/> keys.
+/// Container settings (sections/groups/paragraphs) are used for layout and typically do not store values.
+/// </para>
 /// </remarks>
 public interface IEditableSettingsContainer
 {

@@ -7,6 +7,10 @@ namespace ChatAIze.PluginApi.Settings;
 /// <summary>
 /// Represents an integer-based setting with optional range limits, step size, and slider display options.
 /// </summary>
+/// <remarks>
+/// The host stores the user-provided value as JSON under <see cref="ISetting.Id"/>.
+/// For plugin-level settings in ChatAIze.Chatbot, ids should be globally unique across all plugins.
+/// </remarks>
 public class IntegerSetting : IIntegerSetting
 {
     /// <summary>
@@ -112,6 +116,21 @@ public static class IntegerSettingExtensions
     /// <summary>
     /// Adds an <see cref="IntegerSetting"/> to an editable settings container.
     /// </summary>
+    /// <param name="container">The container to which the setting will be added.</param>
+    /// <param name="id">The unique identifier of the setting.</param>
+    /// <param name="title">The title of the setting.</param>
+    /// <param name="description">Optional description or helper text.</param>
+    /// <param name="style">The style used to present the setting (e.g., stepper, slider).</param>
+    /// <param name="defaultValue">The default integer value for the setting.</param>
+    /// <param name="minValue">The minimum allowable value.</param>
+    /// <param name="maxValue">The maximum allowable value.</param>
+    /// <param name="step">The increment/decrement step size.</param>
+    /// <param name="showSliderValue">Indicates whether the current slider value should be displayed.</param>
+    /// <param name="showSliderPercentage">Indicates whether the slider should show percentage values.</param>
+    /// <param name="minValueLabel">Label to show when the slider is at its minimum value (or null to use the value itself).</param>
+    /// <param name="maxValueLabel">Label to show when the slider is at its maximum value (or null to use the value itself).</param>
+    /// <param name="isDisabled">Indicates whether the setting is disabled and not editable.</param>
+    /// <returns>The same container instance, allowing method chaining.</returns>
     public static IEditableSettingsContainer AddIntegerSetting(
         this IEditableSettingsContainer container,
         string id,
@@ -137,6 +156,21 @@ public static class IntegerSettingExtensions
     /// <summary>
     /// Adds an <see cref="IntegerSetting"/> to a settings collection.
     /// </summary>
+    /// <param name="collection">The collection to which the setting will be added.</param>
+    /// <param name="id">The unique identifier of the setting.</param>
+    /// <param name="title">The title of the setting.</param>
+    /// <param name="description">Optional description or helper text.</param>
+    /// <param name="style">The style used to present the setting (e.g., stepper, slider).</param>
+    /// <param name="defaultValue">The default integer value for the setting.</param>
+    /// <param name="minValue">The minimum allowable value.</param>
+    /// <param name="maxValue">The maximum allowable value.</param>
+    /// <param name="step">The increment/decrement step size.</param>
+    /// <param name="showSliderValue">Indicates whether the current slider value should be displayed.</param>
+    /// <param name="showSliderPercentage">Indicates whether the slider should show percentage values.</param>
+    /// <param name="minValueLabel">Label to show when the slider is at its minimum value (or null to use the value itself).</param>
+    /// <param name="maxValueLabel">Label to show when the slider is at its maximum value (or null to use the value itself).</param>
+    /// <param name="isDisabled">Indicates whether the setting is disabled and not editable.</param>
+    /// <returns>The same collection instance, allowing method chaining.</returns>
     public static ICollection<ISetting> AddIntegerSetting(
         this ICollection<ISetting> collection,
         string id,

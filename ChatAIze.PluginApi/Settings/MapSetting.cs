@@ -6,6 +6,10 @@ namespace ChatAIze.PluginApi.Settings;
 /// <summary>
 /// Represents a dictionary-like setting that allows users to input key-value pairs with optional constraints.
 /// </summary>
+/// <remarks>
+/// The host stores the user-provided map as JSON under <see cref="ISetting.Id"/>.
+/// For plugin-level settings in ChatAIze.Chatbot, ids should be globally unique across all plugins.
+/// </remarks>
 public class MapSetting : IMapSetting
 {
     /// <summary>
@@ -87,6 +91,17 @@ public static class MapSettingExtensions
     /// <summary>
     /// Adds a <see cref="MapSetting"/> to an editable settings container.
     /// </summary>
+    /// <param name="container">The container to which the setting will be added.</param>
+    /// <param name="id">The unique identifier of the setting.</param>
+    /// <param name="title">The title of the setting.</param>
+    /// <param name="description">Optional description or helper text.</param>
+    /// <param name="keyPlaceholder">Placeholder text for key input fields.</param>
+    /// <param name="valuePlaceholder">Placeholder text for value input fields.</param>
+    /// <param name="maxItems">Maximum number of key-value pairs allowed.</param>
+    /// <param name="maxKeyLength">Maximum length of each key.</param>
+    /// <param name="maxValueLength">Maximum length of each value.</param>
+    /// <param name="isDisabled">Indicates whether the setting is disabled and not editable.</param>
+    /// <returns>The same container instance, allowing method chaining.</returns>
     public static IEditableSettingsContainer AddMapSetting(
         this IEditableSettingsContainer container,
         string id,
@@ -108,6 +123,17 @@ public static class MapSettingExtensions
     /// <summary>
     /// Adds a <see cref="MapSetting"/> to a settings collection.
     /// </summary>
+    /// <param name="collection">The collection to which the setting will be added.</param>
+    /// <param name="id">The unique identifier of the setting.</param>
+    /// <param name="title">The title of the setting.</param>
+    /// <param name="description">Optional description or helper text.</param>
+    /// <param name="keyPlaceholder">Placeholder text for key input fields.</param>
+    /// <param name="valuePlaceholder">Placeholder text for value input fields.</param>
+    /// <param name="maxItems">Maximum number of key-value pairs allowed.</param>
+    /// <param name="maxKeyLength">Maximum length of each key.</param>
+    /// <param name="maxValueLength">Maximum length of each value.</param>
+    /// <param name="isDisabled">Indicates whether the setting is disabled and not editable.</param>
+    /// <returns>The same collection instance, allowing method chaining.</returns>
     public static ICollection<ISetting> AddMapSetting(
         this ICollection<ISetting> collection,
         string id,

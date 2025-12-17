@@ -4,7 +4,17 @@ using ChatAIze.PluginApi.Settings;
 
 namespace ChatAIze.PluginApi;
 
-/// <inheritdoc cref="ISelectionChoice"/>
+/// <summary>
+/// Concrete <see cref="ISelectionChoice"/> used by <see cref="Settings.SelectionSetting"/> and other selection controls.
+/// </summary>
+/// <remarks>
+/// <para>
+/// The host stores <see cref="Value"/> (not <see cref="Title"/>) as the setting value.
+/// </para>
+/// <para>
+/// Host support for <see cref="IsDisabled"/> can vary. As of ChatAIze.Chatbot's default UI, per-choice disabling may be ignored.
+/// </para>
+/// </remarks>
 public class SelectionChoice : ISelectionChoice
 {
     /// <summary>
@@ -48,6 +58,9 @@ public static class SelectionChoiceExtensions
     /// <param name="value">The internal value of the choice.</param>
     /// <param name="title">The display title of the choice.</param>
     /// <param name="isDisabled">Whether the choice is disabled in the UI.</param>
+    /// <remarks>
+    /// This is a convenience helper for building <see cref="SelectionSetting.Choices"/>.
+    /// </remarks>
     public static void AddChoice(this SelectionSetting setting, string value, string? title = null, bool isDisabled = false)
     {
         var choice = new SelectionChoice(value, title, isDisabled);

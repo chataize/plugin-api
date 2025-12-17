@@ -7,6 +7,10 @@ namespace ChatAIze.PluginApi.Settings;
 /// <summary>
 /// Represents a boolean (true/false) setting that can be displayed and configured in the user interface.
 /// </summary>
+/// <remarks>
+/// The host stores the user-provided value as JSON under <see cref="ISetting.Id"/>.
+/// For plugin-level settings in ChatAIze.Chatbot, ids should be globally unique across all plugins.
+/// </remarks>
 public class BooleanSetting : IBooleanSetting
 {
     /// <summary>

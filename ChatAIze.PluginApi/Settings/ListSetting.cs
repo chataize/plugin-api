@@ -7,6 +7,10 @@ namespace ChatAIze.PluginApi.Settings;
 /// <summary>
 /// Represents a setting that allows users to enter a list of string values with optional constraints and input formatting.
 /// </summary>
+/// <remarks>
+/// The host stores the user-provided list as JSON under <see cref="ISetting.Id"/>.
+/// For plugin-level settings in ChatAIze.Chatbot, ids should be globally unique across all plugins.
+/// </remarks>
 public class ListSetting : IListSetting
 {
     /// <summary>
@@ -94,6 +98,18 @@ public static class ListSettingExtensions
     /// <summary>
     /// Adds a <see cref="ListSetting"/> to an editable settings container.
     /// </summary>
+    /// <param name="container">The container to which the setting will be added.</param>
+    /// <param name="id">The unique identifier of the setting.</param>
+    /// <param name="title">The title of the setting.</param>
+    /// <param name="description">The optional description or helper text.</param>
+    /// <param name="itemPlaceholder">The placeholder text shown for each list item.</param>
+    /// <param name="textFieldType">The input type (e.g., default, email, URL).</param>
+    /// <param name="maxItems">The maximum number of items allowed in the list.</param>
+    /// <param name="maxItemLength">The maximum number of characters allowed per item.</param>
+    /// <param name="allowDuplicates">Whether duplicate items are allowed.</param>
+    /// <param name="isLowercase">Whether to convert all input to lowercase.</param>
+    /// <param name="isDisabled">Indicates whether the setting is disabled and not editable.</param>
+    /// <returns>The same container instance, allowing method chaining.</returns>
     public static IEditableSettingsContainer AddListSetting(
         this IEditableSettingsContainer container,
         string id,
@@ -116,6 +132,18 @@ public static class ListSettingExtensions
     /// <summary>
     /// Adds a <see cref="ListSetting"/> to a settings collection.
     /// </summary>
+    /// <param name="collection">The collection to which the setting will be added.</param>
+    /// <param name="id">The unique identifier of the setting.</param>
+    /// <param name="title">The title of the setting.</param>
+    /// <param name="description">The optional description or helper text.</param>
+    /// <param name="itemPlaceholder">The placeholder text shown for each list item.</param>
+    /// <param name="textFieldType">The input type (e.g., default, email, URL).</param>
+    /// <param name="maxItems">The maximum number of items allowed in the list.</param>
+    /// <param name="maxItemLength">The maximum number of characters allowed per item.</param>
+    /// <param name="allowDuplicates">Whether duplicate items are allowed.</param>
+    /// <param name="isLowercase">Whether to convert all input to lowercase.</param>
+    /// <param name="isDisabled">Indicates whether the setting is disabled and not editable.</param>
+    /// <returns>The same collection instance, allowing method chaining.</returns>
     public static ICollection<ISetting> AddListSetting(
         this ICollection<ISetting> collection,
         string id,

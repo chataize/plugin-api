@@ -7,6 +7,15 @@ namespace ChatAIze.PluginApi.Settings;
 /// <summary>
 /// Represents a selection setting where the user chooses one option from a predefined list of choices.
 /// </summary>
+/// <remarks>
+/// <para>
+/// The host stores the selected <see cref="ISelectionChoice.Value"/> as JSON under <see cref="ISetting.Id"/>.
+/// For plugin-level settings in ChatAIze.Chatbot, ids should be globally unique across all plugins.
+/// </para>
+/// <para>
+/// Host support for per-choice disabling (<see cref="ISelectionChoice.IsDisabled"/>) can vary.
+/// </para>
+/// </remarks>
 public class SelectionSetting : ISelectionSetting
 {
     /// <summary>
@@ -87,6 +96,16 @@ public static class SelectionSettingExtensions
     /// <summary>
     /// Adds a <see cref="SelectionSetting"/> to an editable settings container.
     /// </summary>
+    /// <param name="container">The container to which the setting will be added.</param>
+    /// <param name="id">The unique identifier of the setting.</param>
+    /// <param name="title">The title of the setting.</param>
+    /// <param name="description">Optional description or helper text.</param>
+    /// <param name="style">The visual style used to render the choices.</param>
+    /// <param name="defaultValue">The default selected value.</param>
+    /// <param name="isCompact">Whether to render the setting in a compact form.</param>
+    /// <param name="isDisabled">Whether the setting is disabled.</param>
+    /// <param name="choices">The available options to choose from.</param>
+    /// <returns>The same container instance, allowing method chaining.</returns>
     public static IEditableSettingsContainer AddSelectionSetting(
         this IEditableSettingsContainer container,
         string id,
@@ -107,6 +126,16 @@ public static class SelectionSettingExtensions
     /// <summary>
     /// Adds a <see cref="SelectionSetting"/> to a settings collection.
     /// </summary>
+    /// <param name="collection">The collection to which the setting will be added.</param>
+    /// <param name="id">The unique identifier of the setting.</param>
+    /// <param name="title">The title of the setting.</param>
+    /// <param name="description">Optional description or helper text.</param>
+    /// <param name="style">The visual style used to render the choices.</param>
+    /// <param name="defaultValue">The default selected value.</param>
+    /// <param name="isCompact">Whether to render the setting in a compact form.</param>
+    /// <param name="isDisabled">Whether the setting is disabled.</param>
+    /// <param name="choices">The available options to choose from.</param>
+    /// <returns>The same collection instance, allowing method chaining.</returns>
     public static ICollection<ISetting> AddSelectionSetting(
         this ICollection<ISetting> collection,
         string id,

@@ -5,8 +5,12 @@ using ChatAIze.Abstractions.Databases.Enums;
 namespace ChatAIze.PluginApi.Databases;
 
 /// <summary>
-/// Represents a filter condition used in a database query, including the property, type of comparison, value, and optional modifiers.
+/// Concrete <see cref="IDatabaseFilter"/> used to describe a single filter predicate in a database query.
 /// </summary>
+/// <remarks>
+/// Use this type with database APIs that accept <see cref="IDatabaseFilter"/> (for example via <see cref="ChatAIze.Abstractions.Databases.IDatabaseManager"/>).
+/// The meaning of <see cref="Property"/> and supported <see cref="FilterType"/> values depend on the underlying database/provider.
+/// </remarks>
 public record DatabaseFilter : IDatabaseFilter
 {
     /// <summary>

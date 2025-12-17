@@ -5,8 +5,12 @@ using ChatAIze.Abstractions.Databases.Enums;
 namespace ChatAIze.PluginApi.Databases;
 
 /// <summary>
-/// Represents a sorting rule used to order database query results by a specified property and sort direction.
+/// Concrete <see cref="IDatabaseSorting"/> used to describe a sort order in a database query.
 /// </summary>
+/// <remarks>
+/// Use this type with database APIs that accept <see cref="IDatabaseSorting"/> (for example via <see cref="ChatAIze.Abstractions.Databases.IDatabaseManager"/>).
+/// The meaning of <see cref="Property"/> and supported fields depend on the underlying database/provider.
+/// </remarks>
 public record DatabaseSorting : IDatabaseSorting
 {
     /// <summary>
