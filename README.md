@@ -47,6 +47,7 @@ If you want a working example, start with `ChatAIze.PluginApi.ExamplePlugin/MySh
 - [Useful Patterns](#useful-patterns)
 - [Troubleshooting](#troubleshooting)
 - [Examples](#examples)
+- [Links](#links)
 
 ## Requirements
 
@@ -817,3 +818,8 @@ var item = await context.Databases.GetFirstItemAsync(
   - a tool (`AddFunction`)
   - an action (`FunctionAction`)
   - a condition (`FunctionCondition`)
+
+## Links
+- GitHub: https://github.com/chataize/plugin-api
+- Chataize organization: https://github.com/chataize
+- Website: https://www.chataize.com
