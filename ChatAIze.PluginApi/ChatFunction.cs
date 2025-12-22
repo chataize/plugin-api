@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using ChatAIze.Abstractions;
 using ChatAIze.Abstractions.Chat;
 using ChatAIze.Utilities.Extensions;
 
@@ -23,11 +24,10 @@ namespace ChatAIze.PluginApi;
 /// </list>
 /// </para>
 /// <para>
-/// If your delegate accepts injected parameters, prefer supplying an explicit <see cref="Parameters"/> list so injected parameters are not
-/// presented as user-provided inputs.
-/// Note: the current schema serializer excludes <see cref="CancellationToken"/> automatically, but it does not exclude
-/// <see cref="IFunctionContext"/>. If your callback accepts <see cref="IFunctionContext"/>, you should provide <see cref="Parameters"/> explicitly
-/// to avoid confusing tool schemas.
+/// If you want full control over what the model sees, prefer supplying an explicit <see cref="Parameters"/> list.
+/// Note: the schema serializer excludes <see cref="CancellationToken"/> and ChatAIze context types
+/// (<see cref="IChatbotContext"/>, <see cref="IChatContext"/>, <see cref="IConditionContext"/>, <see cref="IFunctionContext"/>,
+/// <see cref="IActionContext"/>, <see cref="IUserContext"/>) automatically.
 /// </para>
 /// <para>
 /// When relying on reflection-based schemas, you can improve the model-visible descriptions and constraints by annotating your callback with:
@@ -121,7 +121,7 @@ public class ChatFunction : IChatFunction
     /// <item><description>names and descriptions shown to the model,</description></item>
     /// <item><description>which parameters are required,</description></item>
     /// <item><description>enum value lists,</description></item>
-    /// <item><description>and avoiding injected parameters (for example <see cref="IFunctionContext"/>).</description></item>
+    /// <item><description>and overriding reflection-based inference.</description></item>
     /// </list>
     /// When <see langword="null"/>, the host derives the schema from <see cref="Callback"/> parameters.
     /// </remarks>

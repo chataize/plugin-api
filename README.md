@@ -303,10 +303,10 @@ In the ChatAIze stack, schema generation works like this:
 
 Important note:
 
-- The schema serializer excludes `CancellationToken` automatically.
-- It currently **does not** exclude `IFunctionContext`.
+- The schema serializer excludes `CancellationToken` and ChatAIze context types (`IChatbotContext`, `IChatContext`, `IConditionContext`,
+  `IFunctionContext`, `IActionContext`, `IUserContext`) automatically.
 
-If your callback accepts `IFunctionContext`, provide an explicit parameter list to avoid showing `context` as a user-supplied tool input:
+If you want full control over what the model sees, provide an explicit parameter list:
 
 ```csharp
 using ChatAIze.PluginApi;
